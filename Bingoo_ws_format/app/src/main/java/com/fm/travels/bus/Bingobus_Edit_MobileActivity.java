@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class Bingobus_Edit_MobileActivity extends AppCompatActivity {
     String  number;
-    ImageView back;
+    ImageView back,newtest;
     TextView upadatenumber,update;
     EditText numberr;
     Context context;
