@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Bingobus_mobileverificationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_marginTop="38dp"/>
+
+        <TextView
+            android:fontFamily="@font/sfpro_display_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Verification"
+            android:textColor="@color/light_black"
+            android:textSize="20sp"
+            android:layout_marginTop="17.7dp"/>
+
+        <TextView
+            android:fontFamily="@font/sfpro_display_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/multitext"
+            android:textSize="13.3sp"
+            android:lineSpacingExtra="5dp"
+            android:id="@+id/usernumber"
+            android:layout_marginTop="17.7dp"/>
+        
+        <LinearLayout
+            android:id="@+id/edit_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.7dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/sfpro_display_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Mobile number"
+                android:textSize="13.3sp"
+                android:textColor="#91959d"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/transferent"
+            >
+        <EditText
+            android:fontFamily="@font/sfpro_display_semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="- - - - - - "
+            android:inputType="number"
+            android:maxLength="6"
+            android:background="@drawable/rectangle_grayboder"
+            android:textSize="15sp"
+            android:textColorHint="#000000"
+            android:letterSpacing="0.0925"
+            android:textColor="#000000"
+            android:id="@+id/code"
+            android:paddingLeft="18.2dp"
+            android:paddingTop="19.7dp"
+            android:paddingBottom="19dp"
+            android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/forward"
+            android:fontFamily="@font/sfpro_display_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16.3dp"
+            android:text="CONTINUE"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginBottom="25.3dp"
+            android:background="@drawable/rectangle_cure_blue"/>
+
+    </LinearLayout>
+</RelativeLayout>

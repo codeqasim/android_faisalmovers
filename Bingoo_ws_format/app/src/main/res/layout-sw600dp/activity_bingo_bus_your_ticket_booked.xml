@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f7f7f7"
+    android:orientation="vertical"
+    tools:context=".BingoBusYourTicketBookedActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="23dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:id="@+id/back"
+                    android:src="@drawable/back" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/sfpro_display_heavy"
+                        android:letterSpacing="0.0325"
+                        android:lineSpacingExtra="4dp"
+                        android:text="YOUR TICKE IS\nBOOKED"
+                        android:textColor="#464646"
+                        android:textSize="23.3sp" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/group_328" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/rectangle_gray_border"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="23dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_share" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14.8dp"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="Share your Booking"
+                        android:textColor="#464646"
+                        android:textSize="13.3sp"
+                        android:letterSpacing="0.075"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rectangle_pink"
+                        android:orientation="horizontal"
+                        android:paddingLeft="21.6dp"
+                        android:paddingTop="22dp"
+                        android:paddingBottom="18dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="GOING FROM"
+                                android:textColor="#8C464646"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/from"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="VADODARA"
+                                android:textColor="#464646"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/going_from" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="GOING TO"
+                                android:textColor="#8C464646"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/to"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="UDAIPUR"
+                                android:textColor="#464646"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginTop="2.5dp"
+                    android:layout_marginRight="0.5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rectangle_pink1"
+                        android:orientation="vertical"
+                        android:paddingLeft="21.6dp"
+                        android:paddingTop="18dp"
+                        android:paddingBottom="18dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="PICKUP FROM"
+                            android:textColor="#9a6c6c"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/pickup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="Tulsidham, Manjalpur - 8:15 pm"
+                            android:textColor="#464646"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="19.7dp"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="DROPPING AT"
+                            android:textColor="#9a6c6c"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/dropping"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="Dabok, udaipur - 7:00 am"
+                            android:textColor="#464646"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginTop="24.3dp"
+                    android:layout_marginRight="0.5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:paddingLeft="21.6dp"
+                        android:paddingTop="18dp"
+                        android:paddingBottom="18dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:letterSpacing="0.0325"
+                                android:text="Payable Amount"
+                                android:textColor="#1d1d1d"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15dp"
+                                android:fontFamily="@font/sfpro_display_heavy"
+                                android:letterSpacing="0.0325"
+                                android:text="Rs 783"
+                                android:textColor="#1d1d1d"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/sfpro_display_medium"
+                            android:lineSpacingExtra="2dp"
+                            android:text="Pay amount at bus agency before 1 hour of boarding\npoint."
+                            android:textColor="#91959d"
+                            android:textSize="12.5sp" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginTop="8.5dp"
+                    android:layout_marginRight="0.5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="18dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="19.3dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:src="@drawable/ic_location_blue" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="12dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:letterSpacing="0.0325"
+                                android:text="View Boarding Location on Map"
+                                android:textColor="#1d1d1d"
+                                android:textSize="15sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/ic_uparrow" />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="48dp"
+                            android:layout_marginTop="16.7dp"
+                            android:fontFamily="@font/sfpro_display_medium"
+                            android:letterSpacing="0.0325"
+                            android:lineSpacingExtra="4dp"
+                            android:text="House 29 St 9 Model Town,\nPhase 3 Lahore,\ ,Pakistan\n54000"
+                            android:textColor="#91959d"
+                            android:textSize="12.7sp" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginTop="8.5dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingBottom="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:paddingLeft="18dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="18dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_more_info"
+                                android:layout_gravity="center"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="14dp"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="More Info."
+                                android:textColor="#464646"
+                                android:textSize="15.3sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28.5dp"
+                            android:layout_marginTop="16.7dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="Passenger"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="Rehman Masood"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28.5dp"
+                            android:layout_marginTop="14.8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="Ticket Number"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="8374837"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="28.5dp"
+                            android:layout_marginTop="14.8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="PNR Number"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="1981283-267267"
+                                android:textColor="#91959d"
+                                android:textSize="13.7sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:background="@drawable/rectangle_top_white"
+                android:orientation="vertical"
+                android:paddingBottom="29.8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="23.3dp"
+                    android:fontFamily="@font/sfpro_display_semibold"
+                    android:letterSpacing="0.0325"
+                    android:text="Need Help?"
+                    android:textColor="#1d1d1d"
+                    android:textSize="17.3sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="11.7dp"
+                    android:fontFamily="@font/sfpro_display_medium"
+                    android:letterSpacing="0.0425"
+                    android:lineSpacingExtra="3dp"
+                    android:text="have queries regarding your booking or stay?\nContact our team."
+                    android:textAlignment="center"
+                    android:textColor="#1d1d1d"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle_cure_gray"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtmale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_medium"
+                            android:text="Get Assistance"
+                            android:textColor="#91959d"
+                            android:textSize="14.7sp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="2.5dp"
+                            android:paddingTop="2.5dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rectangle_cure_gray"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtfemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_medium"
+                            android:text="Cancel Booking"
+                            android:textColor="#91959d"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="2.5dp"
+                            android:paddingTop="2.5dp"
+                            android:textSize="14.7sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

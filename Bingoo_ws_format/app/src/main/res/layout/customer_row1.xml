@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/text"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Search"
+        android:textSize="15sp"
+        android:textColor="#464646"
+        android:layout_marginTop="39dp"
+        android:paddingBottom="38.7dp"
+        android:fontFamily="@font/sfpro_display_semibold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivCustomerImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/clock" />
+                
+        <TextView
+            android:id="@+id/tvCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16.4dp"
+            android:fontFamily="@font/sfpro_display_medium"
+            android:gravity="center_vertical"
+            android:text="asin afia"
+            android:textColor="#464646"
+            android:textSize="13.3sp" /> 
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.7dp"
+        android:layout_marginTop="10dp"
+        android:background="#b6b6b6" />
+</LinearLayout>

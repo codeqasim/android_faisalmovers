@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".Bingobus_Last_StepActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="23dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/back" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="18dp">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1.3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rectangle_pink"
+                        android:orientation="horizontal"
+                        android:paddingLeft="21.6dp"
+                        android:paddingTop="22dp"
+                        android:paddingBottom="18dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="GOING FROM"
+                                android:textColor="#8C464646"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/from"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="VADODARA"
+                                android:textColor="#464646"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/going_from" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="GOING TO"
+                                android:textColor="#8C464646"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/to"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="UDAIPUR"
+                                android:textColor="#464646"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginRight="0.5dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="1.3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rectangle_pink1"
+                    android:orientation="vertical"
+                    android:paddingLeft="21.6dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="PICKUP FROM"
+                        android:textColor="#9a6c6c"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/pickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="Tulsidham, Manjalpur - 8:15 pm"
+                        android:textColor="#464646"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19.7dp"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="DROPPING AT"
+                        android:textColor="#9a6c6c"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/dropping"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="Dabok, udaipur - 7:00 am"
+                        android:textColor="#464646"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="14.3dp"
+                android:fontFamily="@font/sfpro_display_regular"
+                android:text="Edit"
+                android:textColor="@color/light_black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/sfpro_display_semibold"
+                android:letterSpacing="0.0525"
+                android:text="Traveller’s Information"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34.7dp"
+                android:fontFamily="@font/sfpro_display_medium"
+                android:text="PASSENGER 1"
+                android:textColor="@color/light_black"
+                android:textSize="14sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17.7dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:textColorHint="#009339"
+                app:hintTextAppearance="@style/BlueTextInputLayout">
+
+                <EditText
+                    android:id="@+id/fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transferent"
+                    android:drawableLeft="@drawable/ic_profile_1"
+                    android:drawablePadding="16dp"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/sfpro_display_semibold"
+                    android:gravity="left"
+                    android:inputType="text"
+                    android:hint="Full name"
+                    android:lines="1"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2.5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="#009339"
+                    android:textCursorDrawable="@color/light_black"
+                    android:textSize="15sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:textColorHint="#009339"
+                app:hintTextAppearance="@style/BlueTextInputLayout">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transferent"
+                    android:drawableLeft="@drawable/ic_calendar_symbol"
+                    android:drawablePadding="16dp"
+                    android:focusableInTouchMode="true"
+                    android:fontFamily="@font/sfpro_display_semibold"
+                    android:gravity="left"
+                    android:textCursorDrawable="@color/light_black"
+                    android:hint="CNIC No"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="2"
+                    android:paddingTop="2.5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="15dp"
+                    android:textColor="#009339"
+                    android:textSize="15sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:orientation="vertical"
+                android:paddingLeft="16.7dp"
+                android:paddingTop="14.7dp"
+                android:paddingBottom="17.4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfpro_display_regular"
+                    android:text="GENDER"
+                    android:textColor="@color/light_black"
+                    android:textSize="16.7sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17.7dp"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle_cure_gray"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtmale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="MALE"
+                            android:textColor="#91959d"
+                            android:textSize="14.7sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rectangle_cure_gray"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtfemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sfpro_display_semibold"
+                            android:text="FEMALE"
+                            android:textColor="#91959d"
+                            android:textSize="14.7sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:fontFamily="@font/sfpro_display_semibold"
+                android:text="Payment Details"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17.7dp"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:orientation="vertical"
+                android:id="@+id/bycash"
+                android:paddingLeft="18.3dp"
+                android:paddingTop="18dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="20.7dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_bus_green"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14.3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="Pay Offline ( by Cash )"
+                        android:textColor="@color/light_black"
+                        android:textSize="15sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/radio_unchecked_border" />
+                        <ImageView
+                            android:id="@+id/img2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_verified"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/sfpro_display_medium"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Pay by cash at bus agency stop, pay by\ncash before 3 hrs. of bus departure time."
+                    android:textColor="#91959d"
+                    android:textSize="12.7sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17.7dp"
+                android:id="@+id/easypisa"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:orientation="vertical"
+                android:paddingLeft="18.3dp"
+                android:paddingTop="18dp"
+                android:visibility="visible"
+                android:paddingRight="12dp"
+                android:paddingBottom="20.7dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/easypaisa"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14.3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:text="Pay  with EasyPaisa "
+                        android:textColor="@color/light_black"
+                        android:textSize="15sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img1easypasa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/radio_unchecked_border" />
+                        <ImageView
+                            android:id="@+id/img2easypasa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_verified"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/sfpro_display_medium"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Pay by cash at bus agency stop, pay by\ncash before 3 hrs. of bus departure time."
+                    android:textColor="#91959d"
+                    android:textSize="12.7sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:visibility="gone"
+
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/paytm_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="@font/sfpro_display_semibold"
+                    android:text="Pay with PAYTM"
+                    android:textColor="@color/light_black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:visibility="gone"
+                android:background="@drawable/rectangle_white_gray1boder"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transferent"
+                    android:fontFamily="@font/sfpro_display_semibold"
+                    android:hint="ENTER PAYTM MOBILE NUMBER"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="18dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="#91959d"
+                    android:textColorHint="#91959d"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="61dp"
+                    android:layout_height="61dp"
+                    android:src="@drawable/pay"/>
+
+                <ImageView
+                    android:layout_width="61dp"
+                    android:layout_height="61dp"
+                    android:src="@drawable/paypal"
+                    android:layout_marginLeft="14dp"/>
+
+                <ImageView
+                    android:layout_width="61dp"
+                    android:layout_height="61dp"
+                    android:src="@drawable/mwallet"
+                    android:layout_marginLeft="14dp"/>
+
+                <ImageView
+                    android:layout_width="61dp"
+                    android:layout_height="61dp"
+                    android:src="@drawable/googlepay"
+                    android:layout_marginLeft="14dp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="111dp"
+                android:layout_height="61dp"
+                android:src="@drawable/amazonpay"
+                android:visibility="gone"
+                android:layout_marginTop="14dp"/>
+
+            <TextView
+                android:fontFamily="@font/sfpro_display_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount Payable"
+                android:textColor="#91959d"
+                android:textSize="15sp"
+                android:letterSpacing="0.085"
+                android:layout_marginTop="54dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/sfpro_display_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL : RS 720"
+                android:textColor="#464646"
+                android:textSize="16.7sp"
+                android:layout_marginTop="0.5dp"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:fontFamily="@font/sfpro_display_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seats Selected : 1"
+                android:textColor="#464646"
+                android:textSize="12sp"
+                android:layout_marginTop="0.5dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/searchbus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/rectangle_cure_blue"
+                android:fontFamily="@font/sfpro_display_medium"
+                android:padding="16.3dp"
+                android:text="CONFIRM &amp; BOOK"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

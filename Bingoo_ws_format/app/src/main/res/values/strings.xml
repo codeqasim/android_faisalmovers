@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Faisal Movers</string>
+    <string name="app_name2">FAISALMOVERS</string>
+
+    <string name="city">
+        <font color="#000000">vadodara</font>
+        <font color="#464646">to</font>
+    </string>
+
+    <string name="multitext">
+        <font fgcolor="#464646">A text message with a 6-digit verification code\nwas sent to</font>
+        <font fgcolor="#435bd4">954-999-1840</font>
+    </string>
+
+
+    <string name="multitext1">
+        <font fgcolor="#c6cbd5">Are you\n looking\n for</font>
+        <font fgcolor="#009339">bus?</font>
+    </string>
+
+    <string name="edittext_hint"><font size="10">FULL NAME</font></string>
+
+    <string name="hint"><font size="10">Hint!</font></string>
+</resources>
