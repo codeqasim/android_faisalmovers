@@ -91,7 +91,7 @@
                 android:hint="MOBILE NUMBER"
                 android:inputType="number"
                 android:letterSpacing="0.0325"
-                android:maxLength="10"
+                android:maxLength="11"
                 android:textColor="@color/light_black"
                 android:textColorHint="#91959d"
                 android:textSize="15sp" />
