@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,12 +12,25 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import Adapter.CitynameAdapter;
 import Adapter.CustomerAdapter;
+import model.Cities;
 import model.Customer;
+import util.Url;
 
-public class Bingobus4Activity extends AppCompatActivity {
+public class Bingobus4Activity extends Url {
 
     AutoCompleteTextView autoCompleteTextView;
     CustomerAdapter adapter = null;
@@ -24,7 +38,12 @@ public class Bingobus4Activity extends AppCompatActivity {
     int layout;
     ImageView back;
     ListView listview;
-    ArrayList<String> citynames = new ArrayList<String>();
+    ArrayList<Cities> citynames = new ArrayList<Cities>();
+    ArrayList<String> citynames1 = new ArrayList<String>();
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
+    String responmessage;
+    CitynameAdapter citynameAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +55,12 @@ public class Bingobus4Activity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview);
 
         customers = new ArrayList<>();
-        customers = populateCustomerData(customers);
+       /* customers = populateCustomerData(customers);*/
+        sendAndRequestResponse(cityweb);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         adapter = new CustomerAdapter(this, customers);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(1);
-
-        for(int k = 0 ; k<customers.size(); k++)
-        {
-            Customer customer = customers.get(k);
-            String  name  =customer.getFirstName();
-            citynames.add(name);
-        }
-
-        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, citynames);
-        listview.setAdapter(adapter2);
-
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,5 +147,78 @@ public class Bingobus4Activity extends AppCompatActivity {
         customers.add(new Customer("Peshawar ", "", 8, R.drawable.clock));
         customers.add(new Customer("Karachi", "", 8, R.drawable.clock));
         return customers;
+    }
+
+    private void sendAndRequestResponse(String url) {
+
+
+
+
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Log.d("checkerdata",response);
+
+                try {
+
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    JSONObject jsonObject12= jsonObject.getJSONObject("response");
+                    JSONArray jsonArray = jsonObject12.getJSONArray("cities");
+                    Log.d("checkjsonArray",jsonArray.length() +"/");
+
+                    for (int i =0; i <jsonArray.length(); i++)
+                    {
+
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        String id = jsonObject1.getString("id");
+                        String name  = jsonObject1.getString("name");
+                        String city_abbr  = jsonObject1.getString("city_abbr");
+                        String country = jsonObject1.getString("country") ;
+                        String province = jsonObject1.getString("province") ;
+                        String active  = jsonObject1.getString("active");
+
+                        customers.add(new Customer(name, "", 8, R.drawable.clock));
+                        Cities cities =  new Cities(id,name,city_abbr,country,province,active);
+                        citynames.add(cities);
+                        citynames1.add(name);
+
+                    }
+
+
+
+     /*              recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                   citynameAdapter = new CitynameAdapter(getApplicationContext(),citynames);
+                  // adapter.setClickListener(this);
+                   recyclerView.setAdapter(citynameAdapter);*/
+
+                    adapter = new CustomerAdapter(getApplicationContext(), customers);
+                    autoCompleteTextView.setAdapter(adapter);
+                    autoCompleteTextView.setThreshold(1);
+
+                    final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, citynames1);
+                    listview.setAdapter(adapter2);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        });
+        mRequestQueue.add(mStringRequest);
+
     }
 }

@@ -18,7 +18,7 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
     ImageView img1,img2,img1easypasa,img2easypasa,back;
     TextView searchbus;
     Context context=this;
-    TextView pickupfrom,topoint;
+    TextView pickupfrom,topoint,totalamount ,totalseatnum;
     TextView locpick,locdrop;
 
     @Override
@@ -40,6 +40,9 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
         locpick = (TextView) findViewById(R.id.pickup);
         locdrop = (TextView) findViewById(R.id.dropping);
 
+        totalamount = (TextView) findViewById(R.id.total);
+        totalseatnum = (TextView) findViewById(R.id.seatnum);
+
 
 
 //        pickup = findViewById(R.id.pickup);
@@ -55,6 +58,8 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
         topoint.setText(pref.getString("to", null));;
        locpick.setText(pref.getString("city", null));
         locdrop.setText(pref.getString("city1", null));
+        totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
+        totalseatnum.setText(pref.getString("numberofseat", null));
 //
 //        editor.clear();
 //        editor.commit();

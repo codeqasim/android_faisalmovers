@@ -26,7 +26,7 @@
                 android:id="@+id/back_press"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/back" />
 
@@ -193,6 +193,7 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="1.5dp"
                android:fontFamily="@font/sfpro_display_medium"
+               android:id="@+id/seatnum"
                android:text="Seats Selected : 1"
                android:textColor="#464646"
                android:textSize="12sp" />

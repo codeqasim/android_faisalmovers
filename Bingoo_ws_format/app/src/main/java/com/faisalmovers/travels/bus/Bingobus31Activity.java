@@ -2,6 +2,7 @@ package com.faisalmovers.travels.bus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -27,7 +28,7 @@ public class Bingobus31Activity extends AppCompatActivity {
     private BoardingPointAdapter boardingPointAdapter;
     private ArrayList<BoardingPointModel> boardingPointModels;
     ImageView back;
-    TextView droppingtext ;
+    TextView droppingtext,totalamount ,totalseatnum ;
     Context context;
 
 
@@ -37,20 +38,28 @@ public class Bingobus31Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus31);
 
+
+        totalamount = (TextView) findViewById(R.id.total);
+        totalseatnum = (TextView) findViewById(R.id.seatnum);
         back= (ImageView)findViewById(R.id.back);
+
 
         droppingtext = (TextView) findViewById( R.id.droppingtext);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Bingobus31Activity.this,Bingobus33Activity.class);
-                finish();
-                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+               // finish();
+                overridePendingTransition(R.anim.right_out, R.anim.left_in );
                 startActivity(i);
             }
         });
 
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
+        totalseatnum.setText(pref.getString("numberofseat", null));
 
         recyclerView = (RecyclerView) findViewById(R.id.boardingpontrecycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Bingobus31Activity.this);

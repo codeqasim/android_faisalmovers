@@ -49,6 +49,7 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
+
               /*    Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
                     startActivity(intent);*/
 

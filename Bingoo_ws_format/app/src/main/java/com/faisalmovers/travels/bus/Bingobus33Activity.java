@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,8 +19,8 @@ import java.util.List;
 public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelected{
 
     private static final int COLUMNS = 5;
-    private TextView txtSeatSelected;
-    int count=0;
+    private TextView txtSeatSelected,seatnum;
+    int count=0,seatcount=0;
     LinearLayout next;
     LinearLayout detailes,recipt;
     Dialog slideDialog;
@@ -36,13 +37,17 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
         setContentView(R.layout.activity_bingobus33);
 
         txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
+        seatnum = (TextView)findViewById(R.id.seatnum);
 
         back_press = (ImageView) findViewById(R.id.back_press);
         back_press.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                finish();
+                Intent i = new Intent(context, Bingobus7Activity.class);
+                overridePendingTransition(R.anim.right_out, R.anim.left_in);
+                context.startActivity(i);
+
             }
         });
 
@@ -78,7 +83,13 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
             @Override
             public void onClick(View view) {
 
-
+                String totalamountofseat = txtSeatSelected.getText().toString();
+                String numberofseat = seatnum.getText().toString();
+                SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("totalamountofseat", totalamountofseat);
+                editor.putString("numberofseat", numberofseat);
+                editor.commit();
                 Intent i = new Intent(context, Bingobus31Activity.class);
                 context.startActivity(i);
 
@@ -114,11 +125,15 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
         //txtSeatSelected.setText("Book "+count+" seats");
         if (x==2){
             count+=720;
+            seatcount+=1;
             txtSeatSelected.setText(String.valueOf(count));
+            seatnum.setText("Seats Selected : "+String.valueOf(seatcount));
         }
         else if (x==1){
             count-=720;
+            seatcount-=1;
             txtSeatSelected.setText(String.valueOf(count));
+            seatnum.setText( "Seats Selected : "+String.valueOf(seatcount));
         }
         else {
 

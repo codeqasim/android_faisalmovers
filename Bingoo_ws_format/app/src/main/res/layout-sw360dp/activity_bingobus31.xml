@@ -23,6 +23,8 @@
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="10dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/back" />
 
@@ -110,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfpro_display_semibold"
                     android:text="TOTAL : Rs 720"
+                    android:id="@+id/total"
                     android:textColor="#464646"
                     android:textSize="16.7sp"
                     android:letterSpacing="0.0325" />
@@ -120,6 +123,7 @@
                     android:layout_marginTop="1dp"
                     android:fontFamily="@font/sfpro_display_medium"
                     android:text="Seats Selected : 1"
+                    android:id="@+id/seatnum"
                     android:textColor="#464646"
                     android:textSize="12sp"
                     android:letterSpacing="0.0325"/>

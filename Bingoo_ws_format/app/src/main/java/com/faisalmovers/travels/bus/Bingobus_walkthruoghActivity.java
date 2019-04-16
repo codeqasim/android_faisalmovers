@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import util.Utils;
+
 public class Bingobus_walkthruoghActivity extends AppCompatActivity {
 
     Context context =this;
@@ -37,17 +39,26 @@ public class Bingobus_walkthruoghActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (editextnumber.getText().toString().trim().equalsIgnoreCase("")) {
-                    editextnumber.setError("Number");
+                if (Utils.isNetworkAvailable(getApplicationContext())) {
+
+                    if (editextnumber.getText().toString().trim().equalsIgnoreCase("")) {
+                        editextnumber.setError("Number");
+                    } else {
+
+
+
+                        String  number = editextnumber.getText().toString();
+                        Intent i = new Intent(context,Bingobus_mobileverificationActivity.class);
+                        i.putExtra("number",number);
+                        context.startActivity(i);
+                    }
                 } else {
+                    Utils.showErrorToast(getApplicationContext(), "NETWORK CONNECTION");
 
 
-
-                    String  number = editextnumber.getText().toString();
-                    Intent i = new Intent(context,Bingobus_mobileverificationActivity.class);
-                    i.putExtra("number",number);
-                    context.startActivity(i);
                 }
+
+
                
             }
         });

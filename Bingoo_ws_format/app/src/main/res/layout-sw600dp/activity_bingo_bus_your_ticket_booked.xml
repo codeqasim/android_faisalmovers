@@ -263,6 +263,7 @@
                                 android:layout_marginRight="15dp"
                                 android:fontFamily="@font/sfpro_display_heavy"
                                 android:letterSpacing="0.0325"
+                                android:id="@+id/total"
                                 android:text="Rs 783"
                                 android:textColor="#1d1d1d"
                                 android:textSize="14sp" />

@@ -264,6 +264,7 @@
                                 android:fontFamily="@font/sfpro_display_heavy"
                                 android:letterSpacing="0.0325"
                                 android:text="Rs 783"
+                                android:id="@+id/total"
                                 android:textColor="#1d1d1d"
                                 android:textSize="14sp" />
                         </LinearLayout>

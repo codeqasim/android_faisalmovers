@@ -43,8 +43,13 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
     @Override
     public void onBindViewHolder(@NonNull final Bingobus7Adapter.ViewHolder holder, final int position) {
 
-        holder.acsleeper.setText(models.get(position).getAcsleeper());
 
+        holder.acsleeper.setText(models.get(position).getBusType());
+        holder.fare.setText("Rs "+models.get(position).getFare());
+        holder.seat.setText(models.get(position).getSeats()+" Seats available");
+        holder.dEPARTURE.setText(models.get(position).getDepartureTime());
+        holder.arrivalTime.setText(models.get(position).getArrivalTime());
+        holder.QuerydepartureTime.setText(models.get(position).getQuerydepartureTime());
         if(position == 0) {
             holder.location.setVisibility(View.GONE);
         }
@@ -88,7 +93,7 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
         return models.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView acsleeper;
+        TextView acsleeper,fare,seat,dEPARTURE,arrivalTime,QuerydepartureTime;
         ImageView location;
         CardView bus_booking;
 
@@ -96,8 +101,14 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
             super(itemView);
 
             acsleeper = itemView.findViewById(R.id.acsleeper);
+            fare  =  itemView.findViewById(R.id.fare);
+            seat  =  itemView.findViewById(R.id.seat);
+            QuerydepartureTime  =  itemView.findViewById(R.id.QuerydepartureTime);
+
+            dEPARTURE  =  itemView.findViewById(R.id.dEPARTURE);
             location = itemView.findViewById(R.id.location);
             bus_booking = itemView.findViewById(R.id.bus_booking);
+            arrivalTime = itemView.findViewById(R.id.arrivalTime);
         }
     }
 }

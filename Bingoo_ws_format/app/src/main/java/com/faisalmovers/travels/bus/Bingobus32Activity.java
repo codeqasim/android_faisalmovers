@@ -1,6 +1,7 @@
 package com.faisalmovers.travels.bus;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,8 @@ import model.BoardingPointModel;
 
 public class Bingobus32Activity extends AppCompatActivity {
 
+     String totalamountofseat ;
+    //TOTAL : Rs
     Integer image[] = {R.drawable.marker,R.drawable.marker,R.drawable.marker};
     String city[] ={"Thokar Niaz Baig","Bund road",
             "kalma chowk"};
@@ -25,7 +28,7 @@ public class Bingobus32Activity extends AppCompatActivity {
     LinearLayout city1,card_bottom,booknow;
     ImageView location1;
 
-    TextView boardingtext;
+    TextView boardingtext,totalamount ,totalseatnum;
 
     private RecyclerView recyclerView;
     private DropingPointAdapter boardingPointAdapter;
@@ -37,6 +40,19 @@ public class Bingobus32Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus32);
+
+
+
+
+
+        totalamount = (TextView) findViewById(R.id.total);
+        totalseatnum = (TextView) findViewById(R.id.seatnum);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
+        totalseatnum.setText(pref.getString("numberofseat", null));
+
 
         back = (ImageView)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {

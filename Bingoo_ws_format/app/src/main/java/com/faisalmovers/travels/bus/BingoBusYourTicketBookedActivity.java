@@ -15,7 +15,7 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
     LinearLayout male, female;
     TextView txtmale, txtfemale;
     TextView pickupfrom,topoint;
-    TextView locpick,locdrop;
+    TextView locpick,locdrop,totalamount;
     ImageView  back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         locpick = (TextView) findViewById(R.id.pickup);
         locdrop = (TextView) findViewById(R.id.dropping);
 
+        totalamount = (TextView) findViewById(R.id.total);
+
+
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,7 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         topoint.setText(pref.getString("to", null));;
         locpick.setText(pref.getString("city", null));
         locdrop.setText(pref.getString("city1", null));
+        totalamount.setText("Rs "+pref.getString("totalamountofseat", null));
 
 
 
