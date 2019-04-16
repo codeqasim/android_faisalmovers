@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fm.travels.bus"
-    android:installLocation="auto"
-    android:versionCode="2">
+    package="com.faisalmovers.travels.bus">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,53 +12,53 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.fm.travels.bus.Bingobus24Activity" />
-        <activity android:name="com.fm.travels.bus.Bingobus28Activity" />
-        <activity android:name="com.fm.travels.bus.Bingobus27Activity" />
-        <activity android:name="com.fm.travels.bus.Bingobus31Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus24Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus28Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus27Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus31Activity" />
         <activity
-            android:name="com.fm.travels.bus.Bingobus4Activity"
+            android:name="com.faisalmovers.travels.bus.Bingobus4Activity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
-        <activity android:name="com.fm.travels.bus.Bingobus7Activity" />
-        <activity android:name="com.fm.travels.bus.ListinwsActivity" />
-        <activity android:name="com.fm.travels.bus.Bingobus33Activity" />
-        <activity android:name="com.fm.travels.bus.Bingobus32Activity" />
-        <activity android:name="com.fm.travels.bus.Bus_result1Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus7Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.ListinwsActivity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus33Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus32Activity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bus_result1Activity" />
         <activity
-            android:name="com.fm.travels.bus.Bingobus_mobileverificationActivity"
+            android:name="com.faisalmovers.travels.bus.Bingobus_mobileverificationActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <activity
-            android:name="com.fm.travels.bus.Bingobus_Edit_MobileActivity"
+            android:name="com.faisalmovers.travels.bus.Bingobus_Edit_MobileActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="com.fm.travels.bus.Bingobus_walkthruoghActivity"
+            android:name="com.faisalmovers.travels.bus.Bingobus_walkthruoghActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.fm.travels.bus.Bingobus_Select_CountryActivity" />
+        <activity android:name="com.faisalmovers.travels.bus.Bingobus_Select_CountryActivity" />
         <activity
-            android:name="com.fm.travels.bus.Bingobus_Last_StepActivity"
+            android:name="com.faisalmovers.travels.bus.Bingobus_Last_StepActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.fm.travels.bus.Bingobus5Activity"
+            android:name="com.faisalmovers.travels.bus.Bingobus5Activity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
 
-        <activity android:name="com.fm.travels.bus.SplaceScreenWSActivity" />
-        <activity android:name="com.fm.travels.bus.Splash_screenActivity">
+        <activity android:name="com.faisalmovers.travels.bus.SplaceScreenWSActivity" />
+        <activity android:name="com.faisalmovers.travels.bus.Splash_screenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fm.travels.bus.BingoBusBookingDetailActivity"></activity>
-        <activity android:name="com.fm.travels.bus.BingoBusYourTicketBookedActivity">
+        <activity android:name="com.faisalmovers.travels.bus.BingoBusBookingDetailActivity"></activity>
+        <activity android:name="com.faisalmovers.travels.bus.BingoBusYourTicketBookedActivity">
 
         </activity>
-        <activity android:name="com.fm.travels.bus.BingoBusBookingHistoryActivity">
+        <activity android:name="com.faisalmovers.travels.bus.BingoBusBookingHistoryActivity">
 
         </activity>
     </application>

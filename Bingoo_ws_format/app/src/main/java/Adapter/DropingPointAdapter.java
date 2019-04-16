@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fm.travels.bus.R;
+import com.faisalmovers.travels.bus.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

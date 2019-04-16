@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.fm.travels.bus.R;
+import com.faisalmovers.travels.bus.R;
 import java.util.ArrayList;
 import model.OffersModel;
 

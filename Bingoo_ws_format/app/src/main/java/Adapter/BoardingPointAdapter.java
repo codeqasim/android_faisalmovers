@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.fm.travels.bus.Bingobus32Activity;
-import com.fm.travels.bus.R;
+import com.faisalmovers.travels.bus.Bingobus32Activity;
+import com.faisalmovers.travels.bus.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
