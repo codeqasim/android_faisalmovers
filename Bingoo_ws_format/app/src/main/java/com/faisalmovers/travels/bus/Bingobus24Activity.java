@@ -19,20 +19,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import Adapter.OffersAdapter;
 import model.OffersModel;
+import util.Utils;
 
 public class Bingobus24Activity extends AppCompatActivity implements View.OnClickListener {
 
     //city change
     TextView uptext, downtext;
     ImageView swap;
-
-    //date select
+    boolean datecfm=false;
     LinearLayout calender1;
     TextView date1, date2, date3;
     DatePickerDialog.OnDateSetListener dateSetListener;
@@ -86,18 +88,24 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         searchbus = (TextView) findViewById(R.id.searchbus);
 
 
-        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("show", "yes");
-        editor.commit();
 
 
         searchbus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context, Bingobus7Activity.class);
-                context.startActivity(i);
+                if (!uptext.getText().equals("") && !downtext.getText().equals("") && datecfm ==true)
+                {
+
+                    Intent i = new Intent(context, Bingobus7Activity.class);
+                    context.startActivity(i);
+                }
+                else
+                {
+
+                    Utils.showErrorToast(getApplicationContext(),"required Date & Location from & to");
+                }
+
             }
         });
 
@@ -123,6 +131,11 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 startActivity(i);
             }
         });
+        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("show", "yes");
+        editor.commit();
+
 
 
 
@@ -169,7 +182,16 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
                 String day = outFormat.format(date);
 
-                //    Toast.makeText(Bingobus24Activity.this, day, Toast.LENGTH_SHORT).show();
+                datecfm=true;
+
+                SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                String finaldate = year+"-"+month+"-"+dayOfMonth;
+                editor.putString("selectdate",finaldate);
+                editor.commit();
+              //  Toast.makeText(Bingobus24Activity.this, dayOfMonth +"-" +"-", Toast.LENGTH_SHORT).show();
+
+                // Toast.makeText(Bingobus24Activity.this, dayOfMonth+"/ "+month, Toast.LENGTH_SHORT).show();
 
                 if (day.equals("Sun")) {
                     day1.setText("Sat");
@@ -249,7 +271,8 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
                 String day = outFormat.format(date);
 
-                //  Toast.makeText(Bingobus24Activity.this, day, Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(Bingobus24Activity.this, dayOfMonth +"-" +"-", Toast.LENGTH_SHORT).show();
 //
                 if (day.equals("Sun")) {
                     day4.setText("Sat");
@@ -378,6 +401,14 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        String finaldate ;
+
         switch (v.getId()) {
             case R.id.liner1:
                 bus.setImageResource(R.drawable.ic_bus_blue);
@@ -401,6 +432,12 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 offer.setTextColor(Color.parseColor("#000000"));
                 booking.setTextColor(Color.parseColor("#91959d"));
                 profile.setTextColor(Color.parseColor("#91959d"));
+
+
+                Intent intent = new Intent(getApplicationContext(),Offers.class);
+                startActivity(intent);
+
+
                 break;
 
             case R.id.liner3:
@@ -428,12 +465,19 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 offer.setTextColor(Color.parseColor("#91959d"));
                 booking.setTextColor(Color.parseColor("#91959d"));
                 profile.setTextColor(Color.parseColor("#000000"));
+
+
+                Intent Profile = new Intent(context,ProfilePerson.class);
+                context.startActivity(Profile);
                 break;
 
             case R.id.circle1:
                 circle1.setBackgroundResource(R.drawable.circle_blue);
                 circle2.setBackgroundResource(R.drawable.circle_white);
                 circle3.setBackgroundResource(R.drawable.circle_white);
+
+
+
 
                 date1.setTextColor(Color.parseColor("#ffffff"));
                 date2.setTextColor(Color.parseColor("#91959d"));
@@ -442,6 +486,12 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 day1.setTextColor(Color.parseColor("#ffffff"));
                 day2.setTextColor(Color.parseColor("#91959d"));
                 day3.setTextColor(Color.parseColor("#91959d"));
+
+                String day1one = day1.getText().toString();
+                 finaldate = thisDate+"-"+day1one;
+                editor.putString("selectdate",finaldate);
+                editor.commit();
+                datecfm=true;
                 break;
 
             case R.id.circle2:
@@ -456,6 +506,13 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 day1.setTextColor(Color.parseColor("#91959d"));
                 day2.setTextColor(Color.parseColor("#ffffff"));
                 day3.setTextColor(Color.parseColor("#91959d"));
+
+
+                String dayday2 = date2.getText().toString();
+                finaldate = thisDate+"-"+dayday2;
+                editor.putString("selectdate",finaldate);
+                editor.commit();
+                datecfm=true;
                 break;
 
             case R.id.circle3:
@@ -471,6 +528,14 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 day1.setTextColor(Color.parseColor("#91959d"));
                 day2.setTextColor(Color.parseColor("#91959d"));
                 day3.setTextColor(Color.parseColor("#ffffff"));
+
+
+                String dayday3 = date3.getText().toString();
+                finaldate = thisDate+"-"+dayday3;
+                editor.putString("selectdate",finaldate);
+                editor.commit();
+                datecfm=true;
+
                 break;
 
             case R.id.circle4:

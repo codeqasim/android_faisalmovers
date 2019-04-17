@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,7 +45,7 @@ public class Bingobus4Activity extends Url {
     private StringRequest mStringRequest;
     String responmessage;
     CitynameAdapter citynameAdapter;
-
+    ProgressBar progressBar ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class Bingobus4Activity extends Url {
         Intent i=getIntent();
         layout = i.getIntExtra("layout",0);
         listview = (ListView) findViewById(R.id.listview);
-
+        progressBar =  findViewById(R.id.progressBar);
         customers = new ArrayList<>();
        /* customers = populateCustomerData(customers);*/
         sendAndRequestResponse(cityweb);
@@ -74,19 +75,25 @@ public class Bingobus4Activity extends Url {
 
 
 
-
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String from = adapterView.getItemAtPosition(i).toString();
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
+                Cities cities = citynames.get(i);
+
+                String cityid= cities.getId();
+               // Log.d("checkerdata",cityid);
+
+
 
                 if(from!=null ) {
 
                     if(layout==1){
                         editor.putString("from", from);
                         editor.commit();
+                        editor.putString("fromcityid", cityid);
                         layout=2;
                         customers.clear();
                         adapter.notifyDataSetChanged();
@@ -97,6 +104,7 @@ public class Bingobus4Activity extends Url {
                     }
                     else if(layout==2){
                         editor.putString("to", from);
+                        editor.putString("tocityid", cityid);
                         editor.commit();
                         finish();
                     }
@@ -114,13 +122,20 @@ public class Bingobus4Activity extends Url {
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
 
+                Cities cities = citynames.get(position);
+
+                String cityid= cities.getId();
+               // Log.d("checkerdata",cityid);
+
                 if(from!=null ) {
                     if(layout==1){
                         editor.putString("from", from);
+                        editor.putString("fromcityid", cityid);
                     }
 
                     if(layout==2){
                         editor.putString("to", from);
+                        editor.putString("tocityid", cityid);
                     }
                     editor.commit();
                     finish();
@@ -203,7 +218,7 @@ public class Bingobus4Activity extends Url {
                     final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, citynames1);
                     listview.setAdapter(adapter2);
 
-
+                    progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

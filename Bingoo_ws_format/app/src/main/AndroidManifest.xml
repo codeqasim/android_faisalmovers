@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,55 +13,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus24Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus28Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus27Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus31Activity" />
+        <activity android:name=".ProfilePerson"></activity>
+        <activity android:name=".Offers" />
+        <activity android:name=".Bingobus24Activity" />
+        <activity android:name=".Bingobus28Activity" />
+        <activity android:name=".Bingobus27Activity" />
+        <activity android:name=".Bingobus31Activity" />
         <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus4Activity"
+            android:name=".Bingobus4Activity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus7Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.ListinwsActivity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus33Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus32Activity" />
-        <activity android:name="com.faisalmovers.travels.bus.Bus_result1Activity" />
+        <activity android:name=".Bingobus7Activity" />
+        <activity android:name=".ListinwsActivity" />
+        <activity android:name=".Bingobus33Activity" />
+        <activity android:name=".Bingobus32Activity" />
+        <activity android:name=".Bus_result1Activity" />
         <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus_mobileverificationActivity"
-            android:theme="@style/activity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-
-        <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus_Edit_MobileActivity"
+            android:name=".Bingobus_mobileverificationActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus_walkthruoghActivity"
+            android:name=".Bingobus_Edit_MobileActivity"
+            android:theme="@style/activity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".Bingobus_walkthruoghActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.faisalmovers.travels.bus.Bingobus_Select_CountryActivity" />
+        <activity android:name=".Bingobus_Select_CountryActivity" />
         <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus_Last_StepActivity"
+            android:name=".Bingobus_Last_StepActivity"
             android:theme="@style/activity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.faisalmovers.travels.bus.Bingobus5Activity"
+            android:name=".Bingobus5Activity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
-
-        <activity android:name="com.faisalmovers.travels.bus.SplaceScreenWSActivity" />
-        <activity android:name="com.faisalmovers.travels.bus.Splash_screenActivity">
+        <activity android:name=".SplaceScreenWSActivity" />
+        <activity android:name=".Splash_screenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.faisalmovers.travels.bus.BingoBusBookingDetailActivity"></activity>
-        <activity android:name="com.faisalmovers.travels.bus.BingoBusYourTicketBookedActivity">
-
-        </activity>
-        <activity android:name="com.faisalmovers.travels.bus.BingoBusBookingHistoryActivity">
-
-        </activity>
+        <activity android:name=".BingoBusBookingDetailActivity" />
+        <activity android:name=".BingoBusYourTicketBookedActivity" />
+        <activity android:name=".BingoBusBookingHistoryActivity" />
     </application>
 
 </manifest>

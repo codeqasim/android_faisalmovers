@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.util.TimeZone;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -30,11 +32,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import Adapter.Bingobus7Adapter;
 import model.Bingobus7Model;
 import util.Url;
+import util.Utils;
 
 public class Bingobus7Activity extends Url {
 
@@ -50,17 +54,25 @@ public class Bingobus7Activity extends Url {
     private StringRequest mStringRequest;
     String responmessage;
     Bingobus7Model bingobus7Model;
-
+    ProgressBar progressBar2 ;
+    String selectdate ;
+    Date oneWayTripDate;
+    TextView dateinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus7);
 
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+
 
         businfo = new ArrayList<>();
 
         businfo = new ArrayList<>();
+
+        dateinfo = (TextView) findViewById(R.id.dateinfo);
+
         back = (ImageView)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +95,18 @@ public class Bingobus7Activity extends Url {
         recyclerView.setLayoutManager(new LinearLayoutManager(Bingobus7Activity.this));
         recyclerView.setFocusableInTouchMode(false);
         recyclerView.setNestedScrollingEnabled(false);
-        sendAndRequestResponse(businfoweb ,recyclerView);
+
+
+
+        String fromCityId = pref.getString("fromcityid",null);
+        String toCityId =  pref.getString("tocityid",null);
+        selectdate = pref.getString("selectdate",null);
+
+      Log.d("fromCityIdfromCityId" , selectdate);
+
+        String businfo = businfoweb+fromCityId+"&toCityId="+toCityId+"&pdate="+selectdate+"&type=getSchedules";
+        //Log.d("fromCityIdfromCityId" , businfo);
+        sendAndRequestResponse(businfo ,recyclerView);
 //        animation content slowly updated in view for using this code
 //        runAnimation(recyclerView);
 
@@ -198,13 +221,38 @@ public class Bingobus7Activity extends Url {
 
                     Context context = recyclerview.getContext();
                     LayoutAnimationController controller = null;
+                    progressBar2.setVisibility(View.GONE);
                     controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down);
                     bingobas7_adapter = new Bingobus7Adapter(Bingobus7Activity.this,businfo );
                     recyclerview.setAdapter(bingobas7_adapter);
+
                     recyclerview.setLayoutAnimation(controller);
                     recyclerview.getAdapter().notifyDataSetChanged();
+
                     recyclerview.scheduleLayoutAnimation();
-                    Log.d("sizearraybusinfo" ,"  "+businfo.size());
+
+                    if (bingobas7_adapter.getItemCount() <= 0)
+                    {
+                        progressBar2.setVisibility(View.GONE);
+                        Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
+                    }
+
+
+                    String datetime=null;
+                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
+                    try {
+                        Date convertedDate = inputFormat.parse(selectdate);
+                        datetime = d.format(convertedDate);
+                        //Log.d("sizearraybusinfo" ,datetime+"  "+businfo.size());
+                        dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
+                    }catch (ParseException e)
+                    {
+
+                    }
+
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -217,6 +265,8 @@ public class Bingobus7Activity extends Url {
             public void onErrorResponse(VolleyError error) {
 
 
+                progressBar2.setVisibility(View.GONE);
+                Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
                 responmessage = String.valueOf(error);
             }
         });
@@ -224,6 +274,8 @@ public class Bingobus7Activity extends Url {
 
         return responmessage ;
     }
+
+
     public String timedate (String time )
     {
 

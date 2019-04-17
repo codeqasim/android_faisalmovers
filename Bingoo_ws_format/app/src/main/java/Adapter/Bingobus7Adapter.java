@@ -50,7 +50,7 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
         holder.dEPARTURE.setText(models.get(position).getDepartureTime());
         holder.arrivalTime.setText(models.get(position).getArrivalTime());
         holder.QuerydepartureTime.setText(models.get(position).getQuerydepartureTime());
-        if(position == 0) {
+      /*  if(position == 0) {
             holder.location.setVisibility(View.GONE);
         }
 
@@ -71,7 +71,7 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
 
         if(position == 6) {
             holder.location.setVisibility(View.GONE);
-        }
+        }*/
 
        holder.bus_booking.setOnClickListener(new View.OnClickListener() {
           @Override

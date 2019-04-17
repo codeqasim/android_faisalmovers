@@ -124,6 +124,10 @@ public class BingoBusBookingHistoryActivity extends AppCompatActivity implements
                 offer.setTextColor(Color.parseColor("#000000"));
                 booking.setTextColor(Color.parseColor("#91959d"));
                 profile.setTextColor(Color.parseColor("#91959d"));
+
+                Intent Offer = new Intent(context, Offers.class);
+                context.startActivity(Offer);
+
                 break;
 
             case R.id.liner3:
@@ -148,6 +152,9 @@ public class BingoBusBookingHistoryActivity extends AppCompatActivity implements
                 offer.setTextColor(Color.parseColor("#91959d"));
                 booking.setTextColor(Color.parseColor("#91959d"));
                 profile.setTextColor(Color.parseColor("#000000"));
+
+                Intent Profile = new Intent(context,ProfilePerson.class);
+                context.startActivity(Profile);
                 break;
         }
     }

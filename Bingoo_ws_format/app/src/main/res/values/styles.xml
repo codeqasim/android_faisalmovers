@@ -52,4 +52,8 @@
         <item name="colorControlHighlight">#009339</item>
     </style>
 
+
+    <style name="progressBargreen" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/fm</item>
+    </style>
 </resources>

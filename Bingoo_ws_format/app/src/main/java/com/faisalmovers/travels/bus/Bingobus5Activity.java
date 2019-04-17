@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
 import model.Cities;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,7 +38,7 @@ public class Bingobus5Activity extends Url {
 
     AutoCompleteTextView autoCompleteTextView;
     CustomerAdapter adapter = null;
-
+    ProgressBar progressBar ;
     ArrayList<Customer> customers = null;
     int layout;
     RecyclerView recyclerView;
@@ -65,6 +67,7 @@ public class Bingobus5Activity extends Url {
                 finish();
             }
         });
+        progressBar =  findViewById(R.id.progressBar);
 
 
         customers = new ArrayList<>();
@@ -78,13 +81,21 @@ public class Bingobus5Activity extends Url {
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
 
+
+                Cities cities = citynames.get(i);
+
+                String cityid= cities.getId();
+               // Log.d("checkerdata",cityid);
+
                 if(from!=null ) {
                     if(layout==1){
                         editor.putString("from", from);
+                        editor.putString("fromcityid", cityid);
                     }
 
                     if(layout==2){
                         editor.putString("to", from);
+                        editor.putString("tocityid", cityid);
                     }
                     editor.commit();
                     finish();
@@ -94,7 +105,7 @@ public class Bingobus5Activity extends Url {
        // final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, citynames1);
         ///listview.setAdapter(adapter2);
 
-       /* listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+    listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
@@ -102,20 +113,27 @@ public class Bingobus5Activity extends Url {
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
 
+                Cities cities = citynames.get(position);
+
+                String cityid= cities.getId();
+               // Log.d("checkerdata",cityid);
+
                 if(from!=null ) {
                     if(layout==1){
                         editor.putString("from", from);
+                        editor.putString("fromcityid", cityid);
                     }
 
                     if(layout==2){
                         editor.putString("to", from);
+                        editor.putString("tocityid", cityid);
                     }
                     editor.commit();
                     finish();
                 }
 
             }
-        });*/
+        });
     }
 
    /* private ArrayList<Customer> populateCustomerData(final ArrayList<Customer> customers) {
@@ -136,9 +154,6 @@ public class Bingobus5Activity extends Url {
         mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-
-                Log.d("checkerdata",response);
 
                try {
 
@@ -181,7 +196,7 @@ public class Bingobus5Activity extends Url {
                 final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, citynames1);
                  listview.setAdapter(adapter2);
 
-
+                   progressBar.setVisibility(View.GONE);
                } catch (JSONException e) {
                     e.printStackTrace();
                 }
