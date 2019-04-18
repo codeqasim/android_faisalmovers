@@ -162,4 +162,11 @@ public class Offers extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
+    @Override
+    public void onBackPressed()
+    {
+
+        finish();
+
+    }
 }

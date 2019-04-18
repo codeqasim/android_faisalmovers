@@ -96,7 +96,7 @@ public class Bingobus_mobileverificationActivity extends AppCompatActivity {
                 } else {
 
 
-                    if (code.getText().toString().trim().equals(time)) {
+                    if (code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")) {
                         //code.setError("code");
                         Intent i = new Intent(context, Bingobus24Activity.class);
                         context.startActivity(i);

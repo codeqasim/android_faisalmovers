@@ -30,6 +30,7 @@ import Adapter.CustomerAdapter;
 import model.Cities;
 import model.Customer;
 import util.Url;
+import util.Utils;
 
 public class Bingobus4Activity extends Url {
 
@@ -57,7 +58,16 @@ public class Bingobus4Activity extends Url {
         progressBar =  findViewById(R.id.progressBar);
         customers = new ArrayList<>();
        /* customers = populateCustomerData(customers);*/
-        sendAndRequestResponse(cityweb);
+
+
+        if (Utils.isNetworkAvailable(getApplicationContext())) {
+
+            sendAndRequestResponse(cityweb);
+        } else {
+            Utils.showErrorToast(getApplicationContext(), "NETWORK CONNECTION");
+
+
+        }
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         adapter = new CustomerAdapter(this, customers);
         autoCompleteTextView.setAdapter(adapter);
@@ -215,7 +225,7 @@ public class Bingobus4Activity extends Url {
                     autoCompleteTextView.setAdapter(adapter);
                     autoCompleteTextView.setThreshold(1);
 
-                    final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, citynames1);
+                    final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.cityname_row, R.id.tvcityName, citynames1);
                     listview.setAdapter(adapter2);
 
                     progressBar.setVisibility(View.GONE);
@@ -230,6 +240,8 @@ public class Bingobus4Activity extends Url {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                progressBar.setVisibility(View.GONE);
+                Utils.showInfoToast(getApplicationContext() ," Data not avaible ");
 
             }
         });

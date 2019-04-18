@@ -1,8 +1,10 @@
 package com.faisalmovers.travels.bus;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -147,6 +149,11 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         uptext = (TextView) findViewById(R.id.uptext);
         downtext = (TextView) findViewById(R.id.downtext);
         swap = (ImageView) findViewById(R.id.swap);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        uptext.setText(pref.getString("from", null));
+        downtext.setText(pref.getString("to", null));
+
 
         swap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,6 +404,9 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         linear2.setOnClickListener(this);
         linear3.setOnClickListener(this);
         linear4.setOnClickListener(this);
+
+
+        load();
     }
 
     @Override
@@ -593,14 +603,51 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Bingobus24Activity.this, Splash_screenActivity.class);
-        finish();
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        startActivity(i);
-       /* // code here to show dialog
-        super.onBackPressed();
-       super.onBackPressed();
-        finish();*/
-        // optional depending on your needs
+
+        dailogbox();
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public  void dailogbox ()
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure, You wanted to Exit");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                      //  Toast.makeText(getApplicationContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
+                        finish();
+                        finishAffinity();
+                        System.exit(0);
+
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.fm);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.fm);
+    }
+
+    public void load()
+    {
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        editor.putString("selectdate",thisDate);
+        editor.commit();
+        datecfm=true;
     }
 }

@@ -9,12 +9,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="23dp"
-        android:layout_marginTop="53.3dp"
-        android:fontFamily="@font/sfpro_display_semibold"
-        android:id="@+id/offertev"
-        android:text="Profile coming soon "
+        android:layout_marginTop="40.3dp"
+        android:fontFamily="@font/sfpro_display_heavy"
+        android:id="@+id/nametv"
+        android:text="Profile "
         android:textColor="@color/light_black"
-        android:textSize="15sp" />
+        android:textSize="23.3sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_below="@+id/nametv"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:text="Profile is  coming  soon "
+        android:textColor="@color/light_black"
+        android:textSize="13.3sp" />
 
 
 

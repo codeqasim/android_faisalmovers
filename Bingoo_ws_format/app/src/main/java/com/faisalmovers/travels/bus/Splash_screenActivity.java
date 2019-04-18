@@ -20,6 +20,7 @@ public class Splash_screenActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("from", null);
         editor.putString("to", null);
+        editor.putString("selectdate",null);
         editor.commit();
 
 

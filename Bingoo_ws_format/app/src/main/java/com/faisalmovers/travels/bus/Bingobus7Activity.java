@@ -49,7 +49,7 @@ public class Bingobus7Activity extends Url {
     TextView up,down;
     ImageView back;
     Context context=this;
-     Animation animation;
+    Animation animation;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     String responmessage;
@@ -58,6 +58,7 @@ public class Bingobus7Activity extends Url {
     String selectdate ;
     Date oneWayTripDate;
     TextView dateinfo;
+    String datetime=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,18 +70,20 @@ public class Bingobus7Activity extends Url {
 
         businfo = new ArrayList<>();
 
-        businfo = new ArrayList<>();
+
 
         dateinfo = (TextView) findViewById(R.id.dateinfo);
+        dateinfo.setText("loading");
 
         back = (ImageView)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Bingobus7Activity.this,Bingobus24Activity.class);
+                /*Intent i = new Intent(Bingobus7Activity.this,Bingobus24Activity.class);
+                */
                 finish();
-                overridePendingTransition(R.anim.left_in, R.anim.right_out);
-                startActivity(i);
+                /*overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                startActivity(i);*/
             }
         });
 
@@ -100,13 +103,39 @@ public class Bingobus7Activity extends Url {
 
         String fromCityId = pref.getString("fromcityid",null);
         String toCityId =  pref.getString("tocityid",null);
+
         selectdate = pref.getString("selectdate",null);
+
+
+
+
+        Log.d("datedate",selectdate);
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
+        try {
+            Date convertedDate = inputFormat.parse(selectdate);
+            datetime = d.format(convertedDate);
+
+            dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
+        }catch (ParseException e)
+        {
+
+        }
 
       Log.d("fromCityIdfromCityId" , selectdate);
 
         String businfo = businfoweb+fromCityId+"&toCityId="+toCityId+"&pdate="+selectdate+"&type=getSchedules";
-        //Log.d("fromCityIdfromCityId" , businfo);
-        sendAndRequestResponse(businfo ,recyclerView);
+        Log.d("fromCityIdfromCityId" , businfo);
+
+
+        if (Utils.isNetworkAvailable(getApplicationContext())) {
+
+            sendAndRequestResponse(businfo ,recyclerView);
+        } else {
+            Utils.showErrorToast(getApplicationContext(), "NETWORK CONNECTION");
+
+
+        }
 //        animation content slowly updated in view for using this code
 //        runAnimation(recyclerView);
 
@@ -156,7 +185,7 @@ public class Bingobus7Activity extends Url {
     public void onBackPressed()
     {
         // code here to show dialog
-        super.onBackPressed();
+       // super.onBackPressed();
         finish();
         /*Intent i = new Intent(Bingobus7Activity.this,ListinwsActivity.class);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
@@ -238,20 +267,9 @@ public class Bingobus7Activity extends Url {
                     }
 
 
-                    String datetime=null;
-                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
-                    try {
-                        Date convertedDate = inputFormat.parse(selectdate);
-                        datetime = d.format(convertedDate);
-                        //Log.d("sizearraybusinfo" ,datetime+"  "+businfo.size());
-                        dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
-                    }catch (ParseException e)
-                    {
-
-                    }
 
 
+                    dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -267,6 +285,7 @@ public class Bingobus7Activity extends Url {
 
                 progressBar2.setVisibility(View.GONE);
                 Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
+                dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
                 responmessage = String.valueOf(error);
             }
         });
