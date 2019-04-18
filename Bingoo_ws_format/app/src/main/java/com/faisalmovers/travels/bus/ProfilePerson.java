@@ -131,4 +131,11 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
 
         }
     }
+    @Override
+    public void onBackPressed() {
+
+        // dailogbox();
+        finish();
+
+    }
 }

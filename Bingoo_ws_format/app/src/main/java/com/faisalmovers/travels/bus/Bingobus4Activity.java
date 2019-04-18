@@ -1,5 +1,6 @@
 package com.faisalmovers.travels.bus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import Adapter.CitynameAdapter;
@@ -47,6 +50,8 @@ public class Bingobus4Activity extends Url {
     String responmessage;
     CitynameAdapter citynameAdapter;
     ProgressBar progressBar ;
+    String data;
+    Context context=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +64,7 @@ public class Bingobus4Activity extends Url {
         customers = new ArrayList<>();
        /* customers = populateCustomerData(customers);*/
 
-
-        if (Utils.isNetworkAvailable(getApplicationContext())) {
-
-            sendAndRequestResponse(cityweb);
-        } else {
-            Utils.showErrorToast(getApplicationContext(), "NETWORK CONNECTION");
-
-
-        }
+        data =getAssetJsonData(context);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         adapter = new CustomerAdapter(this, customers);
         autoCompleteTextView.setAdapter(adapter);
@@ -246,6 +243,68 @@ public class Bingobus4Activity extends Url {
             }
         });
         mRequestQueue.add(mStringRequest);
+
+    }
+
+    public  String getAssetJsonData(Context context) {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open("city.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        Log.e("getAssetJsonData", json);
+
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONObject jsonObject12 = jsonObject.getJSONObject("response");
+            JSONArray jsonArray = jsonObject12.getJSONArray("cities");
+            Log.d("checkjsonArray", jsonArray.length() + "/");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                String id = jsonObject1.getString("id");
+                String name = jsonObject1.getString("name");
+                String city_abbr = jsonObject1.getString("city_abbr");
+                String country = jsonObject1.getString("country");
+                String province = jsonObject1.getString("province");
+                String active = jsonObject1.getString("active");
+
+                customers.add(new Customer(name, "", 8, R.drawable.clock));
+                Cities cities = new Cities(id, name, city_abbr, country, province, active);
+                citynames.add(cities);
+                citynames1.add(name);
+
+            }
+
+
+
+     /*              recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                   citynameAdapter = new CitynameAdapter(getApplicationContext(),citynames);
+                  // adapter.setClickListener(this);
+                   recyclerView.setAdapter(citynameAdapter);*/
+
+            /*
+             */
+            final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.cityname_row, R.id.tvcityName, citynames1);
+            listview.setAdapter(adapter2);
+
+            progressBar.setVisibility(View.GONE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
 
     }
 }
