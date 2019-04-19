@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import Adapter.BoardingPointAdapter;
+import model.Bingobus7Model;
 import model.BoardingPointModel;
 
 public class Bingobus31Activity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class Bingobus31Activity extends AppCompatActivity {
     String city[] ={"Bund road","kalma chowk ",
     "Thokar Niaz Baig"};
     String time[] = {"8:00 pm","8:15 pm","8:30 pm"};
+    Bingobus7Model bingobus7Model;
 
 
     private RecyclerView recyclerView;
@@ -32,11 +34,28 @@ public class Bingobus31Activity extends AppCompatActivity {
     Context context;
 
 
-
+    ArrayList<String> dropingpoint = new ArrayList<>() ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus31);
+
+
+        Intent da = getIntent();
+        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+
+
+
+
+
+        dropingpoint = bingobus7Model.getBoardingPoints();
+        String time  = bingobus7Model.getDepartureTime();
+
+
+
+
+
+
 
 
         totalamount = (TextView) findViewById(R.id.total);
@@ -68,8 +87,12 @@ public class Bingobus31Activity extends AppCompatActivity {
 
         boardingPointModels = new ArrayList<>();
 
-        for (int i = 0; i < image.length; i++) {
-            BoardingPointModel ab = new BoardingPointModel(image[i],city[i],time[i]);
+        for (int i = 0; i < dropingpoint.size(); i++) {
+
+
+            String name1 = dropingpoint.get(i);
+
+            BoardingPointModel ab = new BoardingPointModel(image[i],name1,time);
             boardingPointModels.add(ab);
         }
         boardingPointAdapter = new BoardingPointAdapter(Bingobus31Activity.this, boardingPointModels);

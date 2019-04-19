@@ -1,50 +1,63 @@
 package model;
 
-public class Bingobus7Model {
-    String acsleeper;
-    String departureTime ;
-    String arrivalTime ;
-    String fare ;
-    String busType;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    String stops ;
-    String status ;
-    String Seats ;
-    String status1;
+public class Bingobus7Model implements Serializable {
 
+    String opId ;
+    String  operator;
+    String logo ;
+    String fromCity ,toCity,departureTime,querydepartureTime,arrivalTime,price,busType,stops,seatsLeft,scheduleID;
 
-
-    String Schedule_Id ;
-    String MaskDate ;
-    String MaskRouteCode ;
-    String MaskTerminalId;
-
-    String ExcludedTerminalsList ;
-    String cancellationpolicy ;
-    String Amenities ;
-    String DropingPoints;
-    String QuerydepartureTime ;
+    ArrayList<String > Amenities_array_list = new ArrayList<>();
+    ArrayList<String > boardingPoints = new ArrayList<>();
 
 
-    public Bingobus7Model(String acsleeper, String departureTime, String arrivalTime, String fare, String busType, String stops, String status, String seats, String status1, String schedule_Id, String maskDate, String maskRouteCode, String maskTerminalId, String excludedTerminalsList, String cancellationpolicy, String amenities, String dropingPoints, String querydepartureTime) {
-        this.acsleeper = acsleeper;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.fare = fare;
-        this.busType = busType;
-        this.stops = stops;
-        this.status = status;
-        Seats = seats;
-        this.status1 = status1;
-        Schedule_Id = schedule_Id;
-        MaskDate = maskDate;
-        MaskRouteCode = maskRouteCode;
-        MaskTerminalId = maskTerminalId;
-        ExcludedTerminalsList = excludedTerminalsList;
-        this.cancellationpolicy = cancellationpolicy;
-        Amenities = amenities;
-        DropingPoints = dropingPoints;
-        QuerydepartureTime = querydepartureTime;
+
+    public Bingobus7Model() {
+    }
+
+
+
+    public String getOpId() {
+        return opId;
+    }
+
+    public void setOpId(String opId) {
+        this.opId = opId;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getFromCity() {
+        return fromCity;
+    }
+
+    public void setFromCity(String fromCity) {
+        this.fromCity = fromCity;
+    }
+
+    public String getToCity() {
+        return toCity;
+    }
+
+    public void setToCity(String toCity) {
+        this.toCity = toCity;
     }
 
     public String getDepartureTime() {
@@ -55,6 +68,14 @@ public class Bingobus7Model {
         this.departureTime = departureTime;
     }
 
+    public String getQuerydepartureTime() {
+        return querydepartureTime;
+    }
+
+    public void setQuerydepartureTime(String querydepartureTime) {
+        this.querydepartureTime = querydepartureTime;
+    }
+
     public String getArrivalTime() {
         return arrivalTime;
     }
@@ -63,12 +84,12 @@ public class Bingobus7Model {
         this.arrivalTime = arrivalTime;
     }
 
-    public String getFare() {
-        return fare;
+    public String getPrice() {
+        return price;
     }
 
-    public void setFare(String fare) {
-        this.fare = fare;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getBusType() {
@@ -87,111 +108,35 @@ public class Bingobus7Model {
         this.stops = stops;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSeatsLeft() {
+        return seatsLeft;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSeatsLeft(String seatsLeft) {
+        this.seatsLeft = seatsLeft;
     }
 
-    public String getSeats() {
-        return Seats;
+    public String getScheduleID() {
+        return scheduleID;
     }
 
-    public void setSeats(String seats) {
-        Seats = seats;
+    public void setScheduleID(String scheduleID) {
+        this.scheduleID = scheduleID;
     }
 
-    public String getStatus1() {
-        return status1;
+
+    public ArrayList<String> getAmenities_array_list() {
+        return Amenities_array_list;
     }
 
-    public void setStatus1(String status1) {
-        this.status1 = status1;
+    public void setAmenities_array_list(ArrayList<String> amenities_array_list) {
+        Amenities_array_list = amenities_array_list;
+    }
+    public ArrayList<String> getBoardingPoints() {
+        return boardingPoints;
     }
 
-    public String getSchedule_Id() {
-        return Schedule_Id;
-    }
-
-    public void setSchedule_Id(String schedule_Id) {
-        Schedule_Id = schedule_Id;
-    }
-
-    public String getMaskDate() {
-        return MaskDate;
-    }
-
-    public void setMaskDate(String maskDate) {
-        MaskDate = maskDate;
-    }
-
-    public String getMaskRouteCode() {
-        return MaskRouteCode;
-    }
-
-    public void setMaskRouteCode(String maskRouteCode) {
-        MaskRouteCode = maskRouteCode;
-    }
-
-    public String getMaskTerminalId() {
-        return MaskTerminalId;
-    }
-
-    public void setMaskTerminalId(String maskTerminalId) {
-        MaskTerminalId = maskTerminalId;
-    }
-
-    public String getExcludedTerminalsList() {
-        return ExcludedTerminalsList;
-    }
-
-    public void setExcludedTerminalsList(String excludedTerminalsList) {
-        ExcludedTerminalsList = excludedTerminalsList;
-    }
-
-    public String getCancellationpolicy() {
-        return cancellationpolicy;
-    }
-
-    public void setCancellationpolicy(String cancellationpolicy) {
-        this.cancellationpolicy = cancellationpolicy;
-    }
-
-    public String getAmenities() {
-        return Amenities;
-    }
-
-    public void setAmenities(String amenities) {
-        Amenities = amenities;
-    }
-
-    public String getDropingPoints() {
-        return DropingPoints;
-    }
-
-    public void setDropingPoints(String dropingPoints) {
-        DropingPoints = dropingPoints;
-    }
-
-    public String getQuerydepartureTime() {
-        return QuerydepartureTime;
-    }
-
-    public void setQuerydepartureTime(String querydepartureTime) {
-        QuerydepartureTime = querydepartureTime;
-    }
-
-    public String getAcsleeper() {
-        return acsleeper;
-    }
-
-    public void setAcsleeper(String acsleeper) {
-        this.acsleeper = acsleeper;
-    }
-
-    public Bingobus7Model(String acsleeper) {
-        this.acsleeper = acsleeper;
+    public void setBoardingPoints(ArrayList<String> boardingPoints) {
+        this.boardingPoints = boardingPoints;
     }
 }

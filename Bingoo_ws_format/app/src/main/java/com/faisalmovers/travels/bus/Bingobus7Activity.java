@@ -2,6 +2,7 @@ package com.faisalmovers.travels.bus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,6 +57,7 @@ public class Bingobus7Activity extends Url {
     Date oneWayTripDate;
     TextView dateinfo;
     String datetime=null;
+    String tour_type_arr[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,55 +108,46 @@ public class Bingobus7Activity extends Url {
 
 
 
-        Log.d("datedate",selectdate);
-        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
-        try {
-            Date convertedDate = inputFormat.parse(selectdate);
-            datetime = d.format(convertedDate);
 
-            dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
-        }catch (ParseException e)
-        {
-
-        }
 
          Log.d("fromCityIdfromCityId" , selectdate);
 
-       String newweb = "https://www.bookkaru.com/api/bus/search?appKey=bookkaru&fromcity=54&tocity=114&depdate=2019-04-19&operator=1";
-        String businfo = businfoweb+fromCityId+"&toCityId="+toCityId+"&pdate="+selectdate+"&type=getSchedules";
+       String newweb = businfoweb+fromCityId+"&tocity="+toCityId+"&depdate="+selectdate+"&operator=1";
+       // String businfo = businfoweb+fromCityId+"&toCityId="+toCityId+"&pdate="+selectdate+"&type=getSchedules";
 
 
-        Log.d("fromCityIdfromCityId" , businfo);
+        Log.d("fromCityIdfromCityId" , newweb);
 
 
         if (Utils.isNetworkAvailable(getApplicationContext())) {
 
-           sendAndRequestResponse(businfo ,recyclerView);
+          // sendAndRequestResponse(businfo ,recyclerView);
 
-           //sendAndRequestResponse2(newweb,recyclerView);
+           sendAndRequestResponse2(newweb,recyclerView);
         } else {
             Utils.showErrorToast(getApplicationContext(), "NETWORK CONNECTION");
 
-
+            progressBar2.setVisibility(View.GONE);
         }
 //        animation content slowly updated in view for using this code
 //        runAnimation(recyclerView);
 
 
-      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context,
+  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context,
                 recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
 
-                        Intent i = new Intent(context, Bingobus33Activity.class);
-                        context.startActivity(i);
+                        bingobus7Model = businfo.get(position);
+                        Intent i = new Intent(context,Bingobus33Activity.class);
+                        i.putExtra("sampleObject", bingobus7Model);
+                        startActivity(i);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
                         // do whatever
                     }
                 })
-        );*/
+        );
 
     }
     private void runAnimation(RecyclerView recyclerview) {
@@ -194,113 +187,7 @@ public class Bingobus7Activity extends Url {
        startActivity(i);*/
     }
 
-    private String  sendAndRequestResponse(String url , final RecyclerView recyclerview) {
 
-
-
-
-        mRequestQueue = Volley.newRequestQueue(this);
-        mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onResponse(String response) {
-
-
-                if(response =="[]")
-                {
-                    progressBar2.setVisibility(View.GONE);
-                    Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
-                    dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
-                }
-                Log.d("responseresponse" ,response);
-                responmessage = response ;
-                try {
-
-
-                    JSONArray jsonArray = new JSONArray(response);
-
-                    for (int i =0; i <jsonArray.length(); i++)
-                    {
-
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-
-                        String  acsleeper = "A/C Sleeper (2+1)" ;
-                        String departureTime = jsonObject.getString("departureTime");
-                        departureTime =  timedate(departureTime);
-                        String arrivalTime = jsonObject.getString("arrivalTime") ;
-                        arrivalTime = timedate(arrivalTime);
-                        String fare  = jsonObject.getString("fare");
-                        String busType = jsonObject.getString("busType");
-                        String stops  = jsonObject.getString("stops");
-                        String status  = jsonObject.getString("status");
-                        String Seats = jsonObject.getString("Seats") ;
-                        String status1 = jsonObject.getString("status1");
-                        String Schedule_Id = jsonObject.getString("Schedule_Id") ;
-                        String MaskDate = jsonObject.getString("MaskDate") ;
-                        String MaskRouteCode  = jsonObject.getString("MaskRouteCode");
-                        String MaskTerminalId = jsonObject.getString("MaskTerminalId");
-                        String ExcludedTerminalsList  = jsonObject.getString("ExcludedTerminalsList");
-                        String cancellationpolicy = jsonObject.getString("cancellationpolicy") ;
-                        String Amenities  = jsonObject.getString("Amenities");
-                        String DropingPoints = jsonObject.getString("DropingPoints");
-                        String QuerydepartureTime = jsonObject.getString("QuerydepartureTime") ;
-                        QuerydepartureTime = timedate(QuerydepartureTime);
-
-                        Bingobus7Model   bingobus7Model =  new Bingobus7Model(acsleeper,departureTime,arrivalTime,
-                                fare,busType,stops,status,Seats,status1,Schedule_Id,MaskDate,MaskRouteCode,
-                                MaskTerminalId,ExcludedTerminalsList,cancellationpolicy,Amenities,DropingPoints,QuerydepartureTime);
-                        businfo.add(bingobus7Model);
-
-
-                    }
-
-
-                    Context context = recyclerview.getContext();
-                    LayoutAnimationController controller = null;
-                    progressBar2.setVisibility(View.GONE);
-                    controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down);
-                    bingobas7_adapter = new Bingobus7Adapter(Bingobus7Activity.this,businfo );
-                    recyclerview.setAdapter(bingobas7_adapter);
-
-                    recyclerview.setLayoutAnimation(controller);
-                    recyclerview.getAdapter().notifyDataSetChanged();
-
-                    recyclerview.scheduleLayoutAnimation();
-
-                    if (bingobas7_adapter.getItemCount() <= 0)
-                    {
-                        progressBar2.setVisibility(View.GONE);
-                        Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
-                    }
-
-
-
-
-                    dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-
-                progressBar2.setVisibility(View.GONE);
-                Utils.showInfoToast(getApplicationContext() ,"no data avaible for this way");
-                dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
-                responmessage = String.valueOf(error);
-            }
-        });
-        mRequestQueue.add(mStringRequest);
-
-        return responmessage ;
-    }
 
 
     public String timedate (String time )
@@ -335,11 +222,11 @@ public class Bingobus7Activity extends Url {
 
 
 
+
                 try {
 
 
                     JSONObject jsonObject1 = new JSONObject(response);
-
                     JSONObject response1 = jsonObject1.getJSONObject("response");
                     JSONObject data = response1.getJSONObject("data");
                     Log.d("data1data1",data.length()+"/");
@@ -358,34 +245,63 @@ public class Bingobus7Activity extends Url {
 
                             for(int i=0;i<mainArray.length();i++) {
 
+                                ArrayList<String> amenitiesdata = new ArrayList<>();
+                                ArrayList<String > boardingPoints = new ArrayList<>();
                                 JSONObject jsonObject = mainArray.getJSONObject(i);
 
-                                String  acsleeper = "A/C Sleeper (2+1)" ;
-                                String departureTime = jsonObject.getString("departureTime");
-                                departureTime =  timedate(departureTime);
-                                String arrivalTime = jsonObject.getString("arrivalTime") ;
-                                arrivalTime = timedate(arrivalTime);
-                                String fare  = jsonObject.getString("fare");
-                                String busType = jsonObject.getString("busType");
-                                String stops  = jsonObject.getString("stops");
-                                String status  = jsonObject.getString("status");
-                                String Seats = jsonObject.getString("Seats") ;
-                                String status1 = jsonObject.getString("status1");
-                                String Schedule_Id = jsonObject.getString("Schedule_Id") ;
-                                String MaskDate = jsonObject.getString("MaskDate") ;
-                                String MaskRouteCode  = jsonObject.getString("MaskRouteCode");
-                                String MaskTerminalId = jsonObject.getString("MaskTerminalId");
-                                String ExcludedTerminalsList  = jsonObject.getString("ExcludedTerminalsList");
-                                String cancellationpolicy = jsonObject.getString("cancellationpolicy") ;
-                                String Amenities  = " ";//jsonObject.getString("Amenities");
-                                String DropingPoints = jsonObject.getString("DropingPoints");
-                                String QuerydepartureTime = jsonObject.getString("QuerydepartureTime") ;
-                                QuerydepartureTime = timedate(QuerydepartureTime);
+                               Bingobus7Model busModel = new Bingobus7Model();
+                                busModel.setOperator(jsonObject.getString("operator"));
+                                busModel.setLogo(jsonObject.getString("logo"));
+                                busModel.setFromCity(jsonObject.getString("fromCity"));
+                                busModel.setToCity(jsonObject.getString("toCity"));
 
-                                Bingobus7Model   bingobus7Model =  new Bingobus7Model(acsleeper,departureTime,arrivalTime,
-                                        fare,busType,stops,status,Seats,status1,Schedule_Id,MaskDate,MaskRouteCode,
-                                        MaskTerminalId,ExcludedTerminalsList,cancellationpolicy,Amenities,DropingPoints,QuerydepartureTime);
-                                businfo.add(bingobus7Model);
+
+                                busModel.setPrice(jsonObject.getString("price"));
+                                busModel.setScheduleID(jsonObject.getString("scheduleID"));
+                                busModel.setStops(jsonObject.getString("stops"));
+                                busModel.setBusType(jsonObject.getString("busType"));
+                                busModel.setOpId(jsonObject.getString("opId"));
+                                busModel.setSeatsLeft(jsonObject.getString("seatsLeft"));
+
+
+                                String QuerydepartureTime = jsonObject.getString("querydepartureTime") ;
+                                QuerydepartureTime = timedate(QuerydepartureTime);
+                                busModel.setQuerydepartureTime(QuerydepartureTime);
+
+                                String arrivalTime = jsonObject.getString("arrivalTime");
+                                arrivalTime = timedate(arrivalTime);
+                                busModel.setArrivalTime(arrivalTime);
+
+                                String departureTime = jsonObject.getString("departureTime");
+                                departureTime = timedate(departureTime);
+                                busModel.setDepartureTime(departureTime);
+
+
+                                JSONArray amenities_listing = jsonObject.getJSONArray("amenities");
+                                for (int amenities = 0 ; amenities<amenities_listing.length();amenities++){
+
+                                    JSONObject amenitiesjson = amenities_listing.getJSONObject(amenities);
+                                    String label = amenitiesjson.getString("label");
+
+                                    amenitiesdata.add(label);
+                                }
+
+                                JSONArray boardingPointsjson = jsonObject.getJSONArray("boardingPoints");
+
+                                for (int boardingPoint = 0 ; boardingPoint<boardingPointsjson.length();boardingPoint++){
+
+                                    JSONObject amenitiesjson = boardingPointsjson.getJSONObject(boardingPoint);
+                                    String terminal_name = amenitiesjson.getString("terminal_name");
+
+                                    boardingPoints.add(terminal_name);
+                                }
+
+
+
+
+                                busModel.setAmenities_array_list(amenitiesdata);
+                                busModel.setBoardingPoints(boardingPoints);
+                                businfo.add(busModel);
 
                             }
 
@@ -394,16 +310,15 @@ public class Bingobus7Activity extends Url {
 
                     }
 
+
                     Context context = recyclerview.getContext();
                     LayoutAnimationController controller = null;
                     progressBar2.setVisibility(View.GONE);
                     controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down);
                     bingobas7_adapter = new Bingobus7Adapter(Bingobus7Activity.this,businfo );
                     recyclerview.setAdapter(bingobas7_adapter);
-
                     recyclerview.setLayoutAnimation(controller);
                     recyclerview.getAdapter().notifyDataSetChanged();
-
                     recyclerview.scheduleLayoutAnimation();
 
                     if (bingobas7_adapter.getItemCount() <= 0)
@@ -414,9 +329,19 @@ public class Bingobus7Activity extends Url {
 
 
 
+                    Log.d("datedate",selectdate);
+                    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
+                    try {
+                        Date convertedDate = inputFormat.parse(selectdate);
+                        datetime = d.format(convertedDate);
 
-                    dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
+                        dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
+                    }catch (ParseException e)
+                    {
 
+                    }
+                   // dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
 
                 } catch (JSONException e) {
                     e.printStackTrace();

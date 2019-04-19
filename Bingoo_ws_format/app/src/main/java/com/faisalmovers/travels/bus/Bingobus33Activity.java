@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +15,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Bingobus7Model;
+import util.MJSONObject;
 
 public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelected{
 
@@ -28,13 +39,23 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
     ImageView cancel;
     private AlertDialog.Builder builder;
     Context context =this;
-
+    Bingobus7Model bingobus7Model;
+    int pricetickets =0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus33);
+
+
+
+        Intent da = getIntent();
+        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+
+        String price = bingobus7Model.getPrice();
+        pricetickets = Integer.parseInt(price);
+
 
         txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         seatnum = (TextView)findViewById(R.id.seatnum);
@@ -59,6 +80,7 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
             public void onClick(View view) {
 
                 Intent i = new Intent(context, Bingobus28Activity.class);
+                i.putExtra("sampleObject", bingobus7Model);
                 context.startActivity(i);
 
             }
@@ -91,6 +113,7 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
                 editor.putString("numberofseat", numberofseat);
                 editor.commit();
                 Intent i = new Intent(context, Bingobus31Activity.class);
+                i.putExtra("sampleObject", bingobus7Model);
                 context.startActivity(i);
 
             }
@@ -124,13 +147,13 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
     public void onSeatSelected(int x) {
         //txtSeatSelected.setText("Book "+count+" seats");
         if (x==2){
-            count+=720;
+            count+=pricetickets;
             seatcount+=1;
             txtSeatSelected.setText(String.valueOf(count));
             seatnum.setText("Seats Selected : "+String.valueOf(seatcount));
         }
         else if (x==1){
-            count-=720;
+            count-=pricetickets;
             seatcount-=1;
             txtSeatSelected.setText(String.valueOf(count));
             seatnum.setText( "Seats Selected : "+String.valueOf(seatcount));
@@ -153,5 +176,6 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
         finish();
         // optional depending on your needs
     }
+
 
 }
