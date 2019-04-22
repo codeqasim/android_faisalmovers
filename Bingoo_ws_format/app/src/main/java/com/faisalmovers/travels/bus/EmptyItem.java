@@ -1,5 +1,7 @@
 package com.faisalmovers.travels.bus;
 
+import model.AbstractItem;
+
 public class EmptyItem extends AbstractItem {
 
     public EmptyItem(String label) {

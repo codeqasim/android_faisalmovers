@@ -1,5 +1,7 @@
 package com.faisalmovers.travels.bus;
 
+import model.AbstractItem;
+
 public class EdgeItem extends AbstractItem {
 
     public EdgeItem(String label) {

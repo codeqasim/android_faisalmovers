@@ -107,7 +107,7 @@
                     android:layout_marginTop="16.5dp"
                     android:fontFamily="@font/sfpro_display_medium"
                     android:letterSpacing="0.0325"
-                    android:text="Agency"
+                    android:text="Operator"
                     android:textColor="#464646"
                     android:textSize="16.7sp" />
 
@@ -118,6 +118,7 @@
                     android:fontFamily="@font/sfpro_display_regular"
                     android:letterSpacing="0.0325"
                     android:text="@string/app_name"
+                    android:id="@+id/operator"
                     android:textColor="#464646"
                     android:textSize="12.3sp" />
 
@@ -143,6 +144,7 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/sfpro_display_regular"
                     android:letterSpacing="0.0325"
+                    android:id="@+id/busType"
                     android:text="AC Seater ( 2 + 2 )"
                     android:textColor="#464646"
                     android:textSize="12.3sp" />
@@ -180,31 +182,6 @@
                         android:textSize="13.3sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/sfpro_display_semibold"
-                        android:letterSpacing="0.0325"
-                        android:text="Service Charge"
-                        android:textColor="#91959d"
-                        android:textSize="13.3sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfpro_display_semibold"
-                        android:letterSpacing="0.0325"
-                        android:text="Rs 30"
-                        android:textColor="#464646"
-                        android:textSize="13.3sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -218,7 +195,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:letterSpacing="0.0325"
-                        android:text="Discount"
+                        android:text="No of Seat"
                         android:textColor="#91959d"
                         android:textSize="13.3sp" />
 
@@ -228,6 +205,7 @@
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:letterSpacing="0.0325"
                         android:text="Rs 90"
+                        android:id="@+id/seatcountt"
                         android:textColor="#464646"
                         android:textSize="13.3sp" />
                 </LinearLayout>
@@ -254,6 +232,7 @@
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:letterSpacing="0.0325"
                         android:text="Rs 720"
+                        android:id="@+id/total"
                         android:textColor="#464646"
                         android:textSize="13.3sp" />
                 </LinearLayout>

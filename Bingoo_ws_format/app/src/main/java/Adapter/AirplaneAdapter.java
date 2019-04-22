@@ -1,4 +1,4 @@
-package com.faisalmovers.travels.bus;
+package Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import model.AbstractItem;
+import com.faisalmovers.travels.bus.CenterItem;
+import com.faisalmovers.travels.bus.EdgeItem;
+import com.faisalmovers.travels.bus.OnSeatSelected;
+import com.faisalmovers.travels.bus.R;
+import com.faisalmovers.travels.bus.SelectableAdapter;
+
 import java.util.List;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {

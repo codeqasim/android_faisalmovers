@@ -1,194 +1,178 @@
 /*
-String acsleeper;
-        String departureTime ;
-        String arrivalTime ;
-        String fare ;
-        String busType;
+package Adapter;
 
-        String stops ;
-        String status ;
-        String Seats ;
-        String status1;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import model.AbstractItem;
+import com.faisalmovers.travels.bus.CenterItem;
+import com.faisalmovers.travels.bus.EdgeItem;
+import com.faisalmovers.travels.bus.OnSeatSelected;
+import com.faisalmovers.travels.bus.R;
+import com.faisalmovers.travels.bus.SelectableAdapter;
 
+import java.util.List;
 
-        String Schedule_Id ;
-        String MaskDate ;
-        String MaskRouteCode ;
-        String MaskTerminalId;
+public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
-        String ExcludedTerminalsList ;
-        String cancellationpolicy ;
-        String Amenities ;
-        String DropingPoints;
-        String QuerydepartureTime ;
+    private OnSeatSelected mOnSeatSelected;
+    private int count = 0;
 
+    private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
-public Bingobus7Model(String acsleeper, String departureTime, String arrivalTime, String fare, String busType, String stops, String status, String seats, String status1, String schedule_Id, String maskDate, String maskRouteCode, String maskTerminalId, String excludedTerminalsList, String cancellationpolicy, String amenities, String dropingPoints, String querydepartureTime) {
-        this.acsleeper = acsleeper;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.fare = fare;
-        this.busType = busType;
-        this.stops = stops;
-        this.status = status;
-        Seats = seats;
-        this.status1 = status1;
-        Schedule_Id = schedule_Id;
-        MaskDate = maskDate;
-        MaskRouteCode = maskRouteCode;
-        MaskTerminalId = maskTerminalId;
-        ExcludedTerminalsList = excludedTerminalsList;
-        this.cancellationpolicy = cancellationpolicy;
-        Amenities = amenities;
-        DropingPoints = dropingPoints;
-        QuerydepartureTime = querydepartureTime;
+        ImageView imgSeat, img_nomral_booked;
+        private final ImageView imgSeatSelected;
+
+        public EdgeViewHolder(View itemView) {
+            super(itemView);
+            imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
+            imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+            img_nomral_booked = (ImageView) itemView.findViewById(R.id.img_nomral_booked);
         }
+    }
 
-public String getDepartureTime() {
-        return departureTime;
+    private static class CenterViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView imgSeat, img_nomral_booked;
+        private final ImageView imgSeatSelected;
+
+        public CenterViewHolder(View itemView) {
+            super(itemView);
+            imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
+            imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+            img_nomral_booked = (ImageView) itemView.findViewById(R.id.img_nomral_booked);
         }
+    }
 
-public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
+    private static class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
         }
+    }
 
-public String getArrivalTime() {
-        return arrivalTime;
+    private Context mContext;
+    private LayoutInflater mLayoutInflater;
+    private List<AbstractItem> mItems;
+
+    public AirplaneAdapter(Context context, List<AbstractItem> items) {
+        mOnSeatSelected = (OnSeatSelected) context;
+        mContext = context;
+        mLayoutInflater = LayoutInflater.from(context);
+        mItems = items;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mItems.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mItems.get(position).getType();
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == AbstractItem.TYPE_CENTER) {
+            View itemView = mLayoutInflater.inflate(R.layout.list_item_seat, parent, false);
+            return new CenterViewHolder(itemView);
+        } else if (viewType == AbstractItem.TYPE_EDGE) {
+            View itemView = mLayoutInflater.inflate(R.layout.list_item_seat, parent, false);
+            return new EdgeViewHolder(itemView);
+        } else {
+            View itemView = new View(mContext);
+            return new EmptyViewHolder(itemView);
         }
+    }
 
-public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
+        int type = mItems.get(position).getType();
+
+
+        if (type == AbstractItem.TYPE_CENTER) {
+            final CenterItem item = (CenterItem) mItems.get(position);
+            CenterViewHolder holder = (CenterViewHolder) viewHolder;
+
+            if (position == 3 ||position == 4 || position==5||
+                    position == 7 || position == 8 || position == 9 ||position == 11
+                    || position == 12|| position == 13 || position == 14 ||
+                    position == 15 ||position == 16 || position == 17||
+                    position == 19 || position == 20 || position == 21 ||
+                    position == 23 || position == 24||
+                    position == 25 || position == 26)
+            {
+                holder.imgSeat.setImageResource(R.drawable.brown_sit);
+                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
+//                mOnSeatSelected.onSeatSelected(getItemCount());
+//                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+            }
+
+            holder.imgSeat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (position == 3 ||position == 4 || position==5||
+                            position == 7 || position == 8 || position == 9 ||position == 11
+                            || position == 12|| position == 13 || position == 14 ||
+                            position == 15 ||position == 16 || position == 17||
+                            position == 19 || position == 20 || position == 21 ||
+                            position == 23 || position == 24||
+                            position == 25 || position == 26)  {
+
+                    } else {
+                        int x = toggleSelection(position);
+                        mOnSeatSelected.onSeatSelected(x);
+                    }
+
+                }
+            });
+
+            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+
+        } else if (type == AbstractItem.TYPE_EDGE) {
+            final EdgeItem item = (EdgeItem) mItems.get(position);
+            EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
+
+            if (position == 3 ||position == 4 || position==5||
+                    position == 7 || position == 8 || position == 9 ||position == 11
+                    || position == 12|| position == 13 || position == 14 ||
+                    position == 15 ||position == 16 || position == 17||
+                    position == 19 || position == 20 || position == 21 ||
+                    position == 23 || position == 24||
+                    position == 25 || position == 26) {
+
+                holder.imgSeat.setImageResource(R.drawable.brown_sit);
+                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
+//                mOnSeatSelected.onSeatSelected(getItemCount());
+//                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+
+            }
+
+            holder.imgSeat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (position == 3 ||position == 4 || position==5||
+                            position == 7 || position == 8 || position == 9 ||position == 11
+                            || position == 12|| position == 13 || position == 14 ||
+                            position == 15 ||position == 16 || position == 17||
+                            position == 19 || position == 20 || position == 21 ||
+                            position == 23 || position == 24||
+                            position == 25 || position == 26) {
+
+                    } else {
+                        int x = toggleSelection(position);
+                        mOnSeatSelected.onSeatSelected(x);
+                    }
+                }
+            });
+
+            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
         }
-
-public String getFare() {
-        return fare;
-        }
-
-public void setFare(String fare) {
-        this.fare = fare;
-        }
-
-public String getBusType() {
-        return busType;
-        }
-
-public void setBusType(String busType) {
-        this.busType = busType;
-        }
-
-public String getStops() {
-        return stops;
-        }
-
-public void setStops(String stops) {
-        this.stops = stops;
-        }
-
-public String getStatus() {
-        return status;
-        }
-
-public void setStatus(String status) {
-        this.status = status;
-        }
-
-public String getSeats() {
-        return Seats;
-        }
-
-public void setSeats(String seats) {
-        Seats = seats;
-        }
-
-public String getStatus1() {
-        return status1;
-        }
-
-public void setStatus1(String status1) {
-        this.status1 = status1;
-        }
-
-public String getSchedule_Id() {
-        return Schedule_Id;
-        }
-
-public void setSchedule_Id(String schedule_Id) {
-        Schedule_Id = schedule_Id;
-        }
-
-public String getMaskDate() {
-        return MaskDate;
-        }
-
-public void setMaskDate(String maskDate) {
-        MaskDate = maskDate;
-        }
-
-public String getMaskRouteCode() {
-        return MaskRouteCode;
-        }
-
-public void setMaskRouteCode(String maskRouteCode) {
-        MaskRouteCode = maskRouteCode;
-        }
-
-public String getMaskTerminalId() {
-        return MaskTerminalId;
-        }
-
-public void setMaskTerminalId(String maskTerminalId) {
-        MaskTerminalId = maskTerminalId;
-        }
-
-public String getExcludedTerminalsList() {
-        return ExcludedTerminalsList;
-        }
-
-public void setExcludedTerminalsList(String excludedTerminalsList) {
-        ExcludedTerminalsList = excludedTerminalsList;
-        }
-
-public String getCancellationpolicy() {
-        return cancellationpolicy;
-        }
-
-public void setCancellationpolicy(String cancellationpolicy) {
-        this.cancellationpolicy = cancellationpolicy;
-        }
-
-public String getAmenities() {
-        return Amenities;
-        }
-
-public void setAmenities(String amenities) {
-        Amenities = amenities;
-        }
-
-public String getDropingPoints() {
-        return DropingPoints;
-        }
-
-public void setDropingPoints(String dropingPoints) {
-        DropingPoints = dropingPoints;
-        }
-
-public String getQuerydepartureTime() {
-        return QuerydepartureTime;
-        }
-
-public void setQuerydepartureTime(String querydepartureTime) {
-        QuerydepartureTime = querydepartureTime;
-        }
-
-public String getAcsleeper() {
-        return acsleeper;
-        }
-
-public void setAcsleeper(String acsleeper) {
-        this.acsleeper = acsleeper;
-        }
-
-public Bingobus7Model(String acsleeper) {
-        this.acsleeper = acsleeper;
-        }*/
+    }
+}*/

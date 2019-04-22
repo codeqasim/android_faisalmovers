@@ -145,6 +145,10 @@ public class Bingobus7Activity extends Url {
 
                     @Override public void onLongItemClick(View view, int position) {
                         // do whatever
+                        bingobus7Model = businfo.get(position);
+                        Intent i = new Intent(context,Bingobus33Activity.class);
+                        i.putExtra("sampleObject", bingobus7Model);
+                        startActivity(i);
                     }
                 })
         );
@@ -220,6 +224,7 @@ public class Bingobus7Activity extends Url {
             @Override
             public void onResponse(String response) {
 
+                    Log.d("fromCityIdfromCityId2",response);
 
 
 
@@ -228,10 +233,31 @@ public class Bingobus7Activity extends Url {
 
                     JSONObject jsonObject1 = new JSONObject(response);
                     JSONObject response1 = jsonObject1.getJSONObject("response");
+                    Log.d("msgmsg",response1.length()+"///");
+                    if(1==response1.length())
+                    {
+                        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
+                        try {
+                            Date convertedDate = inputFormat.parse(selectdate);
+                            datetime = d.format(convertedDate);
+
+                            dateinfo.setText(businfo.size() +" Buses Found for "+datetime );
+                            progressBar2.setVisibility(View.GONE);
+                            Utils.showInfoToast(getApplicationContext() ,"Schedules Not Found");
+                        }catch (ParseException e)
+                        {
+
+                        }
+
+                    }
                     JSONObject data = response1.getJSONObject("data");
                     Log.d("data1data1",data.length()+"/");
                     Iterator keys = data.keys();
 
+
+
+                   // String msg = error.getString("msg");
 
                     while(keys.hasNext()) {
 
@@ -312,6 +338,7 @@ public class Bingobus7Activity extends Url {
 
 
                     }
+
 
 
                     Context context = recyclerview.getContext();

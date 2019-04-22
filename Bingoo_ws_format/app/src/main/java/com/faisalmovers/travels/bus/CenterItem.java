@@ -1,5 +1,7 @@
 package com.faisalmovers.travels.bus;
 
+import model.AbstractItem;
+
 public class CenterItem extends AbstractItem {
 
     public CenterItem(String label) {

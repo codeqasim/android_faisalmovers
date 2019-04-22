@@ -1,4 +1,4 @@
-package com.faisalmovers.travels.bus;
+package model;
 
 public abstract class AbstractItem {
 
