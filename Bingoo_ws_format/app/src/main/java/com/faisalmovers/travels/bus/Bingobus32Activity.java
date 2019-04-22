@@ -58,10 +58,9 @@ public class Bingobus32Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Bingobus32Activity.this,Bingobus31Activity.class);
+
                 finish();
-                overridePendingTransition(R.anim.left_in, R.anim.right_out);
-                startActivity(i);
+
             }
         });
         card_bottom = findViewById(R.id.card_bottom);
@@ -116,12 +115,10 @@ public class Bingobus32Activity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        Intent intent=new Intent(Bingobus32Activity.this,Bingobus31Activity.class);
-        finish();
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        startActivity(intent);
-        // code here to show dialog
+
         super.onBackPressed();
+        finish();
+
         // optional depending on your needs
     }
 }

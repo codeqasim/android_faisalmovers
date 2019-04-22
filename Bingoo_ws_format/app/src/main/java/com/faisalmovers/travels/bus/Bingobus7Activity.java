@@ -246,6 +246,7 @@ public class Bingobus7Activity extends Url {
                             for(int i=0;i<mainArray.length();i++) {
 
                                 ArrayList<String> amenitiesdata = new ArrayList<>();
+                                ArrayList<String> amenitiesdataimage = new ArrayList<>();
                                 ArrayList<String > boardingPoints = new ArrayList<>();
                                 JSONObject jsonObject = mainArray.getJSONObject(i);
 
@@ -282,7 +283,8 @@ public class Bingobus7Activity extends Url {
 
                                     JSONObject amenitiesjson = amenities_listing.getJSONObject(amenities);
                                     String label = amenitiesjson.getString("label");
-
+                                    String imagepth = amenitiesjson.getString("path");
+                                    amenitiesdataimage.add(imagepth);
                                     amenitiesdata.add(label);
                                 }
 
@@ -300,6 +302,7 @@ public class Bingobus7Activity extends Url {
 
 
                                 busModel.setAmenities_array_list(amenitiesdata);
+                                busModel.setAmenities_array_listimage(amenitiesdataimage);
                                 busModel.setBoardingPoints(boardingPoints);
                                 businfo.add(busModel);
 

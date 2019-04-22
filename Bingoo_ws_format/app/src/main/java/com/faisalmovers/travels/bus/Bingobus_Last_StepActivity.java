@@ -56,7 +56,7 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
 //
         pickupfrom.setText(pref.getString("from", null));
         topoint.setText(pref.getString("to", null));;
-       locpick.setText(pref.getString("city", null));
+        locpick.setText(pref.getString("city", null));
         locdrop.setText(pref.getString("city1", null));
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
         totalseatnum.setText(pref.getString("numberofseat", null));
@@ -73,6 +73,7 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
 
         img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
         img2easypasa = (ImageView)findViewById(R.id.img2easypasa);
+/*
 
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,7 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
                 img1.setVisibility(View.VISIBLE);
             }
         });
+*/
 
 
         img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
@@ -145,6 +147,10 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
         easypisa.setOnClickListener(this);
         bycash.setOnClickListener(this);
 
+        img1.setVisibility(View.GONE);
+        img2.setVisibility(View.VISIBLE);
+        img2easypasa.setVisibility(View.GONE);
+        img1easypasa.setVisibility(View.VISIBLE);
     }
 
     @Override

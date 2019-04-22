@@ -11,9 +11,17 @@ public class Bingobus7Model implements Serializable {
     String fromCity ,toCity,departureTime,querydepartureTime,arrivalTime,price,busType,stops,seatsLeft,scheduleID;
 
     ArrayList<String > Amenities_array_list = new ArrayList<>();
+    ArrayList<String > Amenities_array_listimage = new ArrayList<>();
     ArrayList<String > boardingPoints = new ArrayList<>();
 
 
+    public ArrayList<String> getAmenities_array_listimage() {
+        return Amenities_array_listimage;
+    }
+
+    public void setAmenities_array_listimage(ArrayList<String> amenities_array_listimage) {
+        Amenities_array_listimage = amenities_array_listimage;
+    }
 
     public Bingobus7Model() {
     }

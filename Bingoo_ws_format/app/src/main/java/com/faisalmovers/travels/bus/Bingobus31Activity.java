@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class Bingobus31Activity extends AppCompatActivity {
     ImageView back;
     TextView droppingtext,totalamount ,totalseatnum ;
     Context context;
-
+    Intent da;
 
     ArrayList<String> dropingpoint = new ArrayList<>() ;
     @Override
@@ -41,7 +42,7 @@ public class Bingobus31Activity extends AppCompatActivity {
         setContentView(R.layout.activity_bingobus31);
 
 
-        Intent da = getIntent();
+         da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
 
 
@@ -67,10 +68,7 @@ public class Bingobus31Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Bingobus31Activity.this,Bingobus33Activity.class);
-               // finish();
-                overridePendingTransition(R.anim.right_out, R.anim.left_in );
-                startActivity(i);
+                onBackPressed();
             }
         });
 
@@ -108,12 +106,20 @@ public class Bingobus31Activity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();  // optional depending on your needs
+      // super.onBackPressed();  // optional depending on your needs
         // code here to show dialog
         /*Intent intent=new Intent(Bingobus31Activity.this,ListinwsActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);*/
         finish();
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+
+        Log.d("lifecycle3","onPause invoked" );
     }
 }

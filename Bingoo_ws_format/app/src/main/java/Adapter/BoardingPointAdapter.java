@@ -59,12 +59,11 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
             public void onClick(View view) {
                myPos = position;
 
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss ");
-                String currentDateandTime = sdf.format(new Date());
+
                notifyDataSetChanged();
                 SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-              editor.putString("city", holder.city.getText().toString() + currentDateandTime); // Storing string name
+              editor.putString("city", holder.city.getText().toString()+ " - "+ lists.getTime()); // Storing string name
               editor.commit();
                Intent i = new Intent(context, Bingobus32Activity.class);
                context.startActivity(i);

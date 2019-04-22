@@ -189,6 +189,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
                 String day = outFormat.format(date);
 
+                Log.d("dayday1",day);
                 datecfm=true;
 
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
@@ -196,7 +197,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 String finaldate = year+"-"+month+"-"+dayOfMonth;
                 editor.putString("selectdate",finaldate);
                 editor.commit();
-              //  Toast.makeText(Bingobus24Activity.this, dayOfMonth +"-" +"-", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(Bingobus24Activity.this, dayOfMonth +"-" +"-", Toast.LENGTH_SHORT).show();
 
                 // Toast.makeText(Bingobus24Activity.this, dayOfMonth+"/ "+month, Toast.LENGTH_SHORT).show();
 
@@ -273,7 +274,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         dateSetListener1 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
+                month = month ;
                 Date date = new Date(year, month, dayOfMonth);
                 SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
                 String day = outFormat.format(date);
@@ -611,7 +612,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
     @SuppressLint("ResourceAsColor")
     public  void dailogbox ()
     {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure, You wanted to Exit");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
@@ -625,18 +626,21 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                     }
                 });
 
-        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
 
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.fm);
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.fm);
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+
     }
 
     public void load()
@@ -648,6 +652,61 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         String thisDate = currentDate.format(todayDate);
         editor.putString("selectdate",thisDate);
         editor.commit();
+
+
+
+        SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
+        String day = outFormat.format(todayDate);
+        if (day.equals("Sun")) {
+            day1.setText("Sat");
+            day2.setText("Sun");
+            day3.setText("Mon");
+        } else if (day.equals("Mon")) {
+            day1.setText("Sun");
+            day2.setText("Mon");
+            day3.setText("Tue");
+        } else if (day.equals("Tue")) {
+            day1.setText("Mon");
+            day2.setText("Tue");
+            day3.setText("Wed");
+        } else if (day.equals("Wed")) {
+            day1.setText("Tue");
+            day2.setText("Wed");
+            day3.setText("Tur");
+        } else if (day.equals("Tur")) {
+            day1.setText("Wed");
+            day2.setText("Tur");
+            day3.setText("Fri");
+        } else if (day.equals("Fri")) {
+            day1.setText("Tur");
+            day2.setText("Fri");
+            day3.setText("Sat");
+        } else if (day.equals("Sat")) {
+            day1.setText("Fri");
+            day2.setText("Sat");
+            day3.setText("Sun");
+        }
+
+        SimpleDateFormat currentDatemonth = new SimpleDateFormat("dd");
+        String dayOfMonth = currentDatemonth.format(todayDate);
+
+      Log.d(TAG, "onDateSet: dd: " + dayOfMonth);
+        String date11 = dayOfMonth + "";
+        date1.setText(date11);
+
+        int countdate = Integer.valueOf(String.valueOf(dayOfMonth));
+        int countdate11 = countdate-1;
+        date1.setText(String.valueOf(countdate11));
+
+        int countdate2 = Integer.valueOf(String.valueOf(dayOfMonth));
+        int countdate12 = countdate2 ;
+        date2.setText(String.valueOf(countdate12));
+
+        int countdate3 = Integer.valueOf(String.valueOf(dayOfMonth));
+        int countdate13 = countdate3 + 1;
+        date3.setText(String.valueOf(countdate13));
+
+
         datecfm=true;
     }
 }

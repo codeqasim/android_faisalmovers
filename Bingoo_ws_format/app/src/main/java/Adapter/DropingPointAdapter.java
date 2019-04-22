@@ -54,12 +54,11 @@ public class DropingPointAdapter extends RecyclerView.Adapter<DropingPointAdapte
             @Override
             public void onClick(View v) {
                 myPos = position;
-                SimpleDateFormat sdf = new SimpleDateFormat(" EEE, d MMM yyyy HH:mm:ss ");
-                String currentDateandTime = sdf.format(new Date());
+
                 notifyDataSetChanged();
                 SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
               SharedPreferences.Editor editor = pref.edit();
-                editor.putString("city1", holder.city.getText().toString() + currentDateandTime); // Storing string name
+                editor.putString("city1", holder.city.getText().toString()+ " - " + lists.getTime()); // Storing string name
                editor.commit();
                 booknow.setVisibility(View.VISIBLE);
             }

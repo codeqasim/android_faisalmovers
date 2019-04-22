@@ -11,6 +11,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +42,8 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
     Context context =this;
     Bingobus7Model bingobus7Model;
     int pricetickets =0;
+    String price ="0";
+    Intent da;
 
 
     @Override
@@ -50,24 +53,23 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
 
 
 
-        Intent da = getIntent();
+         da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
-
-        String price = bingobus7Model.getPrice();
+        price = bingobus7Model.getPrice();
         pricetickets = Integer.parseInt(price);
+
 
 
         txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         seatnum = (TextView)findViewById(R.id.seatnum);
+        seatnum.setText( "Seats Selected : "+String.valueOf(seatcount));
 
         back_press = (ImageView) findViewById(R.id.back_press);
         back_press.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(context, Bingobus7Activity.class);
-                overridePendingTransition(R.anim.right_out, R.anim.left_in);
-                context.startActivity(i);
+                finish();
 
             }
         });
@@ -95,6 +97,7 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
             public void onClick(View view) {
 
                 Intent i = new Intent(context, Bingobus27Activity.class);
+                i.putExtra("sampleObject", bingobus7Model);
                 context.startActivity(i);
 
             }
@@ -176,6 +179,20 @@ public class Bingobus33Activity extends AppCompatActivity implements OnSeatSelec
         finish();
         // optional depending on your needs
     }
+
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+        price = bingobus7Model.getPrice();
+        pricetickets = Integer.parseInt(price);
+        Log.d("lifecycle3","onPause invoked" +price);
+    }
+
 
 
 }
