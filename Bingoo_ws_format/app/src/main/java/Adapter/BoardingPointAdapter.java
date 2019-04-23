@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.faisalmovers.travels.bus.Bingobus32Activity;
+import com.faisalmovers.travels.bus.Bingobus_Last_StepActivity;
 import com.faisalmovers.travels.bus.R;
 
 import java.text.SimpleDateFormat;
@@ -65,8 +66,12 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
                 SharedPreferences.Editor editor = pref.edit();
               editor.putString("city", holder.city.getText().toString()+ " - "+ lists.getTime()); // Storing string name
               editor.commit();
-               Intent i = new Intent(context, Bingobus32Activity.class);
-               context.startActivity(i);
+
+               /*Intent i = new Intent(context, Bingobus32Activity.class);
+               context.startActivity(i);*/
+
+                Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
+                context.startActivity(i);
             }
         });
     }

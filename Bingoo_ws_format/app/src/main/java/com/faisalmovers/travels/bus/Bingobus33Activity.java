@@ -65,7 +65,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
 
-         da = getIntent();
+       da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
         price = bingobus7Model.getPrice();
         pricetickets = Integer.parseInt(price);
@@ -73,10 +73,15 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
 
 
+        String scheduleid =bingobus7Model.getScheduleID() ;
+        String fromCity =bingobus7Model.getFromCity();
+        String toCity =bingobus7Model.getToCity();
+        String departureTime =bingobus7Model.getDepartureTime();
+        String querydepartureTime =bingobus7Model.getQuerydepartureTime();
 
-
+        //String webseat = "https://www.bookkaru.com/api/bus/seatsinfo?appKey=bookkaru&operator=1&scheduleid="+scheduleid+"&depdate=2019-04-20&fromcity="+fromCity+"&tocity="+toCity+"&deptime=00%3A30&depqtime=00%3A30";
         String requestinfoseat=seatinfo;
-        Log.d("fromCityIdfromCityId" , requestinfoseat);
+        //Log.d("fromCityIdfromCityId" , departureTime+"/  "+webseat);
 
 
         txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
@@ -225,9 +230,9 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     protected void onPause() {
         super.onPause();
 
-        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+       /* bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
         price = bingobus7Model.getPrice();
-        pricetickets = Integer.parseInt(price);
+        pricetickets = Integer.parseInt(price);*/
         Log.d("lifecycle3","onPause invoked" +price);
     }
 
@@ -301,7 +306,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             items.add(new EmptyItem(String.valueOf(i)));
                         }
                     }
-                    AirplaneAdapter adapter = new AirplaneAdapter(context, items);
+                    AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

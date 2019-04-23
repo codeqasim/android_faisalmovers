@@ -2,12 +2,16 @@ package Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import model.AbstractItem;
+import model.SeatData;
+
 import com.faisalmovers.travels.bus.CenterItem;
 import com.faisalmovers.travels.bus.EdgeItem;
 import com.faisalmovers.travels.bus.OnSeatSelected;
@@ -57,12 +61,14 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private List<AbstractItem> mItems;
+    private List<SeatData> Seatdata11;
 
-    public AirplaneAdapter(Context context, List<AbstractItem> items) {
+    public AirplaneAdapter(Context context, List<AbstractItem> items,List<SeatData> Seatdata1) {
         mOnSeatSelected = (OnSeatSelected) context;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mItems = items;
+        Seatdata11 =Seatdata1;
     }
 
     @Override
@@ -87,6 +93,10 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             View itemView = new View(mContext);
             return new EmptyViewHolder(itemView);
         }
+
+
+
+
     }
 
     @Override
@@ -94,43 +104,42 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         int type = mItems.get(position).getType();
 
 
+
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
+            SeatData seatData2 =Seatdata11.get(position);
+            String seat_no = seatData2.getSeat_No();
+            int result = Integer.parseInt(seat_no);
+            final String  seat_status= seatData2.getSeat_status();
+            Log.d("resultresult",seat_status+"/");
 
-            if (position == 3 ||position == 4 || position==5||
-                    position == 7 || position == 8 || position == 9 ||position == 11
-                    || position == 12|| position == 13 || position == 14 ||
-                    position == 15 ||position == 16 || position == 17||
-                    position == 19 || position == 20 || position == 21 ||
-                    position == 23 || position == 24||
-                    position == 25 || position == 26)
+            result =result-1;
+
+
+            if (seat_status.equals("Reserved"))
             {
                 holder.imgSeat.setImageResource(R.drawable.brown_sit);
                 holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
 //                mOnSeatSelected.onSeatSelected(getItemCount());
 //                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
             }
-
-            holder.imgSeat.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
 
-                    if (position == 3 ||position == 4 || position==5||
-                            position == 7 || position == 8 || position == 9 ||position == 11
-                            || position == 12|| position == 13 || position == 14 ||
-                            position == 15 ||position == 16 || position == 17||
-                            position == 19 || position == 20 || position == 21 ||
-                            position == 23 || position == 24||
-                            position == 25 || position == 26)  {
-
-                    } else {
+                    if(seat_status.equals("Reserved"))
+                    {
+                        Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                    }else {
                         int x = toggleSelection(position);
                         mOnSeatSelected.onSeatSelected(x);
                     }
-
+                    //
                 }
             });
+
+
 
             holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
 
@@ -138,13 +147,13 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
 
-            if (position == 3 ||position == 4 || position==5||
-                    position == 7 || position == 8 || position == 9 ||position == 11
-                    || position == 12|| position == 13 || position == 14 ||
-                    position == 15 ||position == 16 || position == 17||
-                    position == 19 || position == 20 || position == 21 ||
-                    position == 23 || position == 24||
-                    position == 25 || position == 26) {
+            SeatData seatData2 =Seatdata11.get(position);
+            String seat_no = seatData2.getSeat_No();
+            int result = Integer.parseInt(seat_no);
+            final String  seat_status= seatData2.getSeat_status();
+            Log.d("resultresult",seat_status+"/");
+            //Log.d("resultresult22",result+"/");
+            if (seat_status.equals("Reserved")) {
 
                 holder.imgSeat.setImageResource(R.drawable.brown_sit);
                 holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
@@ -153,23 +162,20 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
             }
 
-            holder.imgSeat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (position == 3 ||position == 4 || position==5||
-                            position == 7 || position == 8 || position == 9 ||position == 11
-                            || position == 12|| position == 13 || position == 14 ||
-                            position == 15 ||position == 16 || position == 17||
-                            position == 19 || position == 20 || position == 21 ||
-                            position == 23 || position == 24||
-                            position == 25 || position == 26) {
+           holder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
 
-                    } else {
-                        int x = toggleSelection(position);
-                        mOnSeatSelected.onSeatSelected(x);
-                    }
-                }
-            });
+                   if(seat_status.equals("Reserved"))
+                   {
+                       Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                   }else {
+                       int x = toggleSelection(position);
+                       mOnSeatSelected.onSeatSelected(x);
+                   }
+                  //
+               }
+           });
 
             holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
         }

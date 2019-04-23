@@ -55,7 +55,8 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         pickupfrom.setText(pref.getString("from", null));
         topoint.setText(pref.getString("to", null));;
         locpick.setText(pref.getString("city", null));
-        locdrop.setText(pref.getString("city1", null));
+        locdrop.setText(pref.getString("to", null) +"  Terminal");
+        /*locdrop.setText(pref.getString("city1", null));*/
         totalamount.setText("Rs "+pref.getString("totalamountofseat", null));
 
 

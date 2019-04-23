@@ -57,7 +57,8 @@ public class Bingobus_Last_StepActivity extends AppCompatActivity implements Vie
         pickupfrom.setText(pref.getString("from", null));
         topoint.setText(pref.getString("to", null));;
         locpick.setText(pref.getString("city", null));
-        locdrop.setText(pref.getString("city1", null));
+       /* locdrop.setText(pref.getString("city1", null));*/
+        locdrop.setText(pref.getString("to", null) +"  Terminal");
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
         totalseatnum.setText(pref.getString("numberofseat", null));
 //
