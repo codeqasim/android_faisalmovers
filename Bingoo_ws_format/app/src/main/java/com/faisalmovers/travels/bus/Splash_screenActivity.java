@@ -38,7 +38,7 @@ public class Splash_screenActivity extends AppCompatActivity {
                 try {
 
 
-                    sleep(1 * 1000);
+                    sleep(2 * 1000);
 
                  if(checker.equals("no") || checker.isEmpty())
                     {
@@ -53,9 +53,9 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
-                  /* Intent intent = new Intent(Splash_screenActivity.this, Bingobus33Activity.class);
-                    startActivity(intent);
-*/
+                /*  Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+                 startActivity(intent);*/
+
                    // After 5 seconds redirect to another intent
 
                     //Remove activity

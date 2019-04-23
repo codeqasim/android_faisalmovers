@@ -29,7 +29,7 @@ import java.util.Date;
 import util.Url;
 import util.Utils;
 
-public class Bingobus_mobileverificationActivity extends AppCompatActivity {
+public class Bingobus_mobileverificationActivity extends Url {
 
     TextView numberuser;
     TextView next;
@@ -71,13 +71,13 @@ public class Bingobus_mobileverificationActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("HHmmss");
         Date date = new Date();
         System.out.println(dateFormat.format(date));
-        url = new Url();
+
 
          time = dateFormat.format(date);
        // Log.d("checkerdatatime",time);
-
-        String weblink = url.url1+number+"&message="+time+"&devices=2";
-       sendAndRequestResponse(weblink);
+        //String weblink = url.url1+number+"&message="+time+"&devices=2";
+        String newmobileverf = mobileverification+number+"&Message="+time;
+       sendAndRequestResponse(newmobileverf);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,9 +148,18 @@ public class Bingobus_mobileverificationActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
 
-                Log.d("checkerdata",response);
+               // Log.d("checkerdata",response);
 
-               try {
+                if(response.equals("Message Sent Successfully") )
+                {
+                    Log.d("checkerdata","yess");
+                }
+                else
+                {
+                    Utils.showErrorToast(getApplicationContext()," wrong try again  ");
+                }
+
+            /*   try {
 
 
                     JSONObject jsonObject = new JSONObject(response);
@@ -173,7 +182,7 @@ public class Bingobus_mobileverificationActivity extends AppCompatActivity {
 
                } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
 
 
@@ -182,7 +191,7 @@ public class Bingobus_mobileverificationActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-
+                Utils.showErrorToast(getApplicationContext()," try again  ");
             }
         });
         mRequestQueue.add(mStringRequest);
