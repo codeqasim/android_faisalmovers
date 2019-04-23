@@ -613,7 +613,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
     @SuppressLint("ResourceAsColor")
     public  void dailogbox ()
     {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
         alertDialogBuilder.setMessage("Are you sure, You wanted to Exit");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
