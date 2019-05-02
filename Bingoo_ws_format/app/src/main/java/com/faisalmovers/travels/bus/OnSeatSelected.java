@@ -5,5 +5,5 @@ package com.faisalmovers.travels.bus;
  */
 public interface OnSeatSelected {
 
-    void onSeatSelected(int x);
+    void onSeatSelected(int x ,int position);
 }

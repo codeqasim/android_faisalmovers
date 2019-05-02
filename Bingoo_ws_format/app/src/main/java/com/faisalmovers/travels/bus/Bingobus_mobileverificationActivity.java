@@ -2,6 +2,7 @@ package com.faisalmovers.travels.bus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -44,6 +45,8 @@ public class Bingobus_mobileverificationActivity extends Url {
     String responmessage;
     Url url;
     String  time;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,8 @@ public class Bingobus_mobileverificationActivity extends Url {
         code = (EditText) findViewById(R.id.code);
         back = (ImageView) findViewById(R.id.back);
 
-
+         preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+         editor = preferences.edit();
 
         if(intent!=null)
         {
@@ -98,6 +102,8 @@ public class Bingobus_mobileverificationActivity extends Url {
 
                     if (code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")) {
                         //code.setError("code");
+                        editor.putString("mobileverification", number);
+                        editor.commit();
                         Intent i = new Intent(context, Bingobus24Activity.class);
                         context.startActivity(i);
                         Utils.showSuccesToast(getApplicationContext(),"successful login");

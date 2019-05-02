@@ -410,6 +410,7 @@
                                 android:layout_marginRight="20dp"
                                 android:fontFamily="@font/sfpro_display_semibold"
                                 android:text="Rehman Masood"
+                                android:id="@+id/Passengername"
                                 android:textColor="#91959d"
                                 android:textSize="13.7sp" />
                         </LinearLayout>

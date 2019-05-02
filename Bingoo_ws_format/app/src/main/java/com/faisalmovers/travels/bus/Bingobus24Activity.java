@@ -24,11 +24,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+
 import Adapter.OffersAdapter;
+import model.Bingobus7Model;
 import model.OffersModel;
 import util.Utils;
 
@@ -77,7 +86,8 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
     public static final String PREFS_NAME = "MyApp_Settings";
     SharedPreferences settings;
     ListView listview;
-
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
 
 
@@ -89,7 +99,8 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         goingfrom = (LinearLayout) findViewById(R.id.goingfrom);
         goingto = (LinearLayout) findViewById(R.id.goingto);
         searchbus = (TextView) findViewById(R.id.searchbus);
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
 
 
 
@@ -409,6 +420,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
         load();
+        //loadhistorydata();
     }
 
     @Override
@@ -712,4 +724,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
         datecfm=true;
     }
+
+
+
 }

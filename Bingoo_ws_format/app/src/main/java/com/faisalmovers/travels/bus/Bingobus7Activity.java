@@ -35,6 +35,7 @@ import java.util.Iterator;
 
 import Adapter.Bingobus7Adapter;
 import model.Bingobus7Model;
+import model.BoardingPoints;
 import util.Url;
 import util.Utils;
 
@@ -255,7 +256,7 @@ public class Bingobus7Activity extends Url {
                     Log.d("data1data1",data.length()+"/");
                     Iterator keys = data.keys();
 
-
+                    ArrayList<BoardingPoints> boardingPointsarray = new ArrayList<>();
 
                    // String msg = error.getString("msg");
 
@@ -274,10 +275,14 @@ public class Bingobus7Activity extends Url {
                                 ArrayList<String> amenitiesdata = new ArrayList<>();
                                 ArrayList<String> amenitiesdataimage = new ArrayList<>();
                                 ArrayList<String > boardingPoints = new ArrayList<>();
+                                ArrayList<String > boardingPointsid = new ArrayList<>();
+
                                 JSONObject jsonObject = mainArray.getJSONObject(i);
 
-                               Bingobus7Model busModel = new Bingobus7Model();
-                                busModel.setOperator(jsonObject.getString("operator"));
+                                Bingobus7Model busModel = new Bingobus7Model();
+                                String nameoperator = jsonObject.getString("operator");
+                                Log.d("ccccc",nameoperator);
+                                busModel.setOperator(nameoperator);
                                 busModel.setLogo(jsonObject.getString("logo"));
                                 busModel.setFromCity(jsonObject.getString("fromCity"));
                                 busModel.setToCity(jsonObject.getString("toCity"));
@@ -292,6 +297,8 @@ public class Bingobus7Activity extends Url {
 
 
                                 String QuerydepartureTime = jsonObject.getString("querydepartureTime") ;
+                                busModel.setQuerydepartureTime2(QuerydepartureTime);
+
                                 QuerydepartureTime = timedate(QuerydepartureTime);
                                 busModel.setQuerydepartureTime(QuerydepartureTime);
 
@@ -300,6 +307,8 @@ public class Bingobus7Activity extends Url {
                                 busModel.setArrivalTime(arrivalTime);
 
                                 String departureTime = jsonObject.getString("departureTime");
+                                busModel.setDepartureTime2(departureTime);
+
                                 departureTime = timedate(departureTime);
                                 busModel.setDepartureTime(departureTime);
 
@@ -320,17 +329,58 @@ public class Bingobus7Activity extends Url {
 
                                     JSONObject amenitiesjson = boardingPointsjson.getJSONObject(boardingPoint);
                                     String terminal_name = amenitiesjson.getString("terminal_name");
-
                                     boardingPoints.add(terminal_name);
+
+                                    String id = amenitiesjson.getString("id");
+                                    boardingPointsid.add(id);
+                                    String operator_id = amenitiesjson.getString("operator_id");
+                                    String operator_city = amenitiesjson.getString("operator_city");
+                                    String address = amenitiesjson.getString("address");
+                                    String latlong = amenitiesjson.getString("latlong");
+                                    String contact = amenitiesjson.getString("contact");
+                                    String point = amenitiesjson.getString("point");
+                                    String refund_policy = amenitiesjson.getString("refund_policy");
+                                    String enabled = amenitiesjson.getString("enabled");
+
+
+                                    BoardingPoints boardingPointsmodel=new BoardingPoints();
+
+                                    boardingPointsmodel.setId(id);
+                                    boardingPointsmodel.setTerminal_name(terminal_name);
+                                    boardingPointsmodel.setOperator_id(operator_id);
+                                    boardingPointsmodel.setOperator_city(operator_city);
+                                    boardingPointsmodel.setAddress(address);
+                                    boardingPointsmodel.setLatlong(latlong);
+                                    boardingPointsmodel.setPoint(point);
+                                    boardingPointsmodel.setEnabled(enabled);
+
+                                    boardingPointsarray.add(boardingPointsmodel);
+
+                                  //  boardingPointsarray.
                                 }
 
 
+                                String datetime1 = " ";
+                                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                SimpleDateFormat d= new SimpleDateFormat("dd MMM yyyy");
+                                try {
+                                    Date convertedDate = inputFormat.parse(selectdate);
+                                 datetime1 = d.format(convertedDate);
+                                    busModel.setDatetime(datetime1);
+
+                                }catch (ParseException e)
+                                {
+
+                                }
 
 
                                 busModel.setAmenities_array_list(amenitiesdata);
                                 busModel.setAmenities_array_listimage(amenitiesdataimage);
                                 busModel.setBoardingPoints(boardingPoints);
+                                busModel.setBoardingPointsid(boardingPointsid);
+                               // busModel.setBoardingPoints2(boardingPointsarray);
                                 businfo.add(busModel);
+
 
                             }
 
@@ -340,6 +390,7 @@ public class Bingobus7Activity extends Url {
                     }
 
 
+                    Log.d("boardingPointsarray",boardingPointsarray.size()+"/");
 
                     Context context = recyclerview.getContext();
                     LayoutAnimationController controller = null;

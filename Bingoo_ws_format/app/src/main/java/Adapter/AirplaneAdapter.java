@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import model.AbstractItem;
 import model.SeatData;
+import util.Utils;
 
 import com.faisalmovers.travels.bus.CenterItem;
 import com.faisalmovers.travels.bus.EdgeItem;
@@ -18,6 +19,7 @@ import com.faisalmovers.travels.bus.OnSeatSelected;
 import com.faisalmovers.travels.bus.R;
 import com.faisalmovers.travels.bus.SelectableAdapter;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
@@ -105,6 +107,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
 
 
+
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
@@ -112,6 +115,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             String seat_no = seatData2.getSeat_No();
             int result = Integer.parseInt(seat_no);
             final String  seat_status= seatData2.getSeat_status();
+            final String  Gender= seatData2.getGender();
             Log.d("resultresult",seat_status+"/");
 
             result =result-1;
@@ -119,8 +123,17 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
             if (seat_status.equals("Reserved"))
             {
-                holder.imgSeat.setImageResource(R.drawable.brown_sit);
-                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
+               if(Gender.equals("Male"))
+               {
+                   holder.imgSeat.setImageResource(R.drawable.red_seat);
+                   holder.imgSeatSelected.setImageResource(R.drawable.red_seat);
+
+               }else {
+                  holder.imgSeat.setImageResource(R.drawable.pink_seat);
+                   holder.imgSeatSelected.setImageResource(R.drawable.pink_seat);
+               }
+               /* holder.imgSeat.setImageResource(R.drawable.brown_sit);
+                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);*/
 //                mOnSeatSelected.onSeatSelected(getItemCount());
 //                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
             }
@@ -128,12 +141,16 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                 @Override
                 public void onClick(View view) {
 
+                    //Toast.makeText(mContext, "position1 = "+position, Toast.LENGTH_LONG).show();
                     if(seat_status.equals("Reserved"))
                     {
-                        Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                        Utils.showErrorToast(mContext, "Allready This Seat is Booked");
                     }else {
+                        SeatData seatData1 = Seatdata11.get(position);
                         int x = toggleSelection(position);
-                        mOnSeatSelected.onSeatSelected(x);
+                        mOnSeatSelected.onSeatSelected(x,position);
+                        Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
                     }
                     //
                 }
@@ -146,32 +163,42 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         } else if (type == AbstractItem.TYPE_EDGE) {
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
-
             SeatData seatData2 =Seatdata11.get(position);
             String seat_no = seatData2.getSeat_No();
             int result = Integer.parseInt(seat_no);
             final String  seat_status= seatData2.getSeat_status();
             Log.d("resultresult",seat_status+"/");
             //Log.d("resultresult22",result+"/");
+            final String  Gender= seatData2.getGender();
             if (seat_status.equals("Reserved")) {
 
-                holder.imgSeat.setImageResource(R.drawable.brown_sit);
-                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);
-//                mOnSeatSelected.onSeatSelected(getItemCount());
-//                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                if(Gender.equals("Male"))
+                {
+                    holder.imgSeat.setImageResource(R.drawable.red_seat);
+                    holder.imgSeatSelected.setImageResource(R.drawable.red_seat);
 
+                }else {
+                    holder.imgSeat.setImageResource(R.drawable.pink_seat);
+                    holder.imgSeatSelected.setImageResource(R.drawable.pink_seat);
+                }
             }
 
            holder.itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
 
+                   //Toast.makeText(mContext, "position2 = "+position, Toast.LENGTH_LONG).show();
                    if(seat_status.equals("Reserved"))
                    {
-                       Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                       //Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
+                       Utils.showErrorToast(mContext, "Allready This Seat is Booked");
                    }else {
                        int x = toggleSelection(position);
-                       mOnSeatSelected.onSeatSelected(x);
+                       mOnSeatSelected.onSeatSelected(x,position);
+                       //Utils.showSuccesToast();
+                       SeatData seatData1 = Seatdata11.get(position);
+                       Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
+
                    }
                   //
                }

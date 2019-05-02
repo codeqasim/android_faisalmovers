@@ -25,15 +25,15 @@ public class Bingobus31Activity extends AppCompatActivity {
     "Thokar Niaz Baig"};
     String time[] = {"8:00 pm","8:15 pm","8:30 pm"};
     Bingobus7Model bingobus7Model;
-
+    Context context;
+    Intent da;
 
     private RecyclerView recyclerView;
     private BoardingPointAdapter boardingPointAdapter;
     private ArrayList<BoardingPointModel> boardingPointModels;
     ImageView back;
     TextView droppingtext,totalamount ,totalseatnum ;
-    Context context;
-    Intent da;
+
 
     ArrayList<String> dropingpoint = new ArrayList<>() ;
     @Override
@@ -90,10 +90,10 @@ public class Bingobus31Activity extends AppCompatActivity {
 
             String name1 = dropingpoint.get(i);
 
-            BoardingPointModel ab = new BoardingPointModel(image[i],name1,time);
+            BoardingPointModel ab = new BoardingPointModel(image[0],name1,time);
             boardingPointModels.add(ab);
         }
-        boardingPointAdapter = new BoardingPointAdapter(Bingobus31Activity.this, boardingPointModels);
+        boardingPointAdapter = new BoardingPointAdapter(Bingobus31Activity.this, boardingPointModels ,bingobus7Model);
         recyclerView.setAdapter(boardingPointAdapter);
 
 

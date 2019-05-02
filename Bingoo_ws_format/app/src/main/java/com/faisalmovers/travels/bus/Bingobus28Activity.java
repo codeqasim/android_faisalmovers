@@ -55,7 +55,13 @@ public class Bingobus28Activity extends AppCompatActivity {
         });
 
 
-        seatcountt.setText(pref.getString("seatcount", null));
+        if(pref.getString("seatcount", null) ==null)
+        {
+            seatcountt.setText("0");
+        }else {
+            seatcountt.setText(pref.getString("seatcount", null));
+        }
+
 
         String numberseat = pref.getString("seatcount", null);
         String pric = bingobus7Model.getPrice();

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfilePerson"></activity>
+        <activity android:name=".Webviewinvoice"></activity>
+        <activity android:name=".ProfilePerson" />
         <activity android:name=".Offers" />
         <activity android:name=".Bingobus24Activity" />
         <activity android:name=".Bingobus28Activity" />

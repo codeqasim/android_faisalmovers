@@ -53,6 +53,7 @@
                 android:fontFamily="@font/sfpro_display_semibold"
                 android:lineSpacingExtra="4dp"
                 android:text="Faisal Movers"
+                android:id="@+id/operatortv"
                 android:textColor="#464646"
                 android:textSize="17.7sp" />
 

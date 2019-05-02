@@ -21,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +33,7 @@ import java.util.List;
 import Adapter.AirplaneAdapter;
 import model.AbstractItem;
 import model.Bingobus7Model;
+import model.Seat;
 import model.SeatData;
 import util.Url;
 import util.Utils;
@@ -58,6 +60,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     RecyclerView recyclerView;
     List<AbstractItem> items = new ArrayList<>();
     List<SeatData> Seatdata = new ArrayList<>();
+    List<Seat> bookseats = new ArrayList<>();
+    Gson gson ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,24 +69,29 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
 
-       da = getIntent();
+        da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
         price = bingobus7Model.getPrice();
         pricetickets = Integer.parseInt(price);
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
 
-
+         gson = new Gson();
         String scheduleid =bingobus7Model.getScheduleID() ;
-        String fromCity =bingobus7Model.getFromCity();
-        String toCity =bingobus7Model.getToCity();
-        String departureTime =bingobus7Model.getDepartureTime();
-        String querydepartureTime =bingobus7Model.getQuerydepartureTime();
+        String departureTime =bingobus7Model.getDepartureTime2();
+        String querydepartureTime =bingobus7Model.getQuerydepartureTime2();
 
-        //String webseat = "https://www.bookkaru.com/api/bus/seatsinfo?appKey=bookkaru&operator=1&scheduleid="+scheduleid+"&depdate=2019-04-20&fromcity="+fromCity+"&tocity="+toCity+"&deptime=00%3A30&depqtime=00%3A30";
-        String requestinfoseat=seatinfo;
+
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        String fromCityId = pref.getString("fromcityid",null);
+        String toCityId =  pref.getString("tocityid",null);
+        String selectdate =pref.getString("selectdate",null);
+
+        String webseat = seatinfo+bingobus7Model.getOpId()+"&scheduleid="+scheduleid+"&depdate="+selectdate+"&fromcity="+fromCityId+"&tocity="+toCityId+"&deptime="+departureTime+"&depqtime="+querydepartureTime;
+        String requestinfoseat=webseat;
         //Log.d("fromCityIdfromCityId" , departureTime+"/  "+webseat);
-
+        Log.d("fromCityIdfromCityId" , webseat);
 
         txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         seatnum = (TextView)findViewById(R.id.seatnum);
@@ -134,15 +143,24 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 String totalamountofseat = txtSeatSelected.getText().toString();
                 String numberofseat = seatnum.getText().toString();
-                SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("totalamountofseat", totalamountofseat);
-                editor.putString("numberofseat", numberofseat);
-                editor.putString("seatcount", String.valueOf(seatcount));
-                editor.commit();
-                Intent i = new Intent(context, Bingobus31Activity.class);
-                i.putExtra("sampleObject", bingobus7Model);
-                context.startActivity(i);
+
+               if(seatcount!=0)
+               {
+                   String seatlist = gson.toJson(bookseats);
+                   SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
+                   SharedPreferences.Editor editor = pref.edit();
+                   editor.putString("totalamountofseat", totalamountofseat);
+                   editor.putString("numberofseat", numberofseat);
+                   editor.putString("seatcount", String.valueOf(seatcount));
+                   editor.putString("seatlist", seatlist);
+                   editor.commit();
+                   Intent i = new Intent(context, Bingobus31Activity.class);
+                   i.putExtra("sampleObject", bingobus7Model);
+                   context.startActivity(i);
+               }else
+               {
+                   Utils.showErrorToast(getApplicationContext()," sealect seat ");
+               }
 
             }
         });
@@ -181,7 +199,12 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     }
 
     @Override
-    public void onSeatSelected(int x) {
+    public void onSeatSelected(int x , int position) {
+
+        SeatData seatData1 = Seatdata.get(position);
+        String idseat = seatData1.getSeat_id();
+
+        //Log.d("positionselected",seatData1.getSeat_id()+"/"+x);
         //txtSeatSelected.setText("Book "+count+" seats");
         if (x==2){
             count+=pricetickets;
@@ -193,6 +216,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("seatcount", String.valueOf(seatcount));
             editor.commit();
+
+            addseatintarray(seatData1);
         }
         else if (x==1){
             count-=pricetickets;
@@ -203,6 +228,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("seatcount", String.valueOf(seatcount));
             editor.commit();
+            String seatno = seatData1.getSeat_No();
+            removeseatarray(seatno);
         }
         else {
 
@@ -249,13 +276,21 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 Log.d("requestinfoseat",response);
                 try {
-
-
-
                     JSONObject jsonObject1 = new JSONObject(response);
                     JSONObject response1 = jsonObject1.getJSONObject("response");
                     JSONArray data = response1.getJSONArray("data");
-                    Log.d("requestinfoseat",data.length()+"///");
+                    JSONObject error = response1.getJSONObject("error");
+                    String status =error.getString("status");
+
+                   // Log.d("requestinfoseaterror",error.length()+"///" +status);
+                 /*   if (status.equals("false")) {
+
+
+                        progressBar2.setVisibility(View.GONE);
+                        Utils.showErrorToast(getApplicationContext(),"Server error");
+
+                    }*/
+                 //   Log.d("requestinfoseat",error.length()+"///");
 
                     for(int i =0; i<data.length();i++)
                     {
@@ -293,21 +328,45 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                        }
                     progressBar2.setVisibility(View.GONE);
 
-                    for (int i=0; i<data.length(); i++) {
+                    String bustype = bingobus7Model.getBusType();
+                    Log.d("fromCityIdfromCityId",bustype);
+                    if (!bustype.equals("Business Class") )
+                    {
+                        for (int i=0; i<data.length(); i++) {
 
-                        if (i%COLUMNS==0 || i%COLUMNS==4)
-                        {
+                            if (i%COLUMNS==0 || i%COLUMNS==4)
+                            {
 
-                            items.add(new EdgeItem(String.valueOf(i)));
-                        } else if (i%COLUMNS==1 || i%COLUMNS==3)
-                        {
-                            items.add(new CenterItem(String.valueOf(i)));
-                        } else {
-                            items.add(new EmptyItem(String.valueOf(i)));
+                                items.add(new EdgeItem(String.valueOf(i)));
+                            } else if (i%COLUMNS==1 || i%COLUMNS==3)
+                            {
+                                items.add(new CenterItem(String.valueOf(i)));
+                            } else {
+                                items.add(new EmptyItem(String.valueOf(i)));
+                            }
                         }
+                        AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
+                        recyclerView.setAdapter(adapter);
+
+                    }else {
+                        for (int i=0; i<data.length(); i++) {
+
+                            if (i%COLUMNS==0 || i%COLUMNS==4)
+                            {
+
+                                items.add(new EdgeItem(String.valueOf(i)));
+                            } else if (i%COLUMNS==3)
+                            {
+                                items.add(new CenterItem(String.valueOf(i)));
+                            } else {
+                                items.add(new EmptyItem(String.valueOf(i)));
+                            }
+                        }
+                        AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
+                        recyclerView.setAdapter(adapter);
                     }
-                    AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
-                    recyclerView.setAdapter(adapter);
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -320,11 +379,56 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                progressBar2.setVisibility(View.GONE);
+                Utils.showErrorToast(getApplicationContext(),"Server error");
 
 
             }
         });
         mRequestQueue.add(mStringRequest);
+    }
+
+    public void addseatintarray( SeatData seatData)
+    {
+
+        String id =  seatData.getSeat_id();
+        String no =  seatData.getSeat_No() ;
+        String price =seatData.getFare() ;
+        int id1 = Integer.parseInt(id);
+        int no1 = Integer.parseInt(no);
+
+        id1 = id1-1;
+        no1 = no1-1;
+
+        Seat seat1 = new Seat(id1+"",no1+"",price);
+        bookseats.add(seat1);
+        String json = gson.toJson(bookseats);
+        Log.d("jsonarray",json);
+
+
+    }
+    public void removeseatarray(String Seat_no )
+    {
+
+        for (int i =0; i<bookseats.size();i++)
+        {
+
+            Seat seat = bookseats.get(i);
+
+            String selecyseat = seat.getNo();
+            if(Seat_no .equals(selecyseat))
+            {
+                bookseats.remove(i);
+
+
+                String json = gson.toJson(bookseats);
+                Log.d("jsonarray",json);
+            }
+
+
+        }
+
+
     }
 
 }

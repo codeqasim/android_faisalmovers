@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,9 +21,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import Adapter.BookingHistoryAdapter;
+import model.Bingobus7Model;
 import model.BookingHistoryModel;
 
 public class BingoBusBookingHistoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,10 +49,19 @@ public class BingoBusBookingHistoryActivity extends AppCompatActivity implements
     TextView search, offer, booking, profile;
 
     Context context=this;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    ArrayList<Bingobus7Model> historyload = new ArrayList<>();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingo_bus_booking_history);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
 
 
         recyclerView = (RecyclerView) findViewById(R.id.booking_history);
@@ -53,17 +69,25 @@ public class BingoBusBookingHistoryActivity extends AppCompatActivity implements
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        bookingHistoryModels = new ArrayList<>();
 
-        for (int i = 0; i < star.length; i++) {
-            BookingHistoryModel ab = new BookingHistoryModel(star[i],rate[i]);
-            bookingHistoryModels.add(ab);
-        }
-        bookingHistoryAdapter = new BookingHistoryAdapter(BingoBusBookingHistoryActivity.this, bookingHistoryModels);
-        recyclerView.setAdapter(bookingHistoryAdapter);
-        recyclerView.setFocusableInTouchMode(false);
-        recyclerView.setNestedScrollingEnabled(false);
-        runAnimation(recyclerView);
+
+
+
+
+
+
+
+
+        loadhistorydata();
+
+
+
+
+
+
+
+
+
         //        custome bottombar
         linear1 = (LinearLayout) findViewById(R.id.liner1);
         linear2 = (LinearLayout) findViewById(R.id.liner2);
@@ -198,5 +222,54 @@ public class BingoBusBookingHistoryActivity extends AppCompatActivity implements
         alertDialog.show();
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.fm);
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.fm);
+    }
+
+
+
+    public void  loadhistorydata()
+    {
+
+        String history =pref.getString("history"," ");
+        Log.d("historyhistory"," ;"+history);
+
+        try {
+
+
+            JSONArray jsonArray = new JSONArray(history);
+
+            for (int i =0; i < jsonArray.length();i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Bingobus7Model busModel = new Bingobus7Model();
+
+                String nameoperator = jsonObject.getString("operator");
+                busModel.setOperator(nameoperator);
+
+                busModel.setFromCity(jsonObject.getString("fromCity"));
+                busModel.setToCity(jsonObject.getString("toCity"));
+                busModel.setBusType(jsonObject.getString("busType"));
+                busModel.setDatetime(jsonObject.getString("datetime"));
+                historyload.add(busModel);
+
+
+            }
+
+            Log.d("ccccc",historyload.size()+"  ");
+
+           /* bookingHistoryModels = new ArrayList<>();
+
+            for (int i = 0; i < star.length; i++) {
+                BookingHistoryModel ab = new BookingHistoryModel(star[i],rate[i]);
+                bookingHistoryModels.add(ab);
+            }*/
+            bookingHistoryAdapter = new BookingHistoryAdapter(BingoBusBookingHistoryActivity.this, historyload);
+            recyclerView.setAdapter(bookingHistoryAdapter);
+            recyclerView.setFocusableInTouchMode(false);
+            recyclerView.setNestedScrollingEnabled(false);
+            runAnimation(recyclerView);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

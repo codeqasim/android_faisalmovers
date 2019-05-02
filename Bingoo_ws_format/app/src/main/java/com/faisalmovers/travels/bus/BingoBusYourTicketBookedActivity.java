@@ -15,7 +15,7 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
     LinearLayout male, female;
     TextView txtmale, txtfemale;
     TextView pickupfrom,topoint;
-    TextView locpick,locdrop,totalamount;
+    TextView locpick,locdrop,totalamount,Passengername;
     ImageView  back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         locpick = (TextView) findViewById(R.id.pickup);
         locdrop = (TextView) findViewById(R.id.dropping);
 
+
+        Passengername = (TextView) findViewById(R.id.Passengername);
+
         totalamount = (TextView) findViewById(R.id.total);
 
 
@@ -42,7 +45,7 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), Bingobus24Activity.class);
+                Intent i = new Intent(getApplicationContext(), Bingobus32Activity.class);
                 startActivity(i);
                 finish();
             }
@@ -58,6 +61,7 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
         locdrop.setText(pref.getString("to", null) +"  Terminal");
         /*locdrop.setText(pref.getString("city1", null));*/
         totalamount.setText("Rs "+pref.getString("totalamountofseat", null));
+        Passengername.setText(pref.getString("mobileverificationfullname", null));
 
 
 
@@ -85,5 +89,10 @@ public class BingoBusYourTicketBookedActivity extends AppCompatActivity implemen
                 txtmale.setTextColor(Color.parseColor("#91959d"));
                 break;
         }
+    }
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), Bingobus32Activity.class);
+        startActivity(i);
+        finish();
     }
 }

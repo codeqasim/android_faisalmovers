@@ -17,12 +17,22 @@ public class Splash_screenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+
+
+        String gander = preferences.getString("gander", "");
+
+        if(gander.equals(null))
+         {
+                gander="0";
+         }
+
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("from", null);
         editor.putString("to", null);
         editor.putString("selectdate",null);
         editor.putString("numberofseat",null);
         editor.putString("seatcount",null);
+        editor.putString("gander",gander);
         editor.commit();
 
 
@@ -40,7 +50,8 @@ public class Splash_screenActivity extends AppCompatActivity {
 
                     sleep(2 * 1000);
 
-                 if(checker.equals("no") || checker.isEmpty())
+
+               /*  if(checker.equals("no") || checker.isEmpty())
                     {
                         Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
                         startActivity(intent);
@@ -50,16 +61,16 @@ public class Splash_screenActivity extends AppCompatActivity {
                         startActivity(i);
                     }
 
+*/
 
 
 
-                /*  Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+
+               /*   Intent intent = new Intent(Splash_screenActivity.this, Webviewinvoice.class);
                  startActivity(intent);*/
 
-                   // After 5 seconds redirect to another intent
 
-                    //Remove activity
-                 //   finish();
+
 
                 } catch (Exception e) {
 
@@ -74,5 +85,29 @@ public class Splash_screenActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         super.onDestroy();
+    }
+
+
+
+
+
+    @Override
+
+    protected void onResume() {
+
+        super.onResume();//visible
+
+    //    Log.d("ActivityActivity","Activity resumed");
+
+        if(checker.equals("no") || checker.isEmpty())
+        {
+            Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+            startActivity(intent);
+        } else
+        {
+            Intent i = new Intent(Splash_screenActivity.this, Bingobus24Activity.class);
+            startActivity(i);
+        }
+
     }
 }

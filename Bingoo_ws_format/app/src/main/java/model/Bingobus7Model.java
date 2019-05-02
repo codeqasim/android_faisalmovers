@@ -5,15 +5,59 @@ import java.util.ArrayList;
 
 public class Bingobus7Model implements Serializable {
 
+    String datetime;
     String opId ;
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
     String  operator;
     String logo ;
     String fromCity ,toCity,departureTime,querydepartureTime,arrivalTime,price,busType,stops,seatsLeft,scheduleID;
-
+    String departureTime2,querydepartureTime2;
     ArrayList<String > Amenities_array_list = new ArrayList<>();
     ArrayList<String > Amenities_array_listimage = new ArrayList<>();
     ArrayList<String > boardingPoints = new ArrayList<>();
+    ArrayList<String > boardingPointsid = new ArrayList<>();
 
+    public ArrayList<String> getBoardingPointsid() {
+        return boardingPointsid;
+    }
+
+    public void setBoardingPointsid(ArrayList<String> boardingPointsid) {
+        this.boardingPointsid = boardingPointsid;
+    }
+
+    ArrayList<BoardingPoints > boardingPoints2 = new ArrayList<>();
+
+    public ArrayList<BoardingPoints> getBoardingPoints2() {
+        return boardingPoints2;
+    }
+
+    public void setBoardingPoints2(ArrayList<BoardingPoints> boardingPoints2) {
+        this.boardingPoints2 = boardingPoints2;
+    }
+
+    public String getDepartureTime2() {
+        return departureTime2;
+    }
+
+    public void setDepartureTime2(String departureTime2) {
+        this.departureTime2 = departureTime2;
+    }
+
+    public String getQuerydepartureTime2() {
+        return querydepartureTime2;
+    }
+
+    public void setQuerydepartureTime2(String querydepartureTime2) {
+        this.querydepartureTime2 = querydepartureTime2;
+    }
 
     public ArrayList<String> getAmenities_array_listimage() {
         return Amenities_array_listimage;

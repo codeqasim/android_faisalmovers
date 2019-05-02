@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Bingobus7Model;
 import model.BoardingPointModel;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,10 +30,14 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
     int myPos = 5;
     Context context;
     ArrayList<BoardingPointModel> models;
+    Bingobus7Model bingobus7Model;
+    ArrayList<String> arrayList = new ArrayList<>();
 
-    public BoardingPointAdapter(Context context, ArrayList<BoardingPointModel> models) {
+    public BoardingPointAdapter(Context context, ArrayList<BoardingPointModel> models , Bingobus7Model bingobus7Model) {
         this.context = context;
         this.models = models;
+        this.bingobus7Model =bingobus7Model;
+
 
     }
     @NonNull
@@ -49,28 +54,37 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
         holder.time.setText(lists.getTime());
         holder.location.setImageResource(lists.getLocation());
 
+
+
         if (myPos == position) {
             holder.location.setImageResource(R.drawable.ic_verified);
         } else {
             holder.location.setImageResource(R.drawable.ic_markerlocation);
         }
 
+
+
+        arrayList = bingobus7Model.getBoardingPointsid();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                myPos = position;
 
 
+              String id = arrayList.get(position);
+
                notifyDataSetChanged();
                 SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-              editor.putString("city", holder.city.getText().toString()+ " - "+ lists.getTime()); // Storing string name
+              editor.putString("city", holder.city.getText().toString()+ " - "+ lists.getTime());
+                editor.putString("boardingpointid", id);// Storing string name
               editor.commit();
 
                /*Intent i = new Intent(context, Bingobus32Activity.class);
                context.startActivity(i);*/
 
                 Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
+                i.putExtra("sampleObject", bingobus7Model);
                 context.startActivity(i);
             }
         });
