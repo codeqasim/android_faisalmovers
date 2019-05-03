@@ -52,6 +52,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/sfpro_display_regular"
                     android:gravity="end"
+                    android:visibility="gone"
                     android:text="Dropping Point"
                     android:textColor="#91959d"
                     android:textSize="20sp"

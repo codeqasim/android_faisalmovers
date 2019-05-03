@@ -61,11 +61,12 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     SharedPreferences.Editor editor;
     Gson gson;
     ProgressBar progressBar2;
-    Bingobus7Model bingobus7Model;
+
     EditText nicnumber,fullname;
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
 
 
+    Bingobus7Model bingobus7Model;
     Intent da;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,7 +269,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
-        loadhistorydata();
+     //   loadhistorydata();
 
 
          }
@@ -349,7 +350,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
                         String url = json_object.getString("url");
                         String booking_id = json_object.getString("booking_id");
-                        addhistory(bm);
+                       // addhistory(bm);
                         progressBar2.setVisibility(View.GONE);
                         Utils.showSuccesToast(getApplicationContext(),"seat BOOKED");
                         Intent intent1 = new Intent(getApplicationContext(),Webviewinvoice.class);
@@ -426,7 +427,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         String mobileverificationefullname =pref.getString("mobileverificationfullname",null);
         String mobileverificationenic =pref.getString("mobileverificationnic",null);
         String gander =pref.getString("gander",null);
-
+        String id =pref.getString("id"," ");
 
         Log.d("gandergander"," ///"+gander);
 
@@ -456,7 +457,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         g ="["+g+"]";
         Log.d("gggggg"," "+g);
         String url = urlseatbook;
-        postrequest(selectdate,url,seatlist ,toCityId,fromCityId,mobileverification,mobileverificationemail,bingobus7Model,"14",mobileverificationenic ,g,bordingpoint,"0");
+        postrequest(selectdate,url,seatlist ,toCityId,fromCityId,mobileverification,mobileverificationemail,bingobus7Model,id,mobileverificationenic ,g,bordingpoint,"0");
 
     }
 

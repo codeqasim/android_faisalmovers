@@ -11,20 +11,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.faisalmovers.travels.bus.BingoBusBookingDetailActivity;
 import com.faisalmovers.travels.bus.R;
+import com.faisalmovers.travels.bus.WebMainActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import model.Bingobus7Model;
 import model.BookingHistoryModel;
 
 public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Bingobus7Model> models;
+    ArrayList<BookingHistoryModel> models;
 
-    public BookingHistoryAdapter(Context context, ArrayList<Bingobus7Model> models) {
+    public BookingHistoryAdapter(Context context, ArrayList<BookingHistoryModel> models) {
         this.context = context;
         this.models = models;
     }
@@ -40,23 +41,22 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
     @Override
     public void onBindViewHolder(@NonNull final BookingHistoryAdapter.ViewHolder holder, final int position) {
 
-       holder.busType.setText(models.get(position).getBusType());
-       holder.opeatorname.setText(models.get(position).getOperator());
-       holder.from.setText(models.get(position).getFromCity());
-       holder.to.setText(models.get(position).getToCity());
-       holder.date.setText(models.get(position).getDatetime());
-      /*  if (position == 0) {
-            holder.ratenow.setVisibility(View.VISIBLE);
-            holder.star_rating.setVisibility(View.GONE);
-        }*/
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+        String arrivalTime =models.get(position).getBusTime() ;
+        arrivalTime = timedate(arrivalTime);
+       holder.busType.setText(arrivalTime);
+       holder.opeatorname.setText(models.get(position).getTitle());
+       holder.from.setText(models.get(position).getOrigin());
+       holder.to.setText(models.get(position).getDestination());
+       holder.date.setText(models.get(position).getBookingDate());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-              Intent i = new Intent(context, BingoBusBookingDetailActivity.class);
+              Intent i = new Intent(context, WebMainActivity.class);
+              i.putExtra("weblinkid",models.get(position).getId());
                 context.startActivity(i);
             }
-        });*/
+        });
     }
 
     @Override
@@ -79,5 +79,22 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
             to = itemView.findViewById(R.id.to);
             date = itemView.findViewById(R.id.date);
         }
+    }
+    public String timedate (String time )
+    {
+
+
+        try {
+            String _24HourTime = time;
+            SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+            Date _24HourDt = _24HourSDF.parse(_24HourTime);
+            System.out.println(_24HourDt);
+            time = _12HourSDF.format(_24HourDt).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return time;
     }
 }

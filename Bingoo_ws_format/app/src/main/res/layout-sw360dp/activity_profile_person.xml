@@ -230,6 +230,7 @@
                 android:inputType="number"
                 android:hint="Phone number"
                 android:lines="1"
+                android:maxLength="11"
                 android:paddingLeft="15dp"
                 android:paddingTop="2.5dp"
                 android:paddingRight="10dp"
@@ -266,6 +267,8 @@
                 android:inputType="number"
                 android:hint="CNIC No"
                 android:lines="1"
+
+                android:maxLength="13"
                 android:paddingLeft="15dp"
                 android:paddingTop="2.5dp"
                 android:paddingRight="10dp"
@@ -324,8 +327,25 @@
 
         </RelativeLayout>
 
+
+
+
     </RelativeLayout>
 
+        <TextView
+            android:id="@+id/next"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rectangle_blue1"
+            android:fontFamily="@font/sfpro_display_medium"
+            android:text="signup"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -452,6 +472,11 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:theme="@style/progressBargreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </RelativeLayout>
 

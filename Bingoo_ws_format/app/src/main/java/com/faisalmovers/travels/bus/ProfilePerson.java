@@ -8,21 +8,41 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-public class ProfilePerson extends AppCompatActivity implements View.OnClickListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import model.Bingobus7Model;
+import util.Url;
+import util.Utils;
+
+public class ProfilePerson extends Url implements View.OnClickListener {
 
     LinearLayout linear1, linear2, linear3, linear4;
     LinearLayout male,female,bycash,easypisa;
-    TextView txtmale,txtfemale;
+    TextView txtmale,txtfemale,next;
     ImageView bus, discount, checked, user;
     TextView search, offer, booking, profile;
     EditText fullname,email,phone,nic;
@@ -30,6 +50,14 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
     SharedPreferences.Editor editor;
     Gson gson;
     Context context=this ;
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
+    ProgressBar progressBar2;
+
+    Bingobus7Model bingobus7Model;
+    Intent da;
+    private boolean inProgress = false;
+    String idupdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,24 +65,37 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
 
 
 
+        if( getIntent().getExtras() != null)
+        {
+            da = getIntent();
+            bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
+            //do here
+        }
 
 
 
-
-
-
-
-
-
-
-
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar2.setVisibility(View.GONE);
         fullname = (EditText) findViewById(R.id.fullname);
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone);
         nic = (EditText) findViewById(R.id.nic);
+        next =(TextView) findViewById(R.id.next);
 
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
+       Boolean nectcheckbuuton= pref.getBoolean("Check_Login", false);
+
+        if(nectcheckbuuton ==false)
+        {
+
+        }else {
+           // next.setVisibility(View.GONE);
+            next.setText("update");
+             idupdate= "1";
+        }
+
+
 
         phone.setHint("");
 
@@ -199,7 +240,7 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
         linear4.setOnClickListener(this);
         male.setOnClickListener(this);
         female.setOnClickListener(this);
-
+        next.setOnClickListener(this);
 
 
 
@@ -336,6 +377,20 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
                 editor.commit();
                 break;
 
+            case R.id.next:
+
+                if (idupdate =="1")
+                {
+                    update_user_detail(updateprofiledata);
+
+                }else
+                {
+
+                    signup(signupurl);
+                }
+
+                break;
+
 
         }
     }
@@ -347,6 +402,242 @@ public class ProfilePerson extends AppCompatActivity implements View.OnClickList
 
     }
 
+    public  void signup(String url)
+    {
+        progressBar2.setVisibility(View.VISIBLE);
+        if (!validate()) {
+            onSignupFailed();
+            return;
+        }
+        inProgress=true;
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
 
+                Log.d("bordingpoint2","response/" +response);
+
+                try {
+
+
+                    JSONObject main_json = new JSONObject(response);
+                    JSONObject responseObj = main_json.getJSONObject("response");
+                    if(!main_json.getJSONObject("error").getBoolean("status"))
+                    {
+                        editor.putBoolean("Check_Login",true);
+                        editor.putString("email",responseObj.getString("email"));
+                        editor.putString("name",responseObj.getString("fullname"));
+                        editor.putString("password",responseObj.getString("password"));
+                        editor.putString("nic",responseObj.getString("nic"));
+                        editor.putString("id",responseObj.getString("id"));
+                        editor.commit();
+
+                        Utils.showSuccesToast(getApplicationContext(),"Registration Successful");
+                        progressBar2.setVisibility(View.GONE);
+
+                        Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
+                        i.putExtra("sampleObject", bingobus7Model);
+                        context.startActivity(i);
+
+                    }
+                    else
+                    {
+                        JSONObject error_object=main_json.getJSONObject("error");
+                        Toast.makeText(getApplicationContext(),error_object.getString("msg"),Toast.LENGTH_LONG).show();
+                        Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
+                    }
+
+                    inProgress=false;
+                } catch (JSONException e) {
+                //    progressDialog.dismiss();
+
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                    progressBar2.setVisibility(View.GONE);
+                    e.printStackTrace();
+                    inProgress=false;
+                }
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("bordingpoint2","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+                inProgress=false;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+                String name = fullname.getText().toString();
+                String email1 = email.getText().toString();
+                String phone_number=phone.getText().toString();
+                String nic1 = nic.getText().toString();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email",email1);
+                params.put("password","000000");
+                params.put("first_name",name);
+                params.put("last_name",name);
+                params.put("phone",phone_number);
+                params.put("nic",nic1);
+                return params;
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
+        //fullnameemailphonenic
+    }
+
+
+    public boolean validate() {
+        boolean valid = true;
+
+        //fullnameemailphonenic
+        String name = fullname.getText().toString();
+        String email1 = email.getText().toString();
+        String phone_number=phone.getText().toString();
+        String nic = this.nic.getText().toString();
+
+        if (name.isEmpty() || name.length() < 3) {
+            fullname.setError("at least 3 characters");
+            valid = false;
+        } else {
+            fullname.setError(null);
+        }
+        if (nic.isEmpty() || nic.length() < 13) {
+            this.nic.setError("at least 13 characters");
+            valid = false;
+        } else {
+            this.nic.setError(null);
+        }
+
+        if (email1.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
+            email.setError("enter a valid email address");
+            valid = false;
+        } else {
+            email.setError(null);
+        }
+
+        if (phone_number.isEmpty() ) {
+            phone.setError("between 4 and 10 alphanumeric characters");
+            valid = false;
+        } else {
+            phone.setError(null);
+        }
+
+        return valid;
+    }
+
+    public void onSignupSuccess() {
+        next.setEnabled(true);
+       // getActivity().finish();
+    }
+
+    public void onSignupFailed() {
+       // Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Utils.showErrorToast(getApplicationContext(), "Login failed");
+        next.setEnabled(true);
+    }
+
+
+    public void update_user_detail(String url)
+    {
+
+        progressBar2.setVisibility(View.VISIBLE);
+        if (!validate()) {
+            onSignupFailed();
+            return;
+        }
+
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Log.d("bordingpoint2","response/" +response);
+                progressBar2.setVisibility(View.GONE);
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    if(jsonObject.getBoolean("response"))
+                    {
+                     //   Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+
+                        Utils.showSuccesToast(getApplicationContext(),"Update Successfully");
+                    }else
+                    {
+                        Utils.showErrorToast(getApplicationContext(), jsonObject.getJSONObject("error").getString("msg"));
+                      //  Toast.makeText(getContext(), jsonObject.getJSONObject("error").getString("msg"), Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("bordingpoint2","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+                String name = fullname.getText().toString();
+                String email1 = email.getText().toString();
+                String phone_number=phone.getText().toString();
+                String nic1 = nic.getText().toString();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("firstname",name );
+                params.put("id", pref.getString("id",""));
+                params.put("lastname", name);
+                params.put("city", "111");
+                params.put("country", "111");
+                params.put("address1", "111");
+                params.put("address2", "11");
+                params.put("phone", phone_number);
+                params.put("zip", "1111");
+                params.put("email", email1);
+                params.put("state", "111");
+                params.put("password", pref.getString("password",""));
+
+                return params;
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!inProgress)
+            return super.dispatchTouchEvent(ev);
+        return true;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bus.setImageResource(R.drawable.ic_bus_gray);
+        discount.setImageResource(R.drawable.ic_percentage_gray);
+        checked.setImageResource(R.drawable.ic_bookings_gray);
+        user.setImageResource(R.drawable.ic_profile_blue);
+
+        search.setTextColor(Color.parseColor("#91959d"));
+        offer.setTextColor(Color.parseColor("#91959d"));
+        booking.setTextColor(Color.parseColor("#91959d"));
+        profile.setTextColor(Color.parseColor("#000000"));
+    }
 }

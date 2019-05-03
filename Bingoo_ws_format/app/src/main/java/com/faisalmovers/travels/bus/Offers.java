@@ -169,4 +169,18 @@ public class Offers extends AppCompatActivity implements View.OnClickListener {
         finish();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bus.setImageResource(R.drawable.ic_bus_gray);
+        discount.setImageResource(R.drawable.ic_percentage_blue);
+        checked.setImageResource(R.drawable.ic_bookings_gray);
+        user.setImageResource(R.drawable.ic_profile_gray);
+
+        search.setTextColor(Color.parseColor("#91959d"));
+        offer.setTextColor(Color.parseColor("#000000"));
+        booking.setTextColor(Color.parseColor("#91959d"));
+        profile.setTextColor(Color.parseColor("#91959d"));
+    }
 }

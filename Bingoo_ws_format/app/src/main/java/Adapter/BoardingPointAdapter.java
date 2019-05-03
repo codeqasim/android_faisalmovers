@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.faisalmovers.travels.bus.Bingobus32Activity;
 import com.faisalmovers.travels.bus.Bingobus_Last_StepActivity;
+import com.faisalmovers.travels.bus.ProfilePerson;
 import com.faisalmovers.travels.bus.R;
 
 import java.text.SimpleDateFormat;
@@ -83,9 +84,25 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
                /*Intent i = new Intent(context, Bingobus32Activity.class);
                context.startActivity(i);*/
 
-                Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
-                i.putExtra("sampleObject", bingobus7Model);
-                context.startActivity(i);
+
+                Boolean nectcheckbuuton= pref.getBoolean("Check_Login", false);
+
+                if(nectcheckbuuton ==false)
+                {
+                    Intent i = new Intent(context, ProfilePerson.class);
+                    i.putExtra("sampleObject", bingobus7Model);
+                    context.startActivity(i);
+
+                }else {
+
+
+                    Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
+                    i.putExtra("sampleObject", bingobus7Model);
+                    context.startActivity(i);
+                }
+
+
+
             }
         });
     }

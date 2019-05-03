@@ -24,6 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -40,6 +43,8 @@ import Adapter.OffersAdapter;
 import model.Bingobus7Model;
 import model.OffersModel;
 import util.Utils;
+
+import static java.security.AccessController.getContext;
 
 public class Bingobus24Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -723,6 +728,21 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
         datecfm=true;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bus.setImageResource(R.drawable.ic_bus_blue);
+        discount.setImageResource(R.drawable.ic_percentage_gray);
+        checked.setImageResource(R.drawable.ic_bookings_gray);
+        user.setImageResource(R.drawable.ic_profile_gray);
+
+        search.setTextColor(Color.parseColor("#000000"));
+        offer.setTextColor(Color.parseColor("#91959d"));
+        booking.setTextColor(Color.parseColor("#91959d"));
+        profile.setTextColor(Color.parseColor("#91959d"));
     }
 
 

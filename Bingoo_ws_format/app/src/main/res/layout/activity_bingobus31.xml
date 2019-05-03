@@ -55,6 +55,7 @@
                     android:text="Dropping Point"
                     android:textColor="#91959d"
                     android:textSize="20sp"
+                    android:visibility="gone"
                     android:letterSpacing="0.0325" />
             </LinearLayout>
 
