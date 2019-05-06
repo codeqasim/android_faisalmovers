@@ -180,6 +180,7 @@
                 android:layout_marginTop="14.3dp"
                 android:fontFamily="@font/sfpro_display_regular"
                 android:text="Edit"
+                android:visibility="gone"
                 android:textColor="@color/light_black"
                 android:textSize="14sp" />
 
@@ -337,17 +338,19 @@
                 android:fontFamily="@font/sfpro_display_semibold"
                 android:text="Payment Details"
                 android:textColor="#000000"
+                android:visibility="gone"
                 android:textSize="20sp" />
 
 
             <LinearLayout
+                android:id="@+id/bycash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17.7dp"
                 android:background="@drawable/rectangle_white_gray1boder"
                 android:orientation="vertical"
-                android:id="@+id/bycash"
                 android:paddingLeft="18.3dp"
+                android:visibility="gone"
                 android:paddingTop="18dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="20.7dp">
@@ -362,7 +365,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_bus_green"/>
+                        android:src="@drawable/ic_bus_green" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -384,18 +387,16 @@
                             android:layout_height="match_parent"
                             android:layout_marginRight="5dp"
                             android:src="@drawable/radio_unchecked_border" />
+
                         <ImageView
                             android:id="@+id/img2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
-                            android:visibility="gone"
-                            android:src="@drawable/ic_verified"/>
+                            android:src="@drawable/ic_verified"
+                            android:visibility="gone" />
                     </FrameLayout>
                 </LinearLayout>
-
-
-
 
 
                 <TextView
@@ -420,7 +421,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="18.3dp"
                 android:paddingTop="18dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:paddingRight="12dp"
                 android:paddingBottom="20.7dp">
 

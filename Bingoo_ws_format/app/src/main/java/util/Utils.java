@@ -8,12 +8,6 @@ import android.widget.Toast;
 
 import com.valdesekamdem.library.mdtoast.MDToast;
 
-import static android.R.id.message;
-
-/**
- * Created by Bino on 9/1/2017.
- */
-
 public class Utils {
 
     @SuppressLint("MissingPermission")

@@ -7,344 +7,351 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
+
+
+
+
+    <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:id="@+id/main"
         android:layout_height="wrap_content">
 
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.052083332" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9557292" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="116dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="108dp"
-            android:background="@drawable/man"
-            app:layout_constraintBottom_toTopOf="@+id/view"
-            app:layout_constraintDimensionRatio="w,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/view"
-            app:srcCompat="@drawable/man" />
-
-
-
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:srcCompat="@drawable/ic_bus_green"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="500+\bus avaible"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="52dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:srcCompat="@drawable/ic_bookings_blue"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="200+\booked"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-            app:layout_constraintStart_toStartOf="@+id/imageButton2"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-            app:layout_constraintVertical_bias="0.52" />
-
-
-
-    </android.support.constraint.ConstraintLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_below="@+id/main"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19.7dp"
-            android:textSize="10sp"
-            android:paddingTop="5dp"
-            android:id="@+id/fullname1"
-            android:visibility="visible"
-            android:background="@drawable/rectangle_white_gray1boder"
-            android:textColorHint="#009339"
-            app:hintTextAppearance="@style/BlueTextInputLayout">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/fullname"
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transferent"
-                android:drawableLeft="@drawable/ic_profile_1"
-                android:drawablePadding="16dp"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/sfpro_display_semibold"
-                android:gravity="left"
-                android:inputType="text"
-                android:hint="Full name"
-                android:lines="1"
-                android:paddingLeft="15dp"
-                android:paddingTop="4.5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="15dp"
-                android:textColor="#009339"
-                android:textCursorDrawable="@color/light_black"
-                android:textSize="15sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="10dp"
+                android:id="@+id/main">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.052083332" />
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.9557292" />
 
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.7dp"
-            android:paddingTop="5dp"
-            android:id="@+id/textView2"
-            android:layout_below="@+id/fullname1"
-            android:visibility="visible"
-            android:background="@drawable/rectangle_white_gray1boder"
-            android:textColorHint="#009339"
-            app:hintTextAppearance="@style/BlueTextInputLayout">
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/man"
+                        app:layout_constraintDimensionRatio="w,1:1"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:srcCompat="@drawable/man"
+                        tools:ignore="MissingConstraints" />
 
-            <EditText
-                android:id="@+id/email"
+
+
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="52dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView"
+                        app:srcCompat="@drawable/ic_bus_green"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500+\bus avaible"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+                        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+                        app:layout_constraintStart_toStartOf="@+id/imageButton"
+                        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="52dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView"
+                        app:srcCompat="@drawable/ic_bookings_blue"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200+\booked"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+                        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+                        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+                        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+                        app:layout_constraintVertical_bias="0.52" />
+
+
+
+                </android.support.constraint.ConstraintLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transferent"
-                android:drawableLeft="@drawable/mail"
-                android:drawablePadding="16dp"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/sfpro_display_semibold"
-                android:gravity="left"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:lines="1"
-                android:paddingLeft="15dp"
-                android:paddingTop="2.5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="15dp"
-                android:textColor="#009339"
-                android:textCursorDrawable="@color/light_black"
-                android:textSize="15sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/main"
+                android:layout_marginRight="20dp">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.7dp"
-            android:paddingTop="5dp"
-            android:id="@+id/phone1"
-            android:layout_below="@+id/textView2"
-            android:visibility="visible"
-            android:background="@drawable/rectangle_white_gray1boder"
-            android:textColorHint="#009339"
-            app:hintTextAppearance="@style/BlueTextInputLayout">
-
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transferent"
-                android:drawableLeft="@drawable/call"
-                android:drawablePadding="16dp"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/sfpro_display_semibold"
-                android:gravity="left"
-                android:inputType="number"
-                android:hint="Phone number"
-                android:lines="1"
-                android:maxLength="11"
-                android:paddingLeft="15dp"
-                android:paddingTop="2.5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="15dp"
-                android:textColor="#009339"
-                android:textCursorDrawable="@color/light_black"
-                android:textSize="15sp" />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.7dp"
-            android:paddingTop="5dp"
-            android:id="@+id/nic1"
-            android:layout_below="@+id/phone1"
-            android:visibility="visible"
-            android:background="@drawable/rectangle_white_gray1boder"
-            android:textColorHint="#009339"
-            app:hintTextAppearance="@style/BlueTextInputLayout">
-
-            <EditText
-                android:id="@+id/nic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transferent"
-                android:drawableLeft="@drawable/id_card"
-                android:drawablePadding="16dp"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/sfpro_display_semibold"
-                android:gravity="left"
-                android:inputType="number"
-                android:hint="CNIC No"
-                android:maxLength="13"
-                android:lines="1"
-                android:paddingLeft="15dp"
-                android:paddingTop="2.5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="15dp"
-                android:textColor="#009339"
-                android:textCursorDrawable="@color/light_black"
-                android:textSize="15sp" />
-        </android.support.design.widget.TextInputLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nic1"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp">
-
-            <LinearLayout
-                android:id="@+id/male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_cure_gray"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtmale"
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/fullname1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfpro_display_semibold"
-                    android:text="MALE"
-                    android:textColor="#91959d"
-                    android:textSize="14.7sp" />
-            </LinearLayout>
+                    android:layout_marginTop="10.7dp"
+                    android:background="@drawable/rectangle_white_gray1boder"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#009339"
 
-            <LinearLayout
-                android:id="@+id/female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
-                android:background="@drawable/rectangle_cure_gray"
-                android:orientation="vertical">
+                    android:visibility="visible"
+                    app:hintTextAppearance="@style/BlueTextInputLayout">
 
-                <TextView
-                    android:id="@+id/txtfemale"
-                    android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transferent"
+                        android:drawableLeft="@drawable/ic_profile_1"
+                        android:drawablePadding="16dp"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:gravity="left"
+                        android:hint="Full name"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="4.5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#009339"
+                        android:textCursorDrawable="@color/light_black"
+                        android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfpro_display_semibold"
-                    android:text="FEMALE"
-                    android:textColor="#91959d"
-                    android:textSize="14.7sp" />
+                    android:layout_below="@+id/fullname1"
+                    android:layout_marginTop="10.7dp"
+                    android:background="@drawable/rectangle_white_gray1boder"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#009339"
+                    android:visibility="visible"
+                    app:hintTextAppearance="@style/BlueTextInputLayout">
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transferent"
+                        android:drawableLeft="@drawable/mail"
+                        android:drawablePadding="16dp"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:gravity="left"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2.5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#009339"
+                        android:textCursorDrawable="@color/light_black"
+                        android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
 
 
-            </LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/phone1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView2"
+                    android:layout_marginTop="10.7dp"
+                    android:background="@drawable/rectangle_white_gray1boder"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#009339"
+                    android:visibility="visible"
+                    app:hintTextAppearance="@style/BlueTextInputLayout">
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transferent"
+                        android:drawableLeft="@drawable/call"
+                        android:drawablePadding="16dp"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:gravity="left"
+                        android:hint="Phone number"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLength="11"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2.5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#009339"
+                        android:textCursorDrawable="@color/light_black"
+                        android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
 
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/nic1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phone1"
+                    android:layout_marginTop="10.7dp"
+                    android:background="@drawable/rectangle_white_gray1boder"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#009339"
+                    android:visibility="visible"
+                    app:hintTextAppearance="@style/BlueTextInputLayout">
+
+                    <EditText
+                        android:id="@+id/nic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transferent"
+                        android:drawableLeft="@drawable/id_card"
+                        android:drawablePadding="16dp"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/sfpro_display_semibold"
+                        android:gravity="left"
+                        android:hint="CNIC No"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLength="13"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2.5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#009339"
+                        android:textCursorDrawable="@color/light_black"
+                        android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
 
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nic1"
+                    android:orientation="vertical">
 
-    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/gander"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_cure_gray"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtmale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="MALE"
+                                android:textColor="#91959d"
+                                android:textSize="14.7sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="110dp"
+                            android:background="@drawable/rectangle_cure_gray"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtfemale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sfpro_display_semibold"
+                                android:text="FEMALE"
+                                android:textColor="#91959d"
+                                android:textSize="14.7sp" />
 
 
+                        </LinearLayout>
 
 
+                    </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/next"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/rectangle_blue1"
-            android:fontFamily="@font/sfpro_display_medium"
-            android:text="signup"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+                    <TextView
+                        android:id="@+id/next"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/gander"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/rectangle_blue1"
+                        android:fontFamily="@font/sfpro_display_medium"
+                        android:text="signup"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
-    </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 
 
 
@@ -352,6 +359,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
         app:cardElevation="10dp">
 
         <LinearLayout
@@ -393,6 +401,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <ImageView

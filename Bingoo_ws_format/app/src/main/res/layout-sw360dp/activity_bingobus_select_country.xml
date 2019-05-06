@@ -29,6 +29,7 @@
             android:layout_marginTop="47.7dp"
             android:fontFamily="@font/sfpro_display_semibold"
             android:text="Select Country"
+            android:visibility="gone"
             android:textColor="@color/light_black"
             android:textSize="20sp" />
 
@@ -39,6 +40,7 @@
             android:background="@drawable/rectangle_white_gray1boder"
             android:orientation="vertical"
             android:paddingTop="0dp"
+            android:visibility="gone"
             android:paddingBottom="0dp">
 
             <Spinner

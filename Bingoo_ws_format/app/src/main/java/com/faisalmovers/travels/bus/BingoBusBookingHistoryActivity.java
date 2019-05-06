@@ -103,12 +103,6 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
 
 
 
-
-
-
-
-
-
         //        custome bottombar
         linear1 = (LinearLayout) findViewById(R.id.liner1);
         linear2 = (LinearLayout) findViewById(R.id.liner2);

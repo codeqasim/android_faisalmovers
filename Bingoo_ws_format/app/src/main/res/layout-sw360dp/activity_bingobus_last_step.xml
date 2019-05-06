@@ -180,6 +180,7 @@
                 android:layout_marginTop="14.3dp"
                 android:fontFamily="@font/sfpro_display_regular"
                 android:text="Edit"
+                android:visibility="gone"
                 android:textColor="@color/light_black"
                 android:textSize="14sp" />
 
@@ -337,6 +338,7 @@
                 android:fontFamily="@font/sfpro_display_semibold"
                 android:text="Payment Details"
                 android:textColor="#000000"
+                android:visibility="gone"
                 android:textSize="20sp" />
 
 
@@ -346,6 +348,7 @@
                 android:layout_marginTop="17.7dp"
                 android:background="@drawable/rectangle_white_gray1boder"
                 android:id="@+id/bycash"
+                android:visibility="gone"
                 android:orientation="vertical"
                 android:paddingLeft="18.3dp"
                 android:paddingTop="18dp"
@@ -419,7 +422,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="18.3dp"
                 android:paddingTop="18dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:paddingRight="12dp"
                 android:paddingBottom="20.7dp">
 

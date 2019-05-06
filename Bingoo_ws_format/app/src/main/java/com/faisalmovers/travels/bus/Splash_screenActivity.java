@@ -51,9 +51,10 @@ public class Splash_screenActivity extends AppCompatActivity {
                     sleep(2 * 1000);
 
 
-               /*  if(checker.equals("no") || checker.isEmpty())
+
+                 if(checker.equals("no") || checker.isEmpty())
                     {
-                        Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+                        Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
                         startActivity(intent);
                     } else
                         {
@@ -61,13 +62,18 @@ public class Splash_screenActivity extends AppCompatActivity {
                         startActivity(i);
                     }
 
+
+
+
+
+
+
+/*
+
+                 Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
+                 startActivity(intent);
 */
 
-
-
-
-               /*   Intent intent = new Intent(Splash_screenActivity.this, Webviewinvoice.class);
-                 startActivity(intent);*/
 
 
 

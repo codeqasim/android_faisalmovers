@@ -98,9 +98,9 @@ public class Bingobus_mobileverificationActivity extends Url {
                 if (code.getText().toString().trim().equalsIgnoreCase("")) {
                     code.setError("code");
                 } else {
+                  //  code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")
 
-
-                    if (code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")) {
+                    if (code.getText().toString().trim().equals(time)) {
                         //code.setError("code");
                         editor.putString("mobileverification", number);
                         editor.commit();

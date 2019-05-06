@@ -182,6 +182,7 @@
                 android:layout_marginTop="14.3dp"
                 android:fontFamily="@font/sfpro_display_regular"
                 android:text="Edit"
+                android:visibility="gone"
                 android:textColor="@color/light_black"
                 android:textSize="14sp" />
 
@@ -341,6 +342,7 @@
                 android:layout_marginTop="38dp"
                 android:fontFamily="@font/sfpro_display_semibold"
                 android:text="Payment Details"
+                android:visibility="gone"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -355,7 +357,7 @@
                 android:paddingLeft="18.3dp"
                 android:paddingTop="18dp"
                 android:paddingRight="12dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:paddingBottom="20.7dp">
 
 
@@ -423,7 +425,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="18.3dp"
                 android:paddingTop="18dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:paddingRight="12dp"
                 android:paddingBottom="20.7dp">
 

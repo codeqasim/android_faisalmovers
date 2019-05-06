@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -48,9 +49,9 @@ import util.Utils;
 
 public class Bingobus_Last_StepActivity extends Url implements View.OnClickListener {
 
-    LinearLayout male,female,bycash,easypisa;
+    LinearLayout male,female;//bycash,easypisa;
     TextView txtmale,txtfemale;
-    ImageView img1,img2,img1easypasa,img2easypasa,back;
+    ImageView img1,img2,back;//,img1easypasa,img2easypasa;
     TextView searchbus;
     Context context=this;
     TextView pickupfrom,topoint,totalamount ,totalseatnum;
@@ -73,11 +74,12 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus_last_step);
 
+
         da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
         gson = new Gson();
-        bycash = (LinearLayout)findViewById(R.id.bycash);
-        easypisa = (LinearLayout)findViewById(R.id.easypisa);
+        //bycash = (LinearLayout)findViewById(R.id.bycash);
+       // easypisa = (LinearLayout)findViewById(R.id.easypisa);
         male = (LinearLayout)findViewById(R.id.male);
         female = (LinearLayout)findViewById(R.id.female);
         txtmale = (TextView) findViewById(R.id.txtmale);
@@ -136,11 +138,11 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
       //  img1easypasa,img2easypasa
 
-        img1 = (ImageView)findViewById(R.id.img1);
+       /* img1 = (ImageView)findViewById(R.id.img1);
         img2 = (ImageView)findViewById(R.id.img2);
 
         img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
-        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);
+        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
 /*
 
         img1.setOnClickListener(new View.OnClickListener() {
@@ -160,9 +162,9 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         });
 */
 
-
+/*
         img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
-        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);
+        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
 
        /* img1easypasa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,25 +215,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         }
 
 
-   /*     bycash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                img1.setVisibility(View.GONE);
-                img2.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(),"bycash",Toast.LENGTH_LONG).show();
-            }
-        });
-
-     easypisa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                img1easypasa.setVisibility(View.GONE);
-                img2easypasa.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(),"easypisa",Toast.LENGTH_LONG).show();
-            }
-        });*/
 
 
         searchbus.setOnClickListener(new View.OnClickListener() {
@@ -259,14 +243,14 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         male.setOnClickListener(this);
         female.setOnClickListener(this);
         back.setOnClickListener(this);
-        easypisa.setOnClickListener(this);
-        bycash.setOnClickListener(this);
+     //   easypisa.setOnClickListener(this);
+     //   bycash.setOnClickListener(this);
 
-        img1.setVisibility(View.GONE);
+     /*   img1.setVisibility(View.GONE);
         img2.setVisibility(View.VISIBLE);
         img2easypasa.setVisibility(View.GONE);
         img1easypasa.setVisibility(View.VISIBLE);
-
+*/
 
 
      //   loadhistorydata();
@@ -301,13 +285,13 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 finish();
                 break;
 
-            case R.id.easypisa:
+       /*     case R.id.easypisa:
 
-                img1.setVisibility(View.VISIBLE);
+             *//*   img1.setVisibility(View.VISIBLE);
                 img2.setVisibility(View.GONE);
 
                 img1easypasa.setVisibility(View.GONE);
-                img2easypasa.setVisibility(View.VISIBLE);
+                img2easypasa.setVisibility(View.VISIBLE);*//*
                 break;
 
 
@@ -315,14 +299,14 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             case R.id.bycash:
 
 
-                img1.setVisibility(View.GONE);
+               *//* img1.setVisibility(View.GONE);
                 img2.setVisibility(View.VISIBLE);
 
 
                 img2easypasa.setVisibility(View.GONE);
                 img1easypasa.setVisibility(View.VISIBLE);
-
-                break;
+*//*
+                break;*/
 
 
 
