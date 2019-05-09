@@ -78,9 +78,10 @@ public class Bingobus_mobileverificationActivity extends Url {
 
 
          time = dateFormat.format(date);
-       // Log.d("checkerdatatime",time);
+
         //String weblink = url.url1+number+"&message="+time+"&devices=2";
         String newmobileverf = mobileverification+number+"&Message="+time;
+        Log.d("checkerdatatime",time);
        sendAndRequestResponse(newmobileverf);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,50 +146,25 @@ public class Bingobus_mobileverificationActivity extends Url {
 
     private void sendAndRequestResponse(String url) {
 
-
-
-
         mRequestQueue = Volley.newRequestQueue(this);
         mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
 
-               // Log.d("checkerdata",response);
+                Log.d("checkerdata",response);
 
                 if(response.equals("Message Sent Successfully") )
                 {
                     Log.d("checkerdata","yess");
+                    Utils.showInfoToast(getApplicationContext(),response.toString());
                 }
                 else
                 {
                     Utils.showErrorToast(getApplicationContext()," wrong try again  ");
                 }
 
-            /*   try {
 
-
-                    JSONObject jsonObject = new JSONObject(response);
-
-                    JSONObject data = jsonObject.optJSONObject("data");
-                    JSONArray jsonArray = data.getJSONArray("messages");
-                  // Log.d("checkerdata",response +"----" +jsonArray.length());
-
-                   for (int i =0; i <jsonArray.length(); i++)
-                   {
-                       JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                       String message = jsonObject1.getString("message");
-                       responmessage = message;
-
-
-                   }
-
-
-
-
-               } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
 
 
 
@@ -197,7 +173,8 @@ public class Bingobus_mobileverificationActivity extends Url {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Utils.showErrorToast(getApplicationContext()," try again  ");
+                Log.d("checkerdata",error.getMessage());
+                Utils.showErrorToast(getApplicationContext()," sever issue  ");
             }
         });
         mRequestQueue.add(mStringRequest);

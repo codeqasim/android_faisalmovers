@@ -17,13 +17,14 @@ public class Splash_screenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
-
-
         String gander = preferences.getString("gander", "");
+
+
 
         if(gander.equals(null))
          {
                 gander="0";
+
          }
 
         SharedPreferences.Editor editor = preferences.edit();
@@ -34,6 +35,7 @@ public class Splash_screenActivity extends AppCompatActivity {
         editor.putString("seatcount",null);
         editor.putString("gander",gander);
         editor.commit();
+
 
 
         settings = getApplicationContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -52,6 +54,7 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
+
                  if(checker.equals("no") || checker.isEmpty())
                     {
                         Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
@@ -65,12 +68,7 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
-
-
-
-/*
-
-                 Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
+                 /*Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
                  startActivity(intent);
 */
 
@@ -87,33 +85,7 @@ public class Splash_screenActivity extends AppCompatActivity {
         background.start();
 
     }
-    @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
-    }
 
 
 
-
-
-    @Override
-
-    protected void onResume() {
-
-        super.onResume();//visible
-
-    //    Log.d("ActivityActivity","Activity resumed");
-
-        if(checker.equals("no") || checker.isEmpty())
-        {
-            Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
-            startActivity(intent);
-        } else
-        {
-            Intent i = new Intent(Splash_screenActivity.this, Bingobus24Activity.class);
-            startActivity(i);
-        }
-
-    }
 }
