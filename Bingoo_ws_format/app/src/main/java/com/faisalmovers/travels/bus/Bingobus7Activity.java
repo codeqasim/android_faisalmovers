@@ -21,6 +21,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +68,8 @@ public class Bingobus7Activity extends Url {
         setContentView(R.layout.activity_bingobus7);
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-
+        //Sprite doubleBounce = new DoubleBounce();
+        //progressBar2.setIndeterminateDrawable(doubleBounce);
 
         businfo = new ArrayList<>();
 

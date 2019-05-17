@@ -497,6 +497,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
                 Intent Profile = new Intent(context,ProfilePerson.class);
+                Profile.putExtra("vlaue", "1");
                 context.startActivity(Profile);
                 break;
 

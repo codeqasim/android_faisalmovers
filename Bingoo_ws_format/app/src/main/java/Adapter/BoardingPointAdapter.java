@@ -91,6 +91,7 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
                 {
                     Intent i = new Intent(context, ProfilePerson.class);
                     i.putExtra("sampleObject", bingobus7Model);
+                    i.putExtra("vlaue", "2");
                     context.startActivity(i);
 
                 }else {

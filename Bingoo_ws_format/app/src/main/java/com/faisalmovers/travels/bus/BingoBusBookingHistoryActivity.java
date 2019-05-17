@@ -64,7 +64,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
     //bottombar
     LinearLayout linear1, linear2, linear3, linear4;
     ImageView bus, discount, checked, user;
-    TextView search, offer, booking, profile;
+    TextView search, offer, booking, profile,infotext;
 
     Context context=this;
 
@@ -91,17 +91,30 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
 
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-
+        infotext = (TextView) findViewById(R.id.infotext);
 
 
 
 
 
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        String id =pref.getString("id"," ");
-        loadhistorydata(yourbookinghistory+id+"&lang=en" );
+       /* String id =pref.getString("id"," ");
+        loadhistorydata(yourbookinghistory+id+"&lang=en" );*/
+
+        Boolean nectcheckbuuton= pref.getBoolean("Check_Login", false);
+
+        if(nectcheckbuuton ==false)
+        {
+            progressBar2.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            infotext.setVisibility(View.VISIBLE);
+            Utils.showInfoToast(getApplicationContext() ,"Bookings not found");
+        }else {
 
 
+            String id =pref.getString("id"," ");
+            loadhistorydata(yourbookinghistory+id+"&lang=en" );
+        }
 
         //        custome bottombar
         linear1 = (LinearLayout) findViewById(R.id.liner1);
@@ -196,6 +209,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
                 profile.setTextColor(Color.parseColor("#000000"));
 
                 Intent Profile = new Intent(context,ProfilePerson.class);
+                Profile.putExtra("vlaue", "1");
                 context.startActivity(Profile);
                 break;
         }
@@ -314,6 +328,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
                     {
                       //  progressBar2.setVisibility(View.GONE);
                         Utils.showInfoToast(getApplicationContext() ,error.getString("msg"));
+
                     }
 
 
@@ -363,6 +378,18 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
                     recyclerView.setNestedScrollingEnabled(false);
                     runAnimation(recyclerView);
 
+
+
+                    if (bookingHistoryAdapter.getItemCount() ==0)
+                    {
+                        recyclerView.setVisibility(View.GONE);
+                        infotext.setVisibility(View.VISIBLE);
+                        Utils.showInfoToast(getApplicationContext() ,"Bookings not found");
+                    }else
+                    {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        infotext.setVisibility(View.GONE);
+                    }
                     Log.d("fromCityIdfromCityId2",historyload.size()+" ");
 
 

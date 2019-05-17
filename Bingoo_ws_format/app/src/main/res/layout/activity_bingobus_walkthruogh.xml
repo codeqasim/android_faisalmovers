@@ -20,7 +20,7 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:clickable="true"
             android:layout_marginTop="35dp"
             android:src="@drawable/back" />
@@ -63,6 +63,7 @@
             android:fontFamily="@font/sfpro_display_semibold"
             android:text="Login / Signup "
             android:textColor="@color/light_black"
+            android:visibility="gone"
             android:textSize="13.3sp" />
 
         <LinearLayout

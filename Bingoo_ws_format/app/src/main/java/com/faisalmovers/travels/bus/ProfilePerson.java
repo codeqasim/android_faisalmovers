@@ -58,6 +58,9 @@ public class ProfilePerson extends Url implements View.OnClickListener {
     Intent da;
     private boolean inProgress = false;
     String idupdate;
+
+    String valuecfm;
+    Boolean nectcheckbuuton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +71,12 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         if( getIntent().getExtras() != null)
         {
             da = getIntent();
+            valuecfm= da.getStringExtra("vlaue");
             bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
             //do here
         }
 
-
+        Log.d("valuecfmvaluecfm",valuecfm);
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         progressBar2.setVisibility(View.GONE);
@@ -84,14 +88,14 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
-       Boolean nectcheckbuuton= pref.getBoolean("Check_Login", false);
+        nectcheckbuuton= pref.getBoolean("Check_Login", false);
 
         if(nectcheckbuuton ==false)
         {
-
+            nectcheckbuuton=false;
         }else {
            // next.setVisibility(View.GONE);
-            next.setText("update");
+            next.setText("Update");
              idupdate= "1";
         }
 
@@ -404,93 +408,16 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
     public  void signup(String url)
     {
-        progressBar2.setVisibility(View.VISIBLE);
+
         if (!validate()) {
             onSignupFailed();
             return;
+        }else
+        {
+
+            creatuser(url);
         }
-        inProgress=true;
-        mRequestQueue = Volley.newRequestQueue(this);
-        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
 
-
-                Log.d("bordingpoint2","response/" +response);
-
-                try {
-
-
-                    JSONObject main_json = new JSONObject(response);
-                    JSONObject responseObj = main_json.getJSONObject("response");
-                    if(!main_json.getJSONObject("error").getBoolean("status"))
-                    {
-                        editor.putBoolean("Check_Login",true);
-                        editor.putString("email",responseObj.getString("email"));
-                        editor.putString("name",responseObj.getString("fullname"));
-                        editor.putString("password",responseObj.getString("password"));
-                        editor.putString("nic",responseObj.getString("nic"));
-                        editor.putString("id",responseObj.getString("id"));
-                        editor.commit();
-
-                        Utils.showSuccesToast(getApplicationContext(),"Registration Successful");
-                        progressBar2.setVisibility(View.GONE);
-
-                        Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
-                        i.putExtra("sampleObject", bingobus7Model);
-                        context.startActivity(i);
-
-                    }
-                    else
-                    {
-                        JSONObject error_object=main_json.getJSONObject("error");
-                        Toast.makeText(getApplicationContext(),error_object.getString("msg"),Toast.LENGTH_LONG).show();
-                        Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
-                    }
-
-                    inProgress=false;
-                } catch (JSONException e) {
-                //    progressDialog.dismiss();
-
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-                    progressBar2.setVisibility(View.GONE);
-                    e.printStackTrace();
-                    inProgress=false;
-                }
-
-
-            }
-        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d("bordingpoint2","error/" +error);
-                Utils.showErrorToast(getApplicationContext(),"server issue");
-                progressBar2.setVisibility(View.GONE);
-                //This code is executed if there is an error.
-                inProgress=false;
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams()  {
-
-                String name = fullname.getText().toString();
-                String email1 = email.getText().toString();
-                String phone_number=phone.getText().toString();
-                String nic1 = nic.getText().toString();
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email",email1);
-                params.put("password","000000");
-                params.put("first_name",name);
-                params.put("last_name",name);
-                params.put("phone",phone_number);
-                params.put("nic",nic1);
-                return params;
-            }
-        };
-
-        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mRequestQueue.add(mStringRequest);
         //fullnameemailphonenic
     }
 
@@ -541,7 +468,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
     public void onSignupFailed() {
        // Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
-        Utils.showErrorToast(getApplicationContext(), "Login failed");
+        Utils.showErrorToast(getApplicationContext(), "enter complete info first");
         next.setEnabled(true);
     }
 
@@ -639,5 +566,97 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         offer.setTextColor(Color.parseColor("#91959d"));
         booking.setTextColor(Color.parseColor("#91959d"));
         profile.setTextColor(Color.parseColor("#000000"));
+    }
+
+
+    public void creatuser(String url)
+    {
+        progressBar2.setVisibility(View.VISIBLE);
+        inProgress=true;
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Log.d("bordingpoint2","response/" +response);
+
+                try {
+
+
+                    JSONObject main_json = new JSONObject(response);
+                    JSONObject responseObj = main_json.getJSONObject("response");
+                    if(!main_json.getJSONObject("error").getBoolean("status"))
+                    {
+                        editor.putBoolean("Check_Login",true);
+                        editor.putString("email",responseObj.getString("email"));
+                        editor.putString("name",responseObj.getString("fullname"));
+                        editor.putString("password",responseObj.getString("password"));
+                        editor.putString("nic",responseObj.getString("nic"));
+                        editor.putString("id",responseObj.getString("id"));
+                        editor.commit();
+
+                        Utils.showSuccesToast(getApplicationContext(),"Registration Successful");
+                        progressBar2.setVisibility(View.GONE);
+
+                        if (valuecfm.equals("2") )
+                        {
+                            Intent i = new Intent(context, Bingobus_Last_StepActivity.class);
+                            i.putExtra("sampleObject", bingobus7Model);
+                            context.startActivity(i);
+                        }
+
+                        next.setText("Update");
+                    }
+                    else
+                    {
+                        JSONObject error_object=main_json.getJSONObject("error");
+                        Toast.makeText(getApplicationContext(),error_object.getString("msg"),Toast.LENGTH_LONG).show();
+                        Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
+                    }
+
+                    inProgress=false;
+                } catch (JSONException e) {
+                    //    progressDialog.dismiss();
+
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                    progressBar2.setVisibility(View.GONE);
+                    e.printStackTrace();
+                    inProgress=false;
+                }
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("bordingpoint2","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+                inProgress=false;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+                String name = fullname.getText().toString();
+                String email1 = email.getText().toString();
+                String phone_number=phone.getText().toString();
+                String nic1 = nic.getText().toString();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email",email1);
+                params.put("password","000000");
+                params.put("first_name",name);
+                params.put("last_name",name);
+                params.put("phone",phone_number);
+                params.put("nic",nic1);
+                return params;
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
     }
 }

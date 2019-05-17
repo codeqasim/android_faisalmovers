@@ -68,7 +68,8 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
-                 /*Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
+             /*    Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
+                 finish();
                  startActivity(intent);
 */
 

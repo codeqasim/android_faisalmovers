@@ -45,7 +45,7 @@
             android:lineSpacingExtra="5dp"
             android:text="Join 10 Million\nTravellers…"
             android:textColor="@color/light_black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -63,6 +63,7 @@
             android:fontFamily="@font/sfpro_display_semibold"
             android:text="Login / Signup "
             android:textColor="@color/light_black"
+            android:visibility="gone"
             android:textSize="13.3sp" />
 
         <LinearLayout

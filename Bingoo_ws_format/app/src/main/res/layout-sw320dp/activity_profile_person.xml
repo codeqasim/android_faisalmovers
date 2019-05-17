@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
-
-
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -328,21 +322,7 @@
                     </RelativeLayout>
 
 
-                    <TextView
-                        android:id="@+id/next"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/gander"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/rectangle_blue1"
-                        android:fontFamily="@font/sfpro_display_medium"
-                        android:text="signup"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+
 
                 </RelativeLayout>
 
@@ -350,9 +330,29 @@
             </RelativeLayout>
 
 
+
+
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rectangle_blue1"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:text="Signup"
+        android:layout_below="@+id/gander"
+        android:layout_above="@+id/optionmain"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        tools:ignore="NotSibling" />
+
         </LinearLayout>
     </ScrollView>
-
 
 
     <android.support.v7.widget.CardView
@@ -360,6 +360,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp"
+        android:id="@+id/optionmain"
         app:cardElevation="10dp">
 
         <LinearLayout

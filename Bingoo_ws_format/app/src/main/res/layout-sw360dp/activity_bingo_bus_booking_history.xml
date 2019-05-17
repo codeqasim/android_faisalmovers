@@ -175,4 +175,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/sfpro_display_medium"
+        android:text="No booking found current User"
+        android:textColor="#464646"
+        android:visibility="gone"
+        android:id="@+id/infotext"
+        android:textSize="13.3sp"/>
+
 </RelativeLayout>
