@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -61,6 +62,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
     String valuecfm;
     Boolean nectcheckbuuton;
+    CardView optionmain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +78,9 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             //do here
         }
 
-        Log.d("valuecfmvaluecfm",valuecfm);
 
+        Log.d("valuecfmvaluecfm",valuecfm);
+        optionmain = (CardView)  findViewById(R.id.optionmain);
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         progressBar2.setVisibility(View.GONE);
         fullname = (EditText) findViewById(R.id.fullname);
@@ -99,7 +102,11 @@ public class ProfilePerson extends Url implements View.OnClickListener {
              idupdate= "1";
         }
 
-
+        if(valuecfm.equals("3"))
+        {
+            next.setText("Signup");
+            optionmain.setVisibility(View.GONE);
+        }
 
         phone.setHint("");
 
@@ -605,6 +612,13 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                             i.putExtra("sampleObject", bingobus7Model);
                             context.startActivity(i);
                         }
+                        if (valuecfm.equals("3"))
+                        {
+                            Intent intent = new Intent(context, Bingobus24Activity.class);
+                            finish();
+                            startActivity(intent);
+                        }
+
 
                         next.setText("Update");
                     }

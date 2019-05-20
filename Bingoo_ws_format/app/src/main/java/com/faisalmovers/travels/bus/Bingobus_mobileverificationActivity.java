@@ -108,7 +108,11 @@ public class Bingobus_mobileverificationActivity extends Url {
                         editor.commit();
                         Intent i = new Intent(context, Bingobus24Activity.class);
                         context.startActivity(i);
-                        Utils.showSuccesToast(getApplicationContext(),"successful login");
+                        Utils.showSuccesToast(getApplicationContext(),"successful register");
+
+                       /* Intent Profile = new Intent(context,ProfilePerson.class);
+                        Profile.putExtra("vlaue", "3");
+                        context.startActivity(Profile);*/
 
                     } else {
 

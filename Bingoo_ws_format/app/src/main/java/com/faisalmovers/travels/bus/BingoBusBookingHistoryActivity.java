@@ -74,7 +74,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
     private StringRequest mStringRequest;
     ProgressBar progressBar2 ;
     SharedPreferences pref;
-    private boolean inProgress = false;
+  //  private boolean inProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,7 +307,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
     {
 
 
-        inProgress=true;
+     //   inProgress=true;
         mRequestQueue = Volley.newRequestQueue(this);
         mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @SuppressLint("LongLogTag")
@@ -394,12 +394,12 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
 
 
 
-                    inProgress=false;
+                   // inProgress=false;
                 } catch (JSONException e) {
 
                     Log.d("abcwwwwd", e.getMessage());
                    progressBar2.setVisibility(View.GONE);
-                    inProgress=false;
+                   // inProgress=false;
                     //Utils.showInfoToast(getApplicationContext() ,"Bookings not found");
                 }
 
@@ -425,12 +425,7 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
     }
 
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (!inProgress)
-            return super.dispatchTouchEvent(ev);
-        return true;
-    }
+
 
     @Override
     protected void onResume() {

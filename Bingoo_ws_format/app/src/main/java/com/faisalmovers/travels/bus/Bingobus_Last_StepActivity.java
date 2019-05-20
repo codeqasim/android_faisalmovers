@@ -355,6 +355,8 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 e.printStackTrace();
 
 
+                   Utils.showErrorToast(getApplicationContext(),"server issue");
+                   progressBar2.setVisibility(View.GONE);
             }
 
             }
