@@ -53,9 +53,11 @@ public class Splash_screenActivity extends AppCompatActivity {
                     sleep(2 * 1000);
 
 
+                    Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+                    finish();
+                    startActivity(intent);
 
-
-                 if(checker.equals("no") || checker.isEmpty())
+                /* if(checker.equals("no") || checker.isEmpty())
                     {
                         Intent intent = new Intent(Splash_screenActivity.this, Bingobus_walkthruoghActivity.class);
                         startActivity(intent);
@@ -67,7 +69,7 @@ public class Splash_screenActivity extends AppCompatActivity {
                          finish();
                          startActivity(intent);
 
-                    }
+                    }*/
 
 
 

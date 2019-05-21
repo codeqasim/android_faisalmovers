@@ -60,6 +60,7 @@ public class Bingobus_mobileverificationActivity extends Url {
         code = (EditText) findViewById(R.id.code);
         back = (ImageView) findViewById(R.id.back);
 
+        valesetNull();
          preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
          editor = preferences.edit();
 
@@ -106,13 +107,13 @@ public class Bingobus_mobileverificationActivity extends Url {
                         //code.setError("code");
                         editor.putString("mobileverification", number);
                         editor.commit();
-                        Intent i = new Intent(context, Bingobus24Activity.class);
-                        context.startActivity(i);
-                        Utils.showSuccesToast(getApplicationContext(),"successful register");
+                        /*Intent i = new Intent(context, Bingobus24Activity.class);
+                        context.startActivity(i);*/
+                        Utils.showSuccesToast(getApplicationContext(),"successful number register");
 
-                       /* Intent Profile = new Intent(context,ProfilePerson.class);
+                        Intent Profile = new Intent(context,ProfilePerson.class);
                         Profile.putExtra("vlaue", "3");
-                        context.startActivity(Profile);*/
+                        context.startActivity(Profile);
 
                     } else {
 
@@ -195,5 +196,25 @@ public class Bingobus_mobileverificationActivity extends Url {
 
         // this will convert any number sequence into 6 character.
         return String.format("%06d", number);
+    }
+
+    public void valesetNull()
+    {
+        SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("from", null);
+        editor.putString("to", null);
+        editor.putString("selectdate",null);
+        editor.putString("numberofseat",null);
+        editor.putString("seatcount",null);
+        editor.putString("mobileverificationemail","");
+        editor.putString("mobileverificationfullname","");
+        editor.putString("mobileverification","");
+        editor.putString("mobileverificationnic","");
+        editor.putString("id","");
+        editor.putBoolean("Check_Login",false);
+        editor.commit();
+
+
     }
 }
