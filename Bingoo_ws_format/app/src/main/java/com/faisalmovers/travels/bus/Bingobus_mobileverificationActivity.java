@@ -211,6 +211,7 @@ public class Bingobus_mobileverificationActivity extends Url {
         editor.putString("mobileverificationfullname","");
         editor.putString("mobileverification","");
         editor.putString("mobileverificationnic","");
+        editor.putString("mobileverificationepassword","");
         editor.putString("id","");
         editor.putBoolean("Check_Login",false);
         editor.commit();

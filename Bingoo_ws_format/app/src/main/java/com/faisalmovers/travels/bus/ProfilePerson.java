@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -46,7 +47,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
     TextView txtmale,txtfemale,next;
     ImageView bus, discount, checked, user;
     TextView search, offer, booking, profile;
-    EditText fullname,email,phone,nic;
+    EditText password,fullname,email,phone,nic;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Gson gson;
@@ -63,6 +64,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
     String valuecfm;
     Boolean nectcheckbuuton;
     CardView optionmain;
+    TextInputLayout password1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +82,12 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
 
         Log.d("valuecfmvaluecfm",valuecfm);
+        password1 =  findViewById(R.id.password1);
         optionmain = (CardView)  findViewById(R.id.optionmain);
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         progressBar2.setVisibility(View.GONE);
         fullname = (EditText) findViewById(R.id.fullname);
+        password=findViewById(R.id.password);
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone);
         nic = (EditText) findViewById(R.id.nic);
@@ -99,6 +103,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         }else {
            // next.setVisibility(View.GONE);
             next.setText("Update");
+            password1.setVisibility(View.GONE);
              idupdate= "1";
         }
 
@@ -114,16 +119,35 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         String mobileverificationemail =pref.getString("mobileverificationemail",null);
         String mobileverificationefullname =pref.getString("mobileverificationfullname",null);
         String mobileverificationenic =pref.getString("mobileverificationnic",null);
+        String mobileverificationepassword=pref.getString("mobileverificationepassword",null);
         String gander =pref.getString("gander",null);
 
         fullname.setText(mobileverificationefullname);
         phone.setText(mobileverification);
         email.setText(mobileverificationemail);
         nic.setText(mobileverificationenic);
-
+        password.setText(mobileverificationepassword);
        // editor.putString("mobileverification", number);
        // editor.commit();
+        password.addTextChangedListener(new TextWatcher() {
 
+            // the user's changes are saved here
+            public void onTextChanged(CharSequence c, int start, int before, int count) {
+
+            }
+
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+                // this space intentionally left blank
+            }
+
+            public void afterTextChanged(Editable c) {
+
+                String password1 = String.valueOf(password.getText());
+                editor.putString("mobileverificationepassword", password1);
+                editor.commit();
+                // this one too
+            }
+        });
 
         email.addTextChangedListener(new TextWatcher() {
 
@@ -437,6 +461,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         String email1 = email.getText().toString();
         String phone_number=phone.getText().toString();
         String nic = this.nic.getText().toString();
+        String passwordtext = password.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
             fullname.setError("at least 3 characters");
@@ -444,6 +469,14 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         } else {
             fullname.setError(null);
         }
+
+        if (passwordtext.isEmpty() || name.length() < 6) {
+            password.setError("at least 6 characters");
+            valid = false;
+        } else {
+            password.setError(null);
+        }
+
         if (nic.isEmpty() || nic.length() < 13) {
             this.nic.setError("at least 13 characters");
             valid = false;
@@ -532,12 +565,13 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 String email1 = email.getText().toString();
                 String phone_number=phone.getText().toString();
                 String nic1 = nic.getText().toString();
+                String passwordtext = password.getText().toString();
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("firstname",name );
                 params.put("id", pref.getString("id",""));
                 params.put("lastname", name);
                 params.put("city", "111");
-                params.put("country", "111");
+                params.put("country", "Pakistan");
                 params.put("address1", "111");
                 params.put("address2", "11");
                 params.put("phone", phone_number);
@@ -554,11 +588,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         mRequestQueue.add(mStringRequest);
     }
 
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (!inProgress)
-            return super.dispatchTouchEvent(ev);
-        return true;
-    }
+
 
 
     @Override
@@ -629,14 +659,14 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                         Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
                     }
 
-                    inProgress=false;
+                  //  inProgress=false;
                 } catch (JSONException e) {
                     //    progressDialog.dismiss();
 
                     Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                     progressBar2.setVisibility(View.GONE);
                     e.printStackTrace();
-                    inProgress=false;
+                  //  inProgress=false;
                 }
 
 
@@ -649,7 +679,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 Utils.showErrorToast(getApplicationContext(),"server issue");
                 progressBar2.setVisibility(View.GONE);
                 //This code is executed if there is an error.
-                inProgress=false;
+                //inProgress=false;
             }
         }) {
             @Override
@@ -659,9 +689,10 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 String email1 = email.getText().toString();
                 String phone_number=phone.getText().toString();
                 String nic1 = nic.getText().toString();
+                String passwordtext = password.getText().toString();
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email",email1);
-                params.put("password","000000");
+                params.put("password",passwordtext);
                 params.put("first_name",name);
                 params.put("last_name",name);
                 params.put("phone",phone_number);

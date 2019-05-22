@@ -72,7 +72,8 @@ public class Bingobus_walkthruoghActivity extends AppCompatActivity {
 
     public void onBackPressed(){
       //  super.onBackPressed();
-        dailogbox();
+        finish();
+      //  dailogbox();
     }
 
     @SuppressLint("ResourceAsColor")

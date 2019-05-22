@@ -624,7 +624,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
     @Override
     public void onBackPressed() {
 
-        dailogbox();
+        dailogbox2();
 
     }
 
@@ -663,6 +663,66 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
     }
+    public void dailogbox2() {
+
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        alertDialogBuilder.setTitle("Are you sure you want to exit");
+        alertDialogBuilder
+                .setMessage("What do you want?")
+                .setCancelable(false)
+                .setPositiveButton("Exit  ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+
+
+                        finish();
+                        finishAffinity();
+                        System.exit(0);
+
+
+
+
+                    }
+                }).setNeutralButton("Logout", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+
+                settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                editor = settings.edit();
+                editor.putString("show", "no");
+                editor.commit();
+
+                finish();
+                finishAffinity();
+                System.exit(0);
+
+
+
+
+            }
+        })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
+        // show it
+        alertDialog.show();
+
+    }
+
+
+
+
+
 
     public void load()
     {

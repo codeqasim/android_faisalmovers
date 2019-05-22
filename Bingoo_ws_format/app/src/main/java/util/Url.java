@@ -17,6 +17,8 @@ public class Url extends AppCompatActivity {
     public String updateprofiledata = "https://www.bookkaru.com/api/login/updateprofile?appKey=bookkaru";
     public String  yourbookinghistory = "https://www.bookkaru.com/api/invoice/list?appKey=bookkaru&userid=";
     public String invoicedetailsuser = "http://www.bookkaru.com/invoice?id=";
+    public String login = "https://www.bookkaru.com/api/login/check?appKey=bookkaru";
+
 }
 
 

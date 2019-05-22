@@ -1,7 +1,9 @@
 package com.faisalmovers.travels.bus;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ public class Webviewinvoice extends AppCompatActivity {
     private Handler handler = new Handler();
     WebView web_view;
     String urlweb;
+    ProgressBar progressBar2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +33,19 @@ public class Webviewinvoice extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
 
+        progressBar2 = findViewById(R.id.progressBar2);
         web_view = (WebView) findViewById(R.id.webview);
         final ProgressBar pb = (ProgressBar) findViewById(R.id.pb);
         final TextView tv = (TextView) findViewById(R.id.tv);
         pb.setProgressTintList(ColorStateList.valueOf(Color.RED));
-
-        web_view.getSettings().setLoadsImagesAutomatically(true);
+        startWebView(web_view,urlweb);
+        /*web_view.getSettings().setLoadsImagesAutomatically(true);
         web_view.getSettings().setJavaScriptEnabled(true);
         web_view.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        web_view.loadUrl(urlweb);
+        web_view.loadUrl(urlweb);*/
+
+
+
 
                 new Thread(new Runnable() {
                     public void run() {
@@ -90,4 +98,36 @@ public class Webviewinvoice extends AppCompatActivity {
 
     }
 
+    private void startWebView(WebView webView,String url) {
+        webView.setWebViewClient(new WebViewClient() {
+            ProgressDialog progressDialog;
+
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            public void onLoadResource (WebView view, String url) {
+
+                if (progressDialog == null) {
+                    progressDialog = new ProgressDialog(Webviewinvoice.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+
+            }
+            public void onPageFinished(WebView view, String url) {
+                progressDialog.dismiss();
+            }
+
+        });
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(url);
+    }
 }
