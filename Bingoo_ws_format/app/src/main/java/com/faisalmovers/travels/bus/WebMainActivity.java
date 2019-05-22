@@ -34,6 +34,9 @@ public class WebMainActivity extends Url {
 
         link =invoicedetailsuser+link;
         webinvoice= (WebView) findViewById(R.id.webinvoice);
+        webinvoice.getSettings().setSupportZoom(true);
+        webinvoice.getSettings().setBuiltInZoomControls(true);
+        webinvoice.getSettings().setDisplayZoomControls(false);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2) ;
 
        progressBar.setVisibility(View.VISIBLE);

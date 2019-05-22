@@ -666,9 +666,8 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
     public void dailogbox2() {
 
         AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-        alertDialogBuilder.setTitle("Are you sure you want to exit");
         alertDialogBuilder
-                .setMessage("What do you want?")
+                .setMessage("Are you sure, You wanted to Exit or Signout")
                 .setCancelable(false)
                 .setPositiveButton("Exit  ", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -684,7 +683,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
                     }
-                }).setNeutralButton("Logout", new DialogInterface.OnClickListener() {
+                }).setNeutralButton("Signout", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
 
