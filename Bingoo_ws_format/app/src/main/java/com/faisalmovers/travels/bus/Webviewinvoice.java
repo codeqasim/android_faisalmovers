@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -38,7 +40,36 @@ public class Webviewinvoice extends AppCompatActivity {
         final ProgressBar pb = (ProgressBar) findViewById(R.id.pb);
         final TextView tv = (TextView) findViewById(R.id.tv);
         pb.setProgressTintList(ColorStateList.valueOf(Color.RED));
-        startWebView(web_view,urlweb);
+
+
+        progressBar2.setVisibility(View.VISIBLE);
+        web_view.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar2.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar2.setVisibility(View.GONE);
+                // setProgressBarVisibility(View.GONE);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                progressBar2.setVisibility(View.GONE);
+                //  setProgressBarVisibility(View.GONE);
+            }
+        });
+
+        web_view.loadUrl(urlweb);
+
+
+
+     //   startWebView(web_view,urlweb);
         /*web_view.getSettings().setLoadsImagesAutomatically(true);
         web_view.getSettings().setJavaScriptEnabled(true);
         web_view.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);

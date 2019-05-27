@@ -70,8 +70,10 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
-
-
+                   /* Intent intent = new Intent(Splash_screenActivity.this, Webviewinvoice.class);
+                   intent.putExtra("weburl","https://www.google.com/search?q=google&rlz=1C5CHFA_enPK767PK767&oq=goo&aqs=chrome.0.69i59j69i60j69i57j69i65l2j69i59l2.1799j0j7&sourceid=chrome&ie=UTF-8");
+                    startActivity(intent);
+*/
 
 
 
