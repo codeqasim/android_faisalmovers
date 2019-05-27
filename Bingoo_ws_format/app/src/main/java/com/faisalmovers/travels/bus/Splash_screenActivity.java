@@ -56,6 +56,7 @@ public class Splash_screenActivity extends AppCompatActivity {
                 if(checker.equals("no") || checker.isEmpty())
                     {
                         Intent intent = new Intent(Splash_screenActivity.this, Bingobus_Select_CountryActivity.class);
+                        finish();
                         startActivity(intent);
                     } else
                         {

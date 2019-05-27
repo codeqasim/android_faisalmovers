@@ -470,7 +470,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             fullname.setError(null);
         }
 
-        if (passwordtext.isEmpty() || name.length() < 6) {
+        if (passwordtext.isEmpty() || passwordtext.length() < 6) {
             password.setError("at least 6 characters");
             valid = false;
         } else {
