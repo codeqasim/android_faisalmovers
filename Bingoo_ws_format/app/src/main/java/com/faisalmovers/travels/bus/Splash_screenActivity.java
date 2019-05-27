@@ -44,6 +44,7 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
+        
         Thread background = new Thread() {
             public void run() {
 
