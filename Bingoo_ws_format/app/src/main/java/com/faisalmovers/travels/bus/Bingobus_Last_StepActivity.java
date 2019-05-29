@@ -345,6 +345,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
                         Utils.showErrorToast(getApplicationContext(), json_object.getString("msg"));
+                        progressBar2.setVisibility(View.GONE);
                        /* Toast.makeText(getApplicationContext(), json_object.getString("msg"), Toast.LENGTH_LONG).show();
                         finish();*/
                     }

@@ -112,14 +112,22 @@
 
 
 
-            <TextView android:id="@+id/link_signup"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="No account yet? "
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:textSize="16dip"/>
+         <android.support.v7.widget.LinearLayoutCompat
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:gravity="center">
+
+             <TextView android:id="@+id/link_signup"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="4dp"
+                 android:text="No account yet? "
+                 android:layout_marginTop="10dp"
+                 android:textSize="16dip"/>
+
+
+         </android.support.v7.widget.LinearLayoutCompat>
 
 
             <TextView android:id="@+id/signup"
@@ -146,6 +154,10 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp"/>
+
+
+
+
 
 
         </LinearLayout>

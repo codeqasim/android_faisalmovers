@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +38,8 @@ import model.Seat;
 import model.SeatData;
 import util.Url;
 import util.Utils;
+
+import static com.faisalmovers.travels.bus.Bingobus24Activity.PREFS_NAME;
 
 public class Bingobus33Activity extends Url implements OnSeatSelected{
 
@@ -62,6 +65,9 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     List<SeatData> Seatdata = new ArrayList<>();
     List<Seat> bookseats = new ArrayList<>();
     Gson gson ;
+
+    public static final String PREFS_NAME = "MyApp_Settings";
+    SharedPreferences settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +93,10 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         String fromCityId = pref.getString("fromcityid",null);
         String toCityId =  pref.getString("tocityid",null);
         String selectdate =pref.getString("selectdate",null);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("seatcount", "0");
+        editor.commit();
+
 
         String webseat = seatinfo+bingobus7Model.getOpId()+"&scheduleid="+scheduleid+"&depdate="+selectdate+"&fromcity="+fromCityId+"&tocity="+toCityId+"&deptime="+departureTime+"&depqtime="+querydepartureTime;
         String requestinfoseat=webseat;
@@ -196,6 +206,11 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             progressBar2.setVisibility(View.GONE);
         }
 
+
+
+
+
+
     }
 
     @Override
@@ -230,11 +245,15 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             editor.commit();
             String seatno = seatData1.getSeat_No();
             removeseatarray(seatno);
+
         }
         else {
 
         }
     }
+
+
+
 
     @Override
     public void onBackPressed()

@@ -31,7 +31,7 @@ public class Splash_screenActivity extends AppCompatActivity {
         editor.putString("from", null);
         editor.putString("to", null);
         editor.putString("selectdate",null);
-        editor.putString("numberofseat",null);
+        editor.putString("numberofseat","0");
         editor.putString("seatcount",null);
         editor.putString("gander",gander);
         editor.commit();
@@ -44,7 +44,7 @@ public class Splash_screenActivity extends AppCompatActivity {
 
 
 
-        
+
         Thread background = new Thread() {
             public void run() {
 

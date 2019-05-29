@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,13 +20,15 @@ import com.faisalmovers.travels.bus.OnSeatSelected;
 import com.faisalmovers.travels.bus.R;
 import com.faisalmovers.travels.bus.SelectableAdapter;
 
-import java.util.HashMap;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     private OnSeatSelected mOnSeatSelected;
-    private int count = 0;
+    private int count = 0,seatlimit;
+    SharedPreferences preferences;
 
     private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
@@ -71,6 +74,9 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         mLayoutInflater = LayoutInflater.from(context);
         mItems = items;
         Seatdata11 =Seatdata1;
+
+
+
     }
 
     @Override
@@ -108,6 +114,11 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
 
 
+         //seatlimit = Integer.parseInt(checkerseat);
+
+
+
+
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
@@ -116,7 +127,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             int result = Integer.parseInt(seat_no);
             final String  seat_status= seatData2.getSeat_status();
             final String  Gender= seatData2.getGender();
-            Log.d("resultresult",seat_status+"/");
+            Log.d("resultresult1",seat_status+"/");
 
             result =result-1;
 
@@ -147,10 +158,30 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                        // Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
                         Utils.showErrorToast(mContext, "Allready This Seat is Booked");
                     }else {
-                        SeatData seatData1 = Seatdata11.get(position);
-                        int x = toggleSelection(position);
-                        mOnSeatSelected.onSeatSelected(x,position);
-                        Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
+
+
+                        preferences=mContext.getSharedPreferences("MyPref",MODE_PRIVATE);
+                        String gander = preferences.getString("seatcount", "");
+                        Log.d("gandergander",gander+"///");
+
+
+                        try {
+                            seatlimit = Integer.parseInt(gander);
+                        } catch(NumberFormatException nfe) {
+
+                        }
+
+                        if (seatlimit <6)
+                        {
+
+                            SeatData seatData1 = Seatdata11.get(position);
+                            int x = toggleSelection(position);
+                            mOnSeatSelected.onSeatSelected(x,position);
+                            Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
+
+                        }else {
+                            Utils.showErrorToast(mContext, "seatlimits complete");
+                        }
                     }
                     //
                 }
@@ -193,11 +224,33 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                        //Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
                        Utils.showErrorToast(mContext, "Allready This Seat is Booked");
                    }else {
-                       int x = toggleSelection(position);
-                       mOnSeatSelected.onSeatSelected(x,position);
-                       //Utils.showSuccesToast();
-                       SeatData seatData1 = Seatdata11.get(position);
-                       Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
+
+                       preferences=mContext.getSharedPreferences("MyPref",MODE_PRIVATE);
+                       String gander = preferences.getString("seatcount", "");
+                       Log.d("gandergander",gander+"///");
+                      // Toast.makeText(mContext, gander+"/", Toast.LENGTH_LONG).show();
+
+
+                       try {
+                           seatlimit = Integer.parseInt(gander);
+                       } catch(NumberFormatException nfe) {
+
+                       }
+
+                       if (seatlimit <6) {
+
+
+
+
+                           int x = toggleSelection(position);
+                           mOnSeatSelected.onSeatSelected(x, position);
+                           //Utils.showSuccesToast();
+                           SeatData seatData1 = Seatdata11.get(position);
+                           Log.d("positionselected", seatData1.getSeat_id() + "/" + position);
+                       }
+                       else {
+                           Utils.showErrorToast(mContext, "seatlimits complete");
+                       }
 
                    }
                   //
@@ -207,4 +260,6 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
         }
     }
+
+
 }
