@@ -111,14 +111,6 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         int type = mItems.get(position).getType();
 
-
-
-
-         //seatlimit = Integer.parseInt(checkerseat);
-
-
-
-
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
@@ -171,7 +163,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
                         }
 
-                        if (seatlimit <6)
+                        if (seatlimit <50)
                         {
 
                             SeatData seatData1 = Seatdata11.get(position);
@@ -187,7 +179,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                 }
             });
 
-
+            Log.d("positionselected","/"+position);
 
             holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
 
@@ -237,7 +229,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
                        }
 
-                       if (seatlimit <6) {
+                       if (seatlimit <50) {
 
 
 
@@ -257,6 +249,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                }
            });
 
+            Log.d("positionselected","/"+position);
             holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
         }
     }

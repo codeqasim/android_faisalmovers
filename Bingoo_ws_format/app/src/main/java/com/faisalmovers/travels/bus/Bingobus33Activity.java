@@ -357,12 +357,28 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             {
 
                                 items.add(new EdgeItem(String.valueOf(i)));
-                            } else if (i%COLUMNS==1 || i%COLUMNS==3)
+
+
+                            }
+                            else if (i%COLUMNS==1 || i%COLUMNS==3)
                             {
+
                                 items.add(new CenterItem(String.valueOf(i)));
-                            } else {
+                            }
+
+                            else if (i==42)
+                            {
+
+                                items.add(new EdgeItem(String.valueOf(i)));
+                            }
+
+                            else {
                                 items.add(new EmptyItem(String.valueOf(i)));
                             }
+
+
+
+
                         }
                         AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
                         recyclerView.setAdapter(adapter);
