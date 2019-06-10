@@ -33,11 +33,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 import Adapter.OffersAdapter;
 import model.Bingobus7Model;
@@ -201,12 +204,13 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                Date date = new Date(year, month, dayOfMonth);
-                SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
-                String day = outFormat.format(date);
 
-                Log.d("dayday1",day);
+
+                SimpleDateFormat currentDate = new SimpleDateFormat("MM-dd-yyyy");
+                Date d = new Date(year, month, dayOfMonth);
+                String strDate = currentDate.format(d);
+
+                Log.d("dayday1",strDate+"/"+year);
                 datecfm=true;
 
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
@@ -214,55 +218,66 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 String finaldate = year+"-"+month+"-"+dayOfMonth;
                 editor.putString("selectdate",finaldate);
                 editor.commit();
-            // Toast.makeText(Bingobus24Activity.this, dayOfMonth +"-" +"-", Toast.LENGTH_SHORT).show();
 
-                // Toast.makeText(Bingobus24Activity.this, dayOfMonth+"/ "+month, Toast.LENGTH_SHORT).show();
 
-                if (day.equals("Sun")) {
-                    day1.setText("Sat");
-                    day2.setText("Sun");
-                    day3.setText("Mon");
-                } else if (day.equals("Mon")) {
-                    day1.setText("Sun");
-                    day2.setText("Mon");
-                    day3.setText("Tue");
-                } else if (day.equals("Tue")) {
-                    day1.setText("Mon");
-                    day2.setText("Tue");
-                    day3.setText("Wed");
-                } else if (day.equals("Wed")) {
-                    day1.setText("Tue");
-                    day2.setText("Wed");
-                    day3.setText("Tur");
-                } else if (day.equals("Tur")) {
-                    day1.setText("Wed");
-                    day2.setText("Tur");
-                    day3.setText("Fri");
-                } else if (day.equals("Fri")) {
-                    day1.setText("Tur");
-                    day2.setText("Fri");
-                    day3.setText("Sat");
-                } else if (day.equals("Sat")) {
-                    day1.setText("Fri");
-                    day2.setText("Sat");
-                    day3.setText("Sun");
+
+                Date readDate = null;
+                try {
+                    readDate = currentDate.parse(strDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
 
-                Log.d(TAG, "onDateSet: dd: " + dayOfMonth);
-                String date11 = dayOfMonth + "";
-                date1.setText(date11);
 
-                int countdate = Integer.valueOf(String.valueOf(dayOfMonth));
-                int countdate11 = countdate;
-                date1.setText(String.valueOf(countdate11));
 
-                int countdate2 = Integer.valueOf(String.valueOf(dayOfMonth));
-                int countdate12 = countdate2 + 1;
-                date2.setText(String.valueOf(countdate12));
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTimeInMillis(readDate.getTime());
 
-                int countdate3 = Integer.valueOf(String.valueOf(dayOfMonth));
-                int countdate13 = countdate3 + 2;
-                date3.setText(String.valueOf(countdate13));
+                Log.d(TAG, "Year: "+cal1.get(Calendar.YEAR));
+                Log.d(TAG, "Month: "+cal1.get(Calendar.MONTH));
+                Log.d(TAG, "Day: "+cal1.get(Calendar.DAY_OF_MONTH));
+
+                int dayofwek = cal1.get(Calendar.DAY_OF_WEEK);
+                String dayLongName =  dateday(readDate,-1);//cal1.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+               // Log.d(TAG, "DAY_OF_WEEK: "+dayLongName+"/"+dayofwek);
+                date1.setText(String.valueOf(cal1.get(Calendar.DAY_OF_MONTH)));
+               day1.setText(String.valueOf(dayLongName.substring(0,3)));
+
+
+
+
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTimeInMillis(readDate.getTime());
+                cal2.add(Calendar.DATE,+1);
+
+                Log.d(TAG, "Year: "+cal2.get(Calendar.YEAR));
+                Log.d(TAG, "Month: "+cal2.get(Calendar.MONTH));
+                Log.d(TAG, "Day: "+cal2.get(Calendar.DAY_OF_MONTH));
+                String dayLongName2 =dateday(readDate,0);// cal2.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+                Log.d(TAG, "DAY_OF_WEEK: "+dayLongName);
+                date2.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH)));
+                day2.setText(String.valueOf(dayLongName2.substring(0,3)));
+
+
+
+
+                Calendar cal3 = Calendar.getInstance();
+                cal3.setTimeInMillis(readDate.getTime());
+                cal3.add(Calendar.DATE,+2);
+
+                Log.d(TAG, "Year: "+cal3.get(Calendar.YEAR));
+                Log.d(TAG, "Month: "+cal3.get(Calendar.MONTH));
+                Log.d(TAG, "Day: "+cal3.get(Calendar.DAY_OF_MONTH));
+                String dayLongName3 = dateday(readDate,+1);;cal3.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+                Log.d(TAG, "DAY_OF_WEEK: "+dayLongName);
+                date3.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH)));
+                day3.setText(String.valueOf(dayLongName3.substring(0,3)));
+
+
+
+
+
+
             }
         };
 
@@ -517,7 +532,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 day2.setTextColor(Color.parseColor("#91959d"));
                 day3.setTextColor(Color.parseColor("#91959d"));
 
-                String day1one = day1.getText().toString();
+                String day1one = date1.getText().toString();
                  finaldate = thisDate+"-"+day1one;
                 editor.putString("selectdate",finaldate);
                 editor.commit();
@@ -734,57 +749,58 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         editor.commit();
 
 
+        Log.d("currentDatecurrentDate",thisDate);
 
-        SimpleDateFormat outFormat = new SimpleDateFormat("EEE");
-        String day = outFormat.format(todayDate);
-        if (day.equals("Sun")) {
-            day1.setText("Sat");
-            day2.setText("Sun");
-            day3.setText("Mon");
-        } else if (day.equals("Mon")) {
-            day1.setText("Sun");
-            day2.setText("Mon");
-            day3.setText("Tue");
-        } else if (day.equals("Tue")) {
-            day1.setText("Mon");
-            day2.setText("Tue");
-            day3.setText("Wed");
-        } else if (day.equals("Wed")) {
-            day1.setText("Tue");
-            day2.setText("Wed");
-            day3.setText("Tur");
-        } else if (day.equals("Tur")) {
-            day1.setText("Wed");
-            day2.setText("Tur");
-            day3.setText("Fri");
-        } else if (day.equals("Fri")) {
-            day1.setText("Tur");
-            day2.setText("Fri");
-            day3.setText("Sat");
-        } else if (day.equals("Sat")) {
-            day1.setText("Fri");
-            day2.setText("Sat");
-            day3.setText("Sun");
+
+
+
+        Date readDate = null;
+        try {
+            readDate = currentDate.parse(thisDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTimeInMillis(readDate.getTime());
 
-        SimpleDateFormat currentDatemonth = new SimpleDateFormat("dd");
-        String dayOfMonth = currentDatemonth.format(todayDate);
+        Log.d(TAG, "Year: "+cal1.get(Calendar.YEAR));
+        Log.d(TAG, "Month: "+cal1.get(Calendar.MONTH));
+        Log.d(TAG, "Day: "+cal1.get(Calendar.DAY_OF_MONTH));
+        String dayLongName = cal1.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d(TAG, "DAY_OF_WEEK: "+dayLongName);
+        date1.setText(String.valueOf(cal1.get(Calendar.DAY_OF_MONTH)));
+        day1.setText(String.valueOf(dayLongName.substring(0,3)));
 
-      Log.d(TAG, "onDateSet: dd: " + dayOfMonth);
-        String date11 = dayOfMonth + "";
-        date1.setText(date11);
 
-        int countdate = Integer.valueOf(String.valueOf(dayOfMonth));
-        int countdate11 = countdate-1;
-        date1.setText(String.valueOf(countdate11));
 
-        int countdate2 = Integer.valueOf(String.valueOf(dayOfMonth));
-        int countdate12 = countdate2 ;
-        date2.setText(String.valueOf(countdate12));
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTimeInMillis(readDate.getTime());
+        cal2.add(Calendar.DATE,+1);
 
-        int countdate3 = Integer.valueOf(String.valueOf(dayOfMonth));
-        int countdate13 = countdate3 + 1;
-        date3.setText(String.valueOf(countdate13));
+        Log.d(TAG, "Year: "+cal2.get(Calendar.YEAR));
+        Log.d(TAG, "Month: "+cal2.get(Calendar.MONTH));
+        Log.d(TAG, "Day: "+cal2.get(Calendar.DAY_OF_MONTH));
+        String dayLongName2 = cal2.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d(TAG, "DAY_OF_WEEK: "+dayLongName);
+        date2.setText(String.valueOf(cal2.get(Calendar.DAY_OF_MONTH)));
+        day2.setText(String.valueOf(dayLongName2.substring(0,3)));
+
+
+
+
+        Calendar cal3 = Calendar.getInstance();
+        cal3.setTimeInMillis(readDate.getTime());
+        cal3.add(Calendar.DATE,+2);
+
+        Log.d(TAG, "Year: "+cal3.get(Calendar.YEAR));
+        Log.d(TAG, "Month: "+cal3.get(Calendar.MONTH));
+        Log.d(TAG, "Day: "+cal3.get(Calendar.DAY_OF_MONTH));
+        String dayLongName3 = cal3.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d(TAG, "DAY_OF_WEEK: "+dayLongName);
+        date3.setText(String.valueOf(cal3.get(Calendar.DAY_OF_MONTH)));
+        day3.setText(String.valueOf(dayLongName3.substring(0,3)));
+
+
 
 
         datecfm=true;
@@ -807,4 +823,21 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
 
+
+
+    public String  dateday( Date readDate, int i)
+    {
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTimeInMillis(readDate.getTime());
+        cal2.add(Calendar.DATE,i);
+
+        Log.d(TAG, "Year: "+cal2.get(Calendar.YEAR));
+        Log.d(TAG, "Month: "+cal2.get(Calendar.MONTH));
+        Log.d(TAG, "Day: "+cal2.get(Calendar.DAY_OF_MONTH));
+        String dayLongName2 = cal2.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d(TAG, "DAY_OF_WEEK: "+dayLongName2);
+
+        return dayLongName2;
+
+    }
 }

@@ -302,7 +302,7 @@
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:gravity="left"
                         android:hint="Password"
-                        android:inputType="numberPassword"
+                        android:inputType="textPassword"
                         android:lines="1"
                         android:maxLength="13"
                         android:paddingLeft="15dp"

@@ -96,8 +96,7 @@
                     android:fontFamily="@font/sfpro_display_semibold"
                     android:gravity="left"
                     android:hint="Password"
-
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:paddingTop="2.5dp"

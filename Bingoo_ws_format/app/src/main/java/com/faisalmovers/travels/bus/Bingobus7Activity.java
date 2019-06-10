@@ -142,9 +142,15 @@ public class Bingobus7Activity extends Url {
                     @Override public void onItemClick(View view, int position) {
 
                         bingobus7Model = businfo.get(position);
-                        Intent i = new Intent(context,Bingobus33Activity.class);
-                        i.putExtra("sampleObject", bingobus7Model);
-                        startActivity(i);
+                        String seatsLeft = bingobus7Model.getSeatsLeft();
+
+
+                            Intent i = new Intent(context,Bingobus33Activity.class);
+                            i.putExtra("sampleObject", bingobus7Model);
+                            startActivity(i);
+
+
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
