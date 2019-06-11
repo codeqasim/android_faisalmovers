@@ -45,9 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfpro_display_medium"
-                    android:text="CONFIRMED"
+                    android:text="View Invoice"
                     android:textColor="#0da855"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:letterSpacing="0.035"/>
             </LinearLayout>
 
