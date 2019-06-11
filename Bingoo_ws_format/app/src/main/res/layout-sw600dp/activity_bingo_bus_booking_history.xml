@@ -34,6 +34,7 @@
             android:fontFamily="@font/sfpro_display_medium"
             android:text="Last synced at 4:50 Pm today"
             android:textColor="#464646"
+            android:visibility="gone"
             android:textSize="13.3sp"/>
 
         <android.support.v7.widget.RecyclerView

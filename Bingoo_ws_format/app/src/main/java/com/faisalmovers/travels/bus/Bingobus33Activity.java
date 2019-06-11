@@ -351,7 +351,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                     Log.d("fromCityIdfromCityId",bustype);
                     if (!bustype.equals("Business Class") )
                     {
-                        for (int i=0; i<data.length(); i++) {
+                        for (int i=0; i<45; i++) {
 
                             if (i%COLUMNS==0 || i%COLUMNS==4)
                             {
@@ -384,7 +384,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                         recyclerView.setAdapter(adapter);
 
                     }else {
-                        for (int i=0; i<data.length(); i++) {
+                        for (int i=0; i<30; i++) {
 
                             if (i%COLUMNS==0 || i%COLUMNS==4)
                             {

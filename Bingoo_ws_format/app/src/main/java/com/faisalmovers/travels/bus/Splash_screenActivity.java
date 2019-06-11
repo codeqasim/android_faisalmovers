@@ -34,6 +34,7 @@ public class Splash_screenActivity extends AppCompatActivity {
         editor.putString("numberofseat","0");
         editor.putString("seatcount",null);
         editor.putString("gander",gander);
+        editor.putString("seatlist"," ");
         editor.commit();
 
 

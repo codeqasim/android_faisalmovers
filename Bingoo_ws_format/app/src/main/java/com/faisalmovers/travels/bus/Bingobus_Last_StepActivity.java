@@ -62,7 +62,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     SharedPreferences.Editor editor;
     Gson gson;
     ProgressBar progressBar2;
-
+    String firtnamestart=" ";
     EditText nicnumber,fullname;
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
 
@@ -125,8 +125,8 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         locdrop.setText(pref.getString("to", null) +"- " +bingobus7Model.getArrivalTime());
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
         totalseatnum.setText(pref.getString("numberofseat", null));
-        String mobileverificationefullname =pref.getString("mobileverificationfullname",null);
-        String mobileverificationenic =pref.getString("mobileverificationnic",null);
+        String mobileverificationefullname =pref.getString("name",null);
+        String mobileverificationenic =pref.getString("nic",null);
 
         fullname.setText(mobileverificationefullname);
         nicnumber.setText(mobileverificationenic);
@@ -332,6 +332,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
                     if (json_object.getString("error").equals("no")) {
 
+
+
+
+                        seatsnull();
                         String url = json_object.getString("url");
                         String booking_id = json_object.getString("booking_id");
                        // addhistory(bm);
@@ -340,6 +344,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                         Intent intent1 = new Intent(getApplicationContext(),Webviewinvoice.class);
                         intent1.putExtra("weburl",url);
                         startActivity(intent1);
+
+
+
+
 
                     }else{
 
@@ -410,9 +418,9 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         String seatlist =pref.getString("seatlist",null);
         String mobileverification = pref.getString("mobileverification",null);
         String bordingpoint = pref.getString("boardingpointid", null);
-        String mobileverificationemail =pref.getString("mobileverificationemail",null);
-        String mobileverificationefullname =pref.getString("mobileverificationfullname",null);
-        String mobileverificationenic =pref.getString("mobileverificationnic",null);
+        String mobileverificationemail =pref.getString("email",null);
+        String mobileverificationefullname =pref.getString("name",null);
+        String mobileverificationenic =pref.getString("nic",null);
         String gander =pref.getString("gander",null);
         String id =pref.getString("id"," ");
 
@@ -422,9 +430,12 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         if(gander.equals("2"))
         {
             gander="male";
+            firtnamestart ="Mr ";
+
 
         }else {
             gander ="female";
+            firtnamestart = "Miss ";
 
         }
 
@@ -437,7 +448,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         jsObj.addProperty("email", mobileverificationemail);
         jsObj.addProperty("first_name", mobileverificationefullname);
         jsObj.addProperty("gender", gander);
-        jsObj.addProperty("last_name", mobileverificationefullname);
+        jsObj.addProperty("last_name", " ");
         jsObj.addProperty("nic", mobileverificationenic);
 
         String g =gson.toJson(jsObj);
@@ -515,4 +526,9 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
+    public  void seatsnull()
+    {
+        editor.putString("seatlist"," ");
+        editor.commit();
+    }
 }

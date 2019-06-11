@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfpro_display_medium"
             android:text="Last synced at 4:50 Pm today"
+            android:visibility="gone"
             android:textColor="#464646"
             android:textSize="13.3sp"/>
 

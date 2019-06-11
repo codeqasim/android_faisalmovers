@@ -169,6 +169,7 @@ public class Bingobus_Select_CountryActivity extends Url {
                         editor.putString("email",userInfo_object.getString("email"));
                         editor.putString("name",userInfo_object.getString("firstName")+" "+userInfo_object.getString("lastName"));
                         editor.putString("password",password);
+                        editor.putString("mobileverification",userInfo_object.getString("mobile"));
                         editor.putString("nic",userInfo_object.getString("nic"));
                         editor.putString("id",userInfo_object.getString("id"));
                         editor.commit();

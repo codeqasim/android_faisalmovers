@@ -702,6 +702,8 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
             public void onClick(DialogInterface dialog, int id) {
 
 
+                setvlauessnull();
+
                 settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
                 editor = settings.edit();
                 editor.putString("show", "no");
@@ -839,5 +841,19 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
         return dayLongName2;
 
+    }
+
+
+    public void setvlauessnull()
+    {
+
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("id", " ");
+        editor.putString("nic", " ");
+        editor.putString("mobileverification"," ");
+        editor.putString("password","");
+        editor.putString("name"," ");
+        editor.putString("email"," ");
+        editor.commit();
     }
 }

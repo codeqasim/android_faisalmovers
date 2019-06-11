@@ -116,10 +116,10 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         phone.setHint("");
 
         String mobileverification = pref.getString("mobileverification",null);
-        String mobileverificationemail =pref.getString("mobileverificationemail",null);
-        String mobileverificationefullname =pref.getString("mobileverificationfullname",null);
-        String mobileverificationenic =pref.getString("mobileverificationnic",null);
-        String mobileverificationepassword=pref.getString("mobileverificationepassword",null);
+        String mobileverificationemail =pref.getString("email",null);
+        String mobileverificationefullname =pref.getString("name",null);
+        String mobileverificationenic =pref.getString("nic",null);
+        String mobileverificationepassword=pref.getString("password",null);
         String gander =pref.getString("gander",null);
 
         fullname.setText(mobileverificationefullname);
@@ -569,7 +569,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("firstname",name );
                 params.put("id", pref.getString("id",""));
-                params.put("lastname", name);
+                params.put("lastname", " ");
                 params.put("city", "111");
                 params.put("country", "Pakistan");
                 params.put("address1", "111");
@@ -694,7 +694,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 params.put("email",email1);
                 params.put("password",passwordtext);
                 params.put("first_name",name);
-                params.put("last_name",name);
+                params.put("last_name"," ");
                 params.put("phone",phone_number);
                 params.put("nic",nic1);
                 return params;
