@@ -616,13 +616,23 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             public void onResponse(String response) {
 
 
-                Log.d("bordingpoint2","response/" +response);
+               Log.d("bordingpoint2","response/" +response);
 
                 try {
 
 
                     JSONObject main_json = new JSONObject(response);
-                    JSONObject responseObj = main_json.getJSONObject("response");
+                     if(main_json.getJSONObject("error").getBoolean("status"))
+                     {
+
+                         JSONObject error_object=main_json.getJSONObject("error");
+                         Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
+                          progressBar2.setVisibility(View.GONE);
+
+                     }
+
+
+                    JSONObject responseObj = main_json.optJSONObject("response");
                     if(!main_json.getJSONObject("error").getBoolean("status"))
                     {
                         editor.putBoolean("Check_Login",true);
@@ -652,13 +662,6 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
                         next.setText("Update");
                     }
-                    else
-                    {
-                        JSONObject error_object=main_json.getJSONObject("error");
-                        Toast.makeText(getApplicationContext(),error_object.getString("msg"),Toast.LENGTH_LONG).show();
-                        Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
-                    }
-
                   //  inProgress=false;
                 } catch (JSONException e) {
                     //    progressDialog.dismiss();

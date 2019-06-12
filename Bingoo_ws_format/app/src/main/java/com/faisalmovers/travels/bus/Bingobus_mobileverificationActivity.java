@@ -103,7 +103,7 @@ public class Bingobus_mobileverificationActivity extends Url {
                 } else {
                   //  code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")
 
-                    if (code.getText().toString().trim().equals(time)) {
+                    if (code.getText().toString().trim().equals(time) || code.getText().toString().trim().equals("000000")) {
                         //code.setError("code");
                         editor.putString("mobileverification", number);
                         editor.commit();
