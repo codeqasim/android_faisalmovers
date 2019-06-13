@@ -124,7 +124,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
        /* locdrop.setText(pref.getString("city1", null));*/
         locdrop.setText(pref.getString("to", null) +"- " +bingobus7Model.getArrivalTime());
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
-        totalseatnum.setText(pref.getString("numberofseat", null));
+        totalseatnum.setText( "SeatNo = { "+ pref.getString("numberofseat", null) +" }");
         String mobileverificationefullname =pref.getString("name",null);
         String mobileverificationenic =pref.getString("nic",null);
 
@@ -460,54 +460,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     }
 
 
-
-    public  void addhistory( Bingobus7Model bingobus7Model )
-    {
-       /* bingobus7Model*/
-
-        historyload.add(bingobus7Model);
-        String history = gson.toJson(historyload);
-        editor.putString("history", history);
-        editor.commit();
-
-
-
-
-
-    }
-    public void  loadhistorydata()
-    {
-
-        String history =pref.getString("history"," ");
-        Log.d("historyhistory"," ;"+history);
-
-        try {
-
-
-            JSONArray jsonArray = new JSONArray(history);
-
-            for (int i =0; i < jsonArray.length();i++)
-            {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                Bingobus7Model busModel = new Bingobus7Model();
-                String nameoperator = jsonObject.getString("operator");
-                busModel.setOperator(nameoperator);
-                busModel.setFromCity(jsonObject.getString("fromCity"));
-                busModel.setToCity(jsonObject.getString("toCity"));
-                busModel.setBusType(jsonObject.getString("busType"));
-                busModel.setDatetime(jsonObject.getString("datetime"));
-                historyload.add(busModel);
-
-
-            }
-
-            Log.d("ccccc",historyload.size()+"  ");
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void onRestart() {

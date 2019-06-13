@@ -76,7 +76,7 @@ public class Bingobus31Activity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
-        totalseatnum.setText(pref.getString("numberofseat", null));
+        totalseatnum.setText( "SeatNo = { "+ pref.getString("numberofseat", null) +" }");
 
         recyclerView = (RecyclerView) findViewById(R.id.boardingpontrecycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Bingobus31Activity.this);

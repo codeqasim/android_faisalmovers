@@ -36,13 +36,13 @@ import model.AbstractItem;
 import model.Bingobus7Model;
 import model.Seat;
 import model.SeatData;
+import model.seatModel;
 import util.Url;
 import util.Utils;
 
-import static com.faisalmovers.travels.bus.Bingobus24Activity.PREFS_NAME;
-
 public class Bingobus33Activity extends Url implements OnSeatSelected{
 
+    ArrayList<seatModel> map =new ArrayList<>();
     private static final int COLUMNS = 5;
     private TextView txtSeatSelected,seatnum;
     int count=0,seatcount=0;
@@ -64,8 +64,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     List<AbstractItem> items = new ArrayList<>();
     List<SeatData> Seatdata = new ArrayList<>();
     List<Seat> bookseats = new ArrayList<>();
+    ArrayList<AbstractItem> list_models=new ArrayList<>();
     Gson gson ;
-
     public static final String PREFS_NAME = "MyApp_Settings";
     SharedPreferences settings;
     @Override
@@ -92,7 +92,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         String fromCityId = pref.getString("fromcityid",null);
         String toCityId =  pref.getString("tocityid",null);
-        String selectdate =pref.getString("selectdate",null);
+        final String selectdate =pref.getString("selectdate",null);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("seatcount", "0");
         editor.commit();
@@ -154,8 +154,12 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                 String totalamountofseat = txtSeatSelected.getText().toString();
                 String numberofseat = seatnum.getText().toString();
 
-               if(seatcount!=0)
+                Log.d("mappsize" ,map.size()+" ");
+                addarray();
+               if(map.size()>0)
                {
+
+
                    String seatlist = gson.toJson(bookseats);
                    SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
                    SharedPreferences.Editor editor = pref.edit();
@@ -191,9 +195,9 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             }
         }*/
 
-        GridLayoutManager manager = new GridLayoutManager(this, COLUMNS);
+       // GridLayoutManager manager = new GridLayoutManager(this, COLUMNS);
         recyclerView = (RecyclerView) findViewById(R.id.lst_items);
-        recyclerView.setLayoutManager(manager);
+        //recyclerView.setLayoutManager(manager);
 
        /* AirplaneAdapter adapter = new AirplaneAdapter(this, items);
         recyclerView.setAdapter(adapter);*/
@@ -213,43 +217,42 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
     }
 
+
     @Override
-    public void onSeatSelected(int x , int position) {
+    public void onSeatSelected(seatModel modelSeat) {
 
-        SeatData seatData1 = Seatdata.get(position);
-        String idseat = seatData1.getSeat_id();
+        if( map.contains(modelSeat)){
+            map.remove(modelSeat);
 
-        //Log.d("positionselected",seatData1.getSeat_id()+"/"+x);
-        //txtSeatSelected.setText("Book "+count+" seats");
-        if (x==2){
-            count+=pricetickets;
-            seatcount+=1;
-            txtSeatSelected.setText(String.valueOf(count));
-            seatnum.setText("Seats Selected : "+String.valueOf(seatcount));
-
-            SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("seatcount", String.valueOf(seatcount));
-            editor.commit();
-
-            addseatintarray(seatData1);
+        }else{
+            map.add(modelSeat);
         }
-        else if (x==1){
-            count-=pricetickets;
-            seatcount-=1;
-            txtSeatSelected.setText(String.valueOf(count));
-            seatnum.setText( "Seats Selected : "+String.valueOf(seatcount));
-            SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("seatcount", String.valueOf(seatcount));
-            editor.commit();
-            String seatno = seatData1.getSeat_No();
-            removeseatarray(seatno);
+        seatnum.setText("");
+        int totalPrice=0;
+        if(map.size()>0){
 
-        }
-        else {
+            for(int i=0;i<map.size();i++)
+            {
+                if(i==0)
+                    seatnum.append(map.get(i).getSeat_on());
+                else
+                    seatnum.append(","+map.get(i).getSeat_on());
 
+                if(!map.get(i).getSeat_fare().equals("null"))
+                {
+                    totalPrice = totalPrice+Integer.parseInt(map.get(i).getSeat_fare());
+
+                }
+                txtSeatSelected.setText(totalPrice+"");
+            }
+
+        }else{
+            seatnum.setText("0");
+            txtSeatSelected.setText("0");
         }
+
+
+
     }
 
 
@@ -291,125 +294,269 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         mStringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @SuppressLint("LongLogTag")
             @Override
+
             public void onResponse(String response) {
 
-                Log.d("requestinfoseat",response);
+
+            Log.d("responceschek", response);
+                progressBar2.setVisibility(View.GONE);
+                JSONObject parentObject = null;
                 try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    JSONObject response1 = jsonObject1.getJSONObject("response");
-                    JSONArray data = response1.getJSONArray("data");
-                    JSONObject error = response1.getJSONObject("error");
-                    String status =error.getString("status");
+                    parentObject = new JSONObject(response);
 
-                   // Log.d("requestinfoseaterror",error.length()+"///" +status);
-                 /*   if (status.equals("false")) {
+                    JSONObject mainObject=parentObject.getJSONObject("response");
+                    JSONArray mainArray=mainObject.getJSONArray("data");
+                    seatModel sModel;
 
-
-                        progressBar2.setVisibility(View.GONE);
-                        Utils.showErrorToast(getApplicationContext(),"Server error");
-
-                    }*/
-                 //   Log.d("requestinfoseat",error.length()+"///");
-
-                    for(int i =0; i<data.length();i++)
+                    if(mainArray.length() <= 0)
                     {
+                        finish();
+                        Toast.makeText(getBaseContext(),"Try Agian Server Error",Toast.LENGTH_LONG).show();
+                    }else{
 
-                        SeatData seatData = new SeatData();
-                        JSONObject jsonObject = data.getJSONObject(i);
-                        String seat_id = jsonObject.getString("seat_id");
-                        String seat_name = jsonObject.getString("seat_name");
-                        String seat_type= jsonObject.getString("seat_type");
-                        String seat_status= jsonObject.getString("seat_status");
-                        String row_name= jsonObject.getString("row_name");
-                        String col_index= jsonObject.getString("col_index");
-                        String row_size= jsonObject.getString("row_size");
-                        String isAvailableForBooking= jsonObject.getString("isAvailableForBooking");
-                        String AreaCategoryCod= jsonObject.getString("AreaCategoryCod");
-                        String Seat_No= jsonObject.getString("Seat_No");
-                        String fare = jsonObject.getString("fare");
-                        String Gender= jsonObject.getString("Gender");
-
-                        seatData.setSeat_id(seat_id);
-                        seatData.setSeat_name(seat_name);
-                        seatData.setSeat_type(seat_type);
-                        seatData.setSeat_status(seat_status);
-                        seatData.setRow_name(row_name);
-                        seatData.setCol_index(col_index);
-                        seatData.setRow_size(row_size);
-                        seatData.setIsAvailableForBooking(isAvailableForBooking);
-                        seatData.setAreaCategoryCod(AreaCategoryCod);
-                        seatData.setSeat_No(Seat_No);
-                        seatData.setFare(fare);
-                        seatData.setGender(Gender);
-                        Seatdata.add(seatData);
-
-
-                       }
-                    progressBar2.setVisibility(View.GONE);
-
-                    String bustype = bingobus7Model.getBusType();
-                    Log.d("fromCityIdfromCityId",bustype);
-                    if (!bustype.equals("Business Class") )
-                    {
-                        for (int i=0; i<45; i++) {
-
-                            if (i%COLUMNS==0 || i%COLUMNS==4)
+                        if(bingobus7Model.getBusType().equals("Business Class"))
+                        {
+                            for(int i=0;i<30;i++)
                             {
 
-                                items.add(new EdgeItem(String.valueOf(i)));
+                                JSONObject jsonObject=mainArray.getJSONObject(i);
+                                sModel=new seatModel();
 
+                                sModel.setSeat_fare(jsonObject.getString("fare"));
+                                sModel.setSeat_on(jsonObject.getString("Seat_No"));
+                                sModel.setSeat_id(jsonObject.getString("seat_id"));
+                                sModel.setSeat_status(jsonObject.getString("seat_status"));
+                                sModel.setGender(jsonObject.getString("Gender"));
+
+
+                                list_models.add(new EdgeItem(sModel));
 
                             }
-                            else if (i%COLUMNS==1 || i%COLUMNS==3)
+                            list_models.add(1,new EmptyItem(new seatModel()));
+                            list_models.add(5,new EmptyItem(new seatModel()));
+                            list_models.add(9,new EmptyItem(new seatModel()));
+                            list_models.add(13,new EmptyItem(new seatModel()));
+                            list_models.add(17,new EmptyItem(new seatModel()));
+                            list_models.add(21,new EmptyItem(new seatModel()));
+                            list_models.add(25,new EmptyItem(new seatModel()));
+                            list_models.add(29,new EmptyItem(new seatModel()));
+                            list_models.add(33,new EmptyItem(new seatModel()));
+                            list_models.add(37,new EmptyItem(new seatModel()));
+
+
+
+
+
+                            GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 4);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+
+                         /*   mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                                @Override
+                                public int getSpanSize(int position) {
+                                    switch(mAdapter.getItemViewType(position)){
+                                        case AbstractItem.TYPE_FOOTER:
+                                            return 4;
+
+                                        default:
+                                            return 1;
+                                    }
+                                }
+                            });
+                            recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                            recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setAdapter(mAdapter);
+
+                        }else if(bingobus7Model.getBusType().equals("Normal") || bingobus7Model.getBusType().equals("Standard")){
+
+
+                            for(int i=0;i<mainArray.length();i++)
                             {
 
-                                items.add(new CenterItem(String.valueOf(i)));
+                                JSONObject jsonObject=mainArray.getJSONObject(i);
+                                sModel=new seatModel();
+
+                                sModel.setSeat_fare(jsonObject.getString("fare"));
+                                sModel.setSeat_on(jsonObject.getString("Seat_No"));
+                                sModel.setSeat_id(jsonObject.getString("seat_id"));
+                                sModel.setSeat_status(jsonObject.getString("seat_status"));
+                                sModel.setGender(jsonObject.getString("Gender"));
+
+                                list_models.add(new EdgeItem(sModel));
+
                             }
 
-                            else if (i==42)
+                            list_models.add(2,new EmptyItem(new seatModel()));
+                            list_models.add(7,new EmptyItem(new seatModel()));
+                            list_models.add(12,new EmptyItem(new seatModel()));
+                            list_models.add(17,new EmptyItem(new seatModel()));
+                            list_models.add(22,new EmptyItem(new seatModel()));
+                            list_models.add(27,new EmptyItem(new seatModel()));
+                            list_models.add(32,new EmptyItem(new seatModel()));
+                            list_models.add(37,new EmptyItem(new seatModel()));
+                            list_models.add(42,new EmptyItem(new seatModel()));
+                            list_models.add(47,new EmptyItem(new seatModel()));
+
+
+
+
+                            GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+/*
+                            mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                                @Override
+                                public int getSpanSize(int position) {
+                                    switch(mAdapter.getItemViewType(position)){
+                                        case AbstractItem.TYPE_FOOTER:
+                                            return 5;
+
+                                        default:
+                                            return 1;
+                                    }
+                                }
+                            });
+
+
+                            recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setAdapter(mAdapter);
+
+                        }else if(bingobus7Model.getBusType().equals("Executive")){
+
+
+                            for(int i=0;i<mainArray.length()-1;i++)
                             {
 
-                                items.add(new EdgeItem(String.valueOf(i)));
+                                JSONObject jsonObject=mainArray.getJSONObject(i);
+                                sModel=new seatModel();
+
+                                sModel.setSeat_fare(jsonObject.getString("fare"));
+                                sModel.setSeat_on(jsonObject.getString("Seat_No"));
+                                sModel.setSeat_id(jsonObject.getString("seat_id"));
+                                sModel.setSeat_status(jsonObject.getString("seat_status"));
+                                sModel.setGender(jsonObject.getString("Gender"));
+
+                                list_models.add(new EdgeItem(sModel));
+
                             }
 
-                            else {
-                                items.add(new EmptyItem(String.valueOf(i)));
+                            list_models.add(2,new EmptyItem(new seatModel()));
+                            list_models.add(7,new EmptyItem(new seatModel()));
+                            list_models.add(12,new EmptyItem(new seatModel()));
+                            list_models.add(17,new EmptyItem(new seatModel()));
+                            list_models.add(22,new EmptyItem(new seatModel()));
+                            list_models.add(27,new EmptyItem(new seatModel()));
+                            list_models.add(32,new EmptyItem(new seatModel()));
+                            list_models.add(37,new EmptyItem(new seatModel()));
+                            list_models.add(42,new EmptyItem(new seatModel()));
+                            list_models.add(47,new EmptyItem(new seatModel()));
+                            list_models.add(52,new EmptyItem(new seatModel()));
+
+
+
+
+                            GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+
+                          /*  mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                                @Override
+                                public int getSpanSize(int position) {
+                                    switch(mAdapter.getItemViewType(position)){
+                                        case AbstractItem.TYPE_FOOTER:
+                                            return 5;
+
+                                        default:
+                                            return 1;
+                                    }
+                                }
+                            });*/
+
+
+                           // recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
+                            //recyclerView.setHasFixedSize(true);
+                            //recyclerView.setPaddingRelative(55,0,0,0);
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setAdapter(mAdapter);
+
+                        }else if(bingobus7Model.getBusType().equals("Executive Plus")){
+
+
+                            for(int i=0;i<mainArray.length()-4;i++)
+                            {
+
+                                JSONObject jsonObject=mainArray.getJSONObject(i);
+                                sModel=new seatModel();
+
+                                sModel.setSeat_fare(jsonObject.getString("fare"));
+                                sModel.setSeat_on(jsonObject.getString("Seat_No"));
+                                sModel.setSeat_id(jsonObject.getString("seat_id"));
+                                sModel.setSeat_status(jsonObject.getString("seat_status"));
+                                sModel.setGender(jsonObject.getString("Gender"));
+
+                                list_models.add(new EdgeItem(sModel));
+
                             }
 
+                            list_models.add(2,new EmptyItem(new seatModel()));
+                            list_models.add(3,new EmptyItem(new seatModel()));
+                            list_models.add(7,new EmptyItem(new seatModel()));
+                            list_models.add(8,new EmptyItem(new seatModel()));
+                            list_models.add(12,new EmptyItem(new seatModel()));
+                            list_models.add(13,new EmptyItem(new seatModel()));
+                            list_models.add(17,new EmptyItem(new seatModel()));
+                            list_models.add(22,new EmptyItem(new seatModel()));
+                            list_models.add(27,new EmptyItem(new seatModel()));
+                            list_models.add(32,new EmptyItem(new seatModel()));
+                            list_models.add(37,new EmptyItem(new seatModel()));
+                            list_models.add(42,new EmptyItem(new seatModel()));
+                            list_models.add(47,new EmptyItem(new seatModel()));
+                            list_models.add(52,new EmptyItem(new seatModel()));
 
 
+
+
+                            GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+
+                           /* mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                                @Override
+                                public int getSpanSize(int position) {
+                                    switch(mAdapter.getItemViewType(position)){
+                                        case AbstractItem.TYPE_FOOTER:
+                                            return 5;
+
+                                        default:
+                                            return 1;
+                                    }
+                                }
+                            });
+
+
+                            recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setAdapter(mAdapter);
 
                         }
-                        AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
-                        recyclerView.setAdapter(adapter);
 
-                    }else {
-                        for (int i=0; i<30; i++) {
-
-                            if (i%COLUMNS==0 || i%COLUMNS==4)
-                            {
-
-                                items.add(new EdgeItem(String.valueOf(i)));
-                            } else if (i%COLUMNS==3)
-                            {
-                                items.add(new CenterItem(String.valueOf(i)));
-                            } else {
-                                items.add(new EmptyItem(String.valueOf(i)));
-                            }
-                        }
-                        AirplaneAdapter adapter = new AirplaneAdapter(context, items,Seatdata);
-                        recyclerView.setAdapter(adapter);
                     }
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+
+
                 }
-
-
-
-
+                catch(JSONException e){
+                    e.printStackTrace();
+                    Log.d("Errors",e.getMessage());
+                }
             }
+
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -423,47 +570,50 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         mRequestQueue.add(mStringRequest);
     }
 
-    public void addseatintarray( SeatData seatData)
+
+    public void addarray()
     {
+        String seatlist = gson.toJson(map);
+        Log.d("adddarraydata",seatlist);
 
-        String id =  seatData.getSeat_id();
-        String no =  seatData.getSeat_No() ;
-        String price =seatData.getFare() ;
-        int id1 = Integer.parseInt(id);
-        int no1 = Integer.parseInt(no);
-
-        id1 = id1-1;
-        no1 = no1-1;
-
-        Seat seat1 = new Seat(id1+"",no1+"",price);
-        bookseats.add(seat1);
-        String json = gson.toJson(bookseats);
-        Log.d("jsonarray",json);
-
-
-    }
-    public void removeseatarray(String Seat_no )
-    {
-
-        for (int i =0; i<bookseats.size();i++)
-        {
-
-            Seat seat = bookseats.get(i);
-
-            String selecyseat = seat.getNo();
-            if(Seat_no .equals(selecyseat))
+        try {
+            JSONArray jsonObject1 = new JSONArray(seatlist);
+            for (int i =0; i<jsonObject1.length(); i++)
             {
-                bookseats.remove(i);
+                JSONObject jsonObject = jsonObject1.getJSONObject(i);
+                String  seat_fare = jsonObject.getString("seat_fare");
+                String  seat_id = jsonObject.getString("seat_id");
+                String  seat_on = jsonObject.getString("seat_on");
+                String  seat_status = jsonObject.getString("seat_status");
 
 
+                String id =  seat_id;
+                String no1 =  seat_on ;
+                String price =seat_fare;
+
+                Seat seat1 = new Seat(id+"",no1+"",price);
+                bookseats.add(seat1);
                 String json = gson.toJson(bookseats);
                 Log.d("jsonarray",json);
+
+
+
+
+
             }
 
 
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 
+
+
     }
+
 
 }

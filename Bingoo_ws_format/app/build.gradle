@@ -6,8 +6,8 @@ android {
         applicationId "com.faisalmovers.travels.bus"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 33
-        versionName "3.3"
+        versionCode 34
+        versionName "3.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

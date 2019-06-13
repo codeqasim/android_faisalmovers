@@ -1,9 +1,7 @@
 package Adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,72 +9,59 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import model.AbstractItem;
-import model.SeatData;
-import util.Utils;
 
-import com.faisalmovers.travels.bus.CenterItem;
 import com.faisalmovers.travels.bus.EdgeItem;
 import com.faisalmovers.travels.bus.OnSeatSelected;
 import com.faisalmovers.travels.bus.R;
 import com.faisalmovers.travels.bus.SelectableAdapter;
+import model.seatModel;
 
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     private OnSeatSelected mOnSeatSelected;
-    private int count = 0,seatlimit;
-    SharedPreferences preferences;
+
+    private int count = 0;
 
     private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgSeat, img_nomral_booked;
+        ImageView imgSeat;
         private final ImageView imgSeatSelected;
+       private  ImageView imgBooked;
+
 
         public EdgeViewHolder(View itemView) {
             super(itemView);
             imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
             imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
-            img_nomral_booked = (ImageView) itemView.findViewById(R.id.img_nomral_booked);
+         //  imgBooked = (ImageView) itemView.findViewById(R.id.img_seat_booked);
+
         }
+
     }
 
-    private static class CenterViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgSeat, img_nomral_booked;
-        private final ImageView imgSeatSelected;
 
-        public CenterViewHolder(View itemView) {
-            super(itemView);
-            imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
-            imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
-            img_nomral_booked = (ImageView) itemView.findViewById(R.id.img_nomral_booked);
-        }
-    }
 
     private static class EmptyViewHolder extends RecyclerView.ViewHolder {
 
         public EmptyViewHolder(View itemView) {
             super(itemView);
         }
+
     }
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private List<AbstractItem> mItems;
-    private List<SeatData> Seatdata11;
 
-    public AirplaneAdapter(Context context, List<AbstractItem> items,List<SeatData> Seatdata1) {
+    private List<AbstractItem> mItems;
+
+    public AirplaneAdapter(Context context, List<AbstractItem> items) {
         mOnSeatSelected = (OnSeatSelected) context;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mItems = items;
-        Seatdata11 =Seatdata1;
-
-
-
     }
 
     @Override
@@ -91,168 +76,75 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == AbstractItem.TYPE_CENTER) {
-            View itemView = mLayoutInflater.inflate(R.layout.list_item_seat, parent, false);
-            return new CenterViewHolder(itemView);
-        } else if (viewType == AbstractItem.TYPE_EDGE) {
+        if (viewType == AbstractItem.TYPE_EDGE) {
             View itemView = mLayoutInflater.inflate(R.layout.list_item_seat, parent, false);
             return new EdgeViewHolder(itemView);
+
         } else {
             View itemView = new View(mContext);
             return new EmptyViewHolder(itemView);
         }
-
-
-
-
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         int type = mItems.get(position).getType();
+        if (type == AbstractItem.TYPE_EDGE) {
+            final EdgeItem item = (EdgeItem) mItems.get(position);
+            final EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
 
-        if (type == AbstractItem.TYPE_CENTER) {
-            final CenterItem item = (CenterItem) mItems.get(position);
-            CenterViewHolder holder = (CenterViewHolder) viewHolder;
-            SeatData seatData2 =Seatdata11.get(position);
-            String seat_no = seatData2.getSeat_No();
-            int result = Integer.parseInt(seat_no);
-            final String  seat_status= seatData2.getSeat_status();
-            final String  Gender= seatData2.getGender();
-            Log.d("resultresult1",seat_status+"/");
-
-            result =result-1;
-
-
-            if (seat_status.equals("Reserved"))
-            {
-               if(Gender.equals("Male"))
-               {
-                   holder.imgSeat.setImageResource(R.drawable.red_seat);
-                   holder.imgSeatSelected.setImageResource(R.drawable.red_seat);
-
-               }else {
-                  holder.imgSeat.setImageResource(R.drawable.pink_seat);
-                   holder.imgSeatSelected.setImageResource(R.drawable.pink_seat);
-               }
-               /* holder.imgSeat.setImageResource(R.drawable.brown_sit);
-                holder.imgSeatSelected.setImageResource(R.drawable.brown_sit);*/
-//                mOnSeatSelected.onSeatSelected(getItemCount());
-//                Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
-            }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            final seatModel model = item.getLabel();
+            holder.imgSeat.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
 
-                    //Toast.makeText(mContext, "position1 = "+position, Toast.LENGTH_LONG).show();
-                    if(seat_status.equals("Reserved"))
-                    {
-                       // Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
-                        Utils.showErrorToast(mContext, "Allready This Seat is Booked");
-                    }else {
+                    if(model.getSeat_status().equals("Empty")){
 
 
-                        preferences=mContext.getSharedPreferences("MyPref",MODE_PRIVATE);
-                        String gander = preferences.getString("seatcount", "");
-                        Log.d("gandergander",gander+"///");
+                        if(isSelected(position)){
+                            toggleSelection(position);
+                            mOnSeatSelected.onSeatSelected(item.getLabel());
 
 
-                        try {
-                            seatlimit = Integer.parseInt(gander);
-                        } catch(NumberFormatException nfe) {
+                        }else{
 
-                        }
 
-                        if (seatlimit <50)
-                        {
+                            if(getSelectedItemCount()>5){
 
-                            SeatData seatData1 = Seatdata11.get(position);
-                            int x = toggleSelection(position);
-                            mOnSeatSelected.onSeatSelected(x,position);
-                            Log.d("positionselected",seatData1.getSeat_id()+"/"+position);
+                                Toast.makeText(mContext,"Max Seat Is 6",Toast.LENGTH_LONG).show();
 
-                        }else {
-                            Utils.showErrorToast(mContext, "seatlimits complete");
+                            }else{
+
+
+
+                                toggleSelection(position);
+                                mOnSeatSelected.onSeatSelected(item.getLabel());
+                              //  holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.green_sit);
+                            }
+
                         }
                     }
-                    //
                 }
             });
 
-            Log.d("positionselected","/"+position);
+            if(model.getSeat_status().equals("Empty"))
+            {
+                holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.sitoffwhite);
 
-            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+            }
+            else if(model.getSeat_status().equals("Reserved"))
+            {
+               if (model.getGender().equals("Female"))
+               {
+                   holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.pink_seat : R.drawable.pink_seat);
+               }else
+               {
+                   holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.red_seat : R.drawable.red_seat);
+               }
 
-        } else if (type == AbstractItem.TYPE_EDGE) {
-            final EdgeItem item = (EdgeItem) mItems.get(position);
-            EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
-            SeatData seatData2 =Seatdata11.get(position);
-            String seat_no = seatData2.getSeat_No();
-            int result = Integer.parseInt(seat_no);
-            final String  seat_status= seatData2.getSeat_status();
-            Log.d("resultresult",seat_status+"/");
-            //Log.d("resultresult22",result+"/");
-            final String  Gender= seatData2.getGender();
-            if (seat_status.equals("Reserved")) {
-
-                if(Gender.equals("Male"))
-                {
-                    holder.imgSeat.setImageResource(R.drawable.red_seat);
-                    holder.imgSeatSelected.setImageResource(R.drawable.red_seat);
-
-                }else {
-                    holder.imgSeat.setImageResource(R.drawable.pink_seat);
-                    holder.imgSeatSelected.setImageResource(R.drawable.pink_seat);
-                }
             }
 
-           holder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-
-                   //Toast.makeText(mContext, "position2 = "+position, Toast.LENGTH_LONG).show();
-                   if(seat_status.equals("Reserved"))
-                   {
-                       //Toast.makeText(mContext, "Allready This Seat is Booked", Toast.LENGTH_LONG).show();
-                       Utils.showErrorToast(mContext, "Allready This Seat is Booked");
-                   }else {
-
-                       preferences=mContext.getSharedPreferences("MyPref",MODE_PRIVATE);
-                       String gander = preferences.getString("seatcount", "");
-                       Log.d("gandergander",gander+"///");
-                      // Toast.makeText(mContext, gander+"/", Toast.LENGTH_LONG).show();
-
-
-                       try {
-                           seatlimit = Integer.parseInt(gander);
-                       } catch(NumberFormatException nfe) {
-
-                       }
-
-                       if (seatlimit <50) {
-
-
-
-
-                           int x = toggleSelection(position);
-                           mOnSeatSelected.onSeatSelected(x, position);
-                           //Utils.showSuccesToast();
-                           SeatData seatData1 = Seatdata11.get(position);
-                           Log.d("positionselected", seatData1.getSeat_id() + "/" + position);
-                       }
-                       else {
-                           Utils.showErrorToast(mContext, "seatlimits complete");
-                       }
-
-                   }
-                  //
-               }
-           });
-
-            Log.d("positionselected","/"+position);
-            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
         }
     }
-
 
 }

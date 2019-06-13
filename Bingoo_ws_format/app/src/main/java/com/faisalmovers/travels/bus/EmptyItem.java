@@ -1,10 +1,11 @@
 package com.faisalmovers.travels.bus;
 
 import model.AbstractItem;
+import model.seatModel;
 
 public class EmptyItem extends AbstractItem {
 
-    public EmptyItem(String label) {
+    public EmptyItem(seatModel label) {
         super(label);
     }
 
