@@ -332,16 +332,16 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                                 list_models.add(new EdgeItem(sModel));
 
                             }
-                            list_models.add(1,new EmptyItem(new seatModel()));
-                            list_models.add(5,new EmptyItem(new seatModel()));
-                            list_models.add(9,new EmptyItem(new seatModel()));
-                            list_models.add(13,new EmptyItem(new seatModel()));
-                            list_models.add(17,new EmptyItem(new seatModel()));
-                            list_models.add(21,new EmptyItem(new seatModel()));
-                            list_models.add(25,new EmptyItem(new seatModel()));
-                            list_models.add(29,new EmptyItem(new seatModel()));
-                            list_models.add(33,new EmptyItem(new seatModel()));
-                            list_models.add(37,new EmptyItem(new seatModel()));
+                            list_models.add(2,new EmptyItem(new seatModel()));
+                            list_models.add(6,new EmptyItem(new seatModel()));
+                            list_models.add(10,new EmptyItem(new seatModel()));
+                            list_models.add(14,new EmptyItem(new seatModel()));
+                            list_models.add(18,new EmptyItem(new seatModel()));
+                            list_models.add(22,new EmptyItem(new seatModel()));
+                            list_models.add(26,new EmptyItem(new seatModel()));
+                            list_models.add(30,new EmptyItem(new seatModel()));
+                            list_models.add(34,new EmptyItem(new seatModel()));
+                            list_models.add(38,new EmptyItem(new seatModel()));
 
 
 
@@ -365,7 +365,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
                             recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
                             recyclerView.setHasFixedSize(true);
-                            recyclerView.setPaddingRelative(55,0,0,0);*/
+//                            recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setAdapter(mAdapter);
 
@@ -422,13 +423,14 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setAdapter(mAdapter);
 
                         }else if(bingobus7Model.getBusType().equals("Executive")){
 
 
-                            for(int i=0;i<mainArray.length()-1;i++)
+                            for(int i=0;i<mainArray.length()-5;i++)
                             {
 
                                 JSONObject jsonObject=mainArray.getJSONObject(i);
@@ -454,7 +456,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             list_models.add(37,new EmptyItem(new seatModel()));
                             list_models.add(42,new EmptyItem(new seatModel()));
                             list_models.add(47,new EmptyItem(new seatModel()));
-                            list_models.add(52,new EmptyItem(new seatModel()));
+                           // list_models.add(52,new EmptyItem(new seatModel()));
 
 
 
@@ -479,13 +481,15 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                            // recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
                             //recyclerView.setHasFixedSize(true);
                             //recyclerView.setPaddingRelative(55,0,0,0);
+                            recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setAdapter(mAdapter);
 
                         }else if(bingobus7Model.getBusType().equals("Executive Plus")){
 
 
-                            for(int i=0;i<mainArray.length()-4;i++)
+
+                            for(int i=0;i<mainArray.length()-8;i++)
                             {
 
                                 JSONObject jsonObject=mainArray.getJSONObject(i);
@@ -514,7 +518,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             list_models.add(37,new EmptyItem(new seatModel()));
                             list_models.add(42,new EmptyItem(new seatModel()));
                             list_models.add(47,new EmptyItem(new seatModel()));
-                            list_models.add(52,new EmptyItem(new seatModel()));
+//                            list_models.add(52,new EmptyItem(new seatModel()));
 
 
 
@@ -539,6 +543,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                             recyclerView.addItemDecoration(new RecyclerViewItemDecorator(context));
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setPaddingRelative(55,0,0,0);*/
+                            recyclerView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                             recyclerView.setLayoutManager(mLayoutManager);
                             recyclerView.setAdapter(mAdapter);
 

@@ -2,6 +2,7 @@ package com.faisalmovers.travels.bus;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -31,11 +32,12 @@ public class WebMainActivity extends Url {
 
         link =invoicedetailsuser+link;
         webinvoice= (WebView) findViewById(R.id.webinvoice);
-        webinvoice.getSettings().setSupportZoom(true);
+        /*webinvoice.getSettings().setSupportZoom(true);
         webinvoice.getSettings().setBuiltInZoomControls(true);
-        webinvoice.getSettings().setDisplayZoomControls(false);
+        webinvoice.getSettings().setDisplayZoomControls(false);*/
         progressBar = (ProgressBar) findViewById(R.id.progressBar2) ;
 
+        Log.d("weblinkkkk",link);
        progressBar.setVisibility(View.VISIBLE);
         webinvoice.setWebViewClient(new WebViewClient() {
             @Override

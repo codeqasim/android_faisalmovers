@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -42,6 +43,7 @@ public class Webviewinvoice extends AppCompatActivity {
         pb.setProgressTintList(ColorStateList.valueOf(Color.RED));
 
 
+
         progressBar2.setVisibility(View.VISIBLE);
         web_view.setWebViewClient(new WebViewClient() {
             @Override
@@ -69,6 +71,7 @@ public class Webviewinvoice extends AppCompatActivity {
 
 
 
+        Log.d("weblinkkkk",urlweb);
      //   startWebView(web_view,urlweb);
         /*web_view.getSettings().setLoadsImagesAutomatically(true);
         web_view.getSettings().setJavaScriptEnabled(true);
