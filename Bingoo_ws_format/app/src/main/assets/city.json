@@ -6,73 +6,18 @@
     },
     "cities": [
       {
-        "id": "54",
-        "name": "Lahore",
-        "city_abbr": "LHR",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
-        "id": "56",
-        "name": "Multan",
-        "city_abbr": "MUL",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
-        "id": "58",
-        "name": "Bahawalpur",
-        "city_abbr": "BWP",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
-        "id": "60",
-        "name": "Murree",
-        "city_abbr": "MRE",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
         "id": "83",
         "name": "Alipur",
         "city_abbr": "ALPR",
         "country": "PK",
         "province": "4",
         "active": "1"
+
       },
       {
-        "id": "114",
-        "name": "Peshawer",
-        "city_abbr": "Pshr",
-        "country": "PK",
-        "province": "1",
-        "active": "1"
-      },
-      {
-        "id": "123",
-        "name": "Rajanpur",
-        "city_abbr": "RJNP",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
-        "id": "179",
-        "name": "Sargodha",
-        "city_abbr": "Sargodha",
-        "country": "PK",
-        "province": "4",
-        "active": "1"
-      },
-      {
-        "id": "210",
-        "name": "Uch Sharif",
-        "city_abbr": "Uch Sharif",
+        "id": "58",
+        "name": "Bahawalpur",
+        "city_abbr": "BWP",
         "country": "PK",
         "province": "4",
         "active": "1"
@@ -92,6 +37,69 @@
         "country": "PK",
         "province": "4",
         "active": "1"
+      },
+      {
+        "id": "54",
+        "name": "Lahore",
+        "city_abbr": "LHR",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+      },
+      {
+        "id": "56",
+        "name": "Multan",
+        "city_abbr": "MUL",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+      },
+      {
+
+        "id": "60",
+        "name": "Murree",
+        "city_abbr": "MRE",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+
+      },
+      {
+        "id": "114",
+        "name": "Peshawer",
+        "city_abbr": "Pshr",
+        "country": "PK",
+        "province": "1",
+        "active": "1"
+      },
+      {
+        "id": "123",
+        "name": "Rajanpur",
+        "city_abbr": "RJNP",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+
+      },
+      {
+
+        "id": "179",
+        "name": "Sargodha",
+        "city_abbr": "Sargodha",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+
+      },
+      {
+
+        "id": "210",
+        "name": "Uch Sharif",
+        "city_abbr": "Uch Sharif",
+        "country": "PK",
+        "province": "4",
+        "active": "1"
+
       }
     ]
   }

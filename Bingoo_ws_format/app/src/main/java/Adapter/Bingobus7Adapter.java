@@ -53,9 +53,9 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
     public void onBindViewHolder(@NonNull final Bingobus7Adapter.ViewHolder holder, final int position) {
 
         holder.operatortv.setText(models.get(position).getOperator());
-        holder.acsleeper.setText(models.get(position).getBusType());
+        holder.acsleeper.setText("Bus type " + models.get(position).getBusType());
         holder.fare.setText("Rs "+models.get(position).getPrice());
-        holder.seat.setText(models.get(position).getSeatsLeft()+" Seats available");
+        holder.seat.setText( "Bus type " + models.get(position).getBusType()+" | Seats left " +models.get(position).getSeatsLeft());
         holder.dEPARTURE.setText(models.get(position).getDepartureTime());
         holder.arrivalTime.setText(models.get(position).getArrivalTime());
         holder.QuerydepartureTime.setText(models.get(position).getQuerydepartureTime());
@@ -130,6 +130,7 @@ public class Bingobus7Adapter extends RecyclerView.Adapter<Bingobus7Adapter.View
             arrivalTime = itemView.findViewById(R.id.arrivalTime);
 
             operatortv =  itemView.findViewById(R.id.operatortv);
+           // operatortv.setVisibility(View.GONE);
         }
     }
 }

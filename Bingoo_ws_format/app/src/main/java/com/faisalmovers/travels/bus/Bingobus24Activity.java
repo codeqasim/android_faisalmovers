@@ -195,8 +195,17 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
+
+                Calendar maxdays = Calendar.getInstance();
+                maxdays.set(Calendar.DAY_OF_MONTH, day+7);
+
+
                 DatePickerDialog dialog = new DatePickerDialog(Bingobus24Activity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK,  dateSetListener, year, month, day);
-               // dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                // dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getDatePicker().setMinDate(cal.getTimeInMillis());
+                dialog.getDatePicker().setMaxDate(maxdays.getTimeInMillis());
+                //dialog.getDatePicker().setMinDate(10);
+
                 dialog.show();
             }
         });
@@ -210,7 +219,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 Date d = new Date(year, month, dayOfMonth);
                 String strDate = currentDate.format(d);
 
-                Log.d("dayday1",strDate+"/"+year);
+                Log.d("dayday1",dayOfMonth+"/"+year);
                 datecfm=true;
 
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
@@ -854,6 +863,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         editor.putString("password","");
         editor.putString("name"," ");
         editor.putString("email"," ");
+        editor.putString("seatcount"," ");
         editor.commit();
     }
 }

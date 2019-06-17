@@ -37,13 +37,15 @@
                     android:fontFamily="@font/sfpro_display_medium"
                     android:text="A/C Sleeper (2+1)"
                     android:textColor="#91959d"
+                    android:visibility="gone"
                     android:textSize="12.7sp" />
 
                 <ImageView
                     android:id="@+id/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/location" />
+                    android:src="@drawable/location"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <TextView
@@ -53,14 +55,16 @@
                 android:fontFamily="@font/sfpro_display_semibold"
                 android:lineSpacingExtra="4dp"
                 android:text="Faisal Movers"
+                android:visibility="gone"
                 android:id="@+id/operatortv"
-                 android:textColor="#464646"
+                android:textColor="#464646"
                 android:textSize="17.7sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7.5dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <RatingBar
@@ -95,18 +99,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/seating" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/sitoffwhite" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="8.6dp"
-                    android:id="@+id/seat"
                     android:fontFamily="@font/sfpro_display_medium"
                     android:text="33 Seats available"
+                    android:id="@+id/seat"
                     android:textColor="#99464646"
                     android:textSize="12.7sp" />
             </LinearLayout>
@@ -121,13 +125,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15.5dp"
-                android:weightSum="4"
+                android:weightSum="3"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -145,6 +150,7 @@
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:text="Rs 1000 "
                         android:id="@+id/fare"
+                        android:textAlignment="center"
                         android:textColor="#464646"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -153,6 +159,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -170,6 +177,7 @@
                         android:layout_marginTop="0.7dp"
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:text="8:50 PM"
+                        android:textAlignment="center"
                         android:id="@+id/dEPARTURE"
                         android:textColor="#d3105b"
                         android:textSize="15sp" />
@@ -179,14 +187,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12.5dp"
+                        android:layout_marginRight="1.5dp"
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:text="REACH AT"
+                        android:gravity="center"
                         android:textColor="#8C464646"
                         android:textSize="10sp" />
 
@@ -196,16 +206,20 @@
                         android:layout_marginTop="0.7dp"
                         android:fontFamily="@font/sfpro_display_semibold"
                         android:text="6:30 AM"
+                        android:textAlignment="center"
                         android:id="@+id/arrivalTime"
                         android:textColor="#0da855"
                         android:textSize="15sp" />
                 </LinearLayout>
 
 
+
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:layout_gravity="right"
                     android:orientation="vertical">
 
@@ -227,6 +241,9 @@
                         android:textColor="#464646"
                         android:textSize="15sp" />
                 </LinearLayout>
+
+
+
 
             </LinearLayout>
         </LinearLayout>

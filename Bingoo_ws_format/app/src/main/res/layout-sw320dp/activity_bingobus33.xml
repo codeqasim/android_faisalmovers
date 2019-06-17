@@ -81,6 +81,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rectangle_white_grayboder"
                 android:orientation="vertical"
+                android:id="@+id/mainbusdesing"
+                android:visibility="gone"
                 android:paddingBottom="15dp">
 
                 <ImageView

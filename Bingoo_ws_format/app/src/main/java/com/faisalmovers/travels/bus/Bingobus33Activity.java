@@ -57,6 +57,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     int pricetickets =0;
     String price ="0";
     Intent da;
+    LinearLayout mainbusdesing;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     ProgressBar progressBar2;
@@ -81,7 +82,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         pricetickets = Integer.parseInt(price);
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-
+        mainbusdesing = findViewById(R.id.mainbusdesing);
          gson = new Gson();
         String scheduleid =bingobus7Model.getScheduleID() ;
         String departureTime =bingobus7Model.getDepartureTime2();
@@ -224,8 +225,11 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         if( map.contains(modelSeat)){
             map.remove(modelSeat);
 
+            seatcount =seatcount-1;
+
         }else{
             map.add(modelSeat);
+            seatcount =seatcount+1;
         }
         seatnum.setText("");
         int totalPrice=0;
@@ -234,13 +238,16 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             for(int i=0;i<map.size();i++)
             {
                 if(i==0)
+
                     seatnum.append(map.get(i).getSeat_on());
                 else
                     seatnum.append(","+map.get(i).getSeat_on());
 
                 if(!map.get(i).getSeat_fare().equals("null"))
                 {
+
                     totalPrice = totalPrice+Integer.parseInt(map.get(i).getSeat_fare());
+
 
                 }
                 txtSeatSelected.setText(totalPrice+"");
@@ -253,6 +260,11 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
 
+        Log.d("seatcountcccc;",  seatcount+" ");
+        SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("seatcount", String.valueOf(seatcount));
+        editor.commit();
     }
 
 
@@ -300,6 +312,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
             Log.d("responceschek", response);
                 progressBar2.setVisibility(View.GONE);
+                mainbusdesing.setVisibility(View.VISIBLE);
                 JSONObject parentObject = null;
                 try {
                     parentObject = new JSONObject(response);
