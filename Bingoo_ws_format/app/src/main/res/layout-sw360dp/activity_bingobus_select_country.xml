@@ -107,49 +107,43 @@
                     android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
 
-
-
-
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-
-
-
-                <TextView
-
-                    android:id="@+id/signup"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="Create account"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/fm"
-                    android:textSize="16dip"/>
-
-
-
-
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-
-
-
             <TextView
                 android:id="@+id/forget"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="forget passowrod "
-                android:gravity="center"
+                android:gravity="right"
+                android:layout_margin="10dp"
+                android:text="forget passwrod"
                 android:textColor="@color/colorError"
-                android:textSize="16dip"/>
+                android:textSize="12dip" />
+
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:text="No account yet?"
+                android:textSize="16dip" />
+
+
+
+            <TextView
+
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:text="Create account"
+                android:textColor="@color/fm"
+                android:textSize="14dip" />
+
+
+
 
 
 
@@ -161,6 +155,7 @@
                 android:background="@drawable/rectangle_blue1"
                 android:fontFamily="@font/sfpro_display_medium"
                 android:text="Login"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
