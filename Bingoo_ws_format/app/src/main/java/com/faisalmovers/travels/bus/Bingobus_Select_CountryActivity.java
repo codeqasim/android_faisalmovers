@@ -46,7 +46,7 @@ public class Bingobus_Select_CountryActivity extends Url {
     private Spinner spinner;
     private CustomSpinnerAdapter spinnerAdapter;
     private List<Country> countries = new ArrayList<Country>();
-    TextView next,signup;
+    TextView next,signup,forget;
     ImageView back;
     Animation animation;
     Context context =this;
@@ -63,6 +63,7 @@ public class Bingobus_Select_CountryActivity extends Url {
         setContentView(R.layout.activity_bingobus_select_country);
 
 
+        forget =  findViewById(R.id.forget);
         next =  findViewById(R.id.next);
         signup = findViewById(R.id.signup);
         _emailText = findViewById(R.id.email);
@@ -98,6 +99,22 @@ public class Bingobus_Select_CountryActivity extends Url {
                 Intent i = new Intent(Bingobus_Select_CountryActivity.this, Bingobus_walkthruoghActivity.class);
                 startActivity(i);
                // finish();
+               /* Intent Profile = new Intent(context,ProfilePerson.class);
+                Profile.putExtra("vlaue", "3");
+                context.startActivity(Profile);*/
+            }
+        });
+
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                Intent i = new Intent(Bingobus_Select_CountryActivity.this, Forgotpassword.class);
+                startActivity(i);
+                // finish();
                /* Intent Profile = new Intent(context,ProfilePerson.class);
                 Profile.putExtra("vlaue", "3");
                 context.startActivity(Profile);*/
@@ -236,8 +253,8 @@ public class Bingobus_Select_CountryActivity extends Url {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 4 ) {
+            _passwordText.setError("between 4   characters");
             valid = false;
         } else {
             _passwordText.setError(null);

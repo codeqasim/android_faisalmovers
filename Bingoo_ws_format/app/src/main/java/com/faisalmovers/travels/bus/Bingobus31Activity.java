@@ -90,7 +90,7 @@ public class Bingobus31Activity extends AppCompatActivity {
 
             String name1 = dropingpoint.get(i);
 
-            BoardingPointModel ab = new BoardingPointModel(image[0],name1,time);
+            BoardingPointModel ab = new BoardingPointModel(image[0],name1," ");
             boardingPointModels.add(ab);
         }
         boardingPointAdapter = new BoardingPointAdapter(Bingobus31Activity.this, boardingPointModels ,bingobus7Model);

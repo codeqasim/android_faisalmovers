@@ -103,7 +103,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         }else {
            // next.setVisibility(View.GONE);
             next.setText("Update");
-            password1.setVisibility(View.GONE);
+          //  password1.setVisibility(View.GONE);
              idupdate= "1";
         }
 
@@ -143,7 +143,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             public void afterTextChanged(Editable c) {
 
                 String password1 = String.valueOf(password.getText());
-                editor.putString("mobileverificationepassword", password1);
+                editor.putString("password", password1);
                 editor.commit();
                 // this one too
             }
@@ -163,7 +163,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             public void afterTextChanged(Editable c) {
 
                  String textemail = String.valueOf(email.getText());
-                editor.putString("mobileverificationemail", textemail);
+                editor.putString("email", textemail);
                 editor.commit();
                 // this one too
             }
@@ -184,8 +184,8 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
             public void afterTextChanged(Editable c) {
 
-                String textemail = String.valueOf(phone.getText());
-                editor.putString("mobileverification", textemail);
+                String phone1 = String.valueOf(phone.getText());
+                editor.putString("mobileverification", phone1);
                 editor.commit();
                 // this one too
             }
@@ -205,8 +205,8 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
             public void afterTextChanged(Editable c) {
 
-                String textemail = String.valueOf(fullname.getText());
-                editor.putString("mobileverificationfullname", textemail);
+                String name = String.valueOf(fullname.getText());
+                editor.putString("name", name);
                 editor.commit();
                 // this one too
             }
@@ -227,8 +227,8 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
             public void afterTextChanged(Editable c) {
 
-                String textemail = String.valueOf(nic.getText());
-                editor.putString("mobileverificationnic", textemail);
+                String nic1 = String.valueOf(nic.getText());
+                editor.putString("nic", nic1);
                 editor.commit();
                 // this one too
             }
@@ -513,8 +513,9 @@ public class ProfilePerson extends Url implements View.OnClickListener {
     }
 
 
-    public void update_user_detail(String url)
+    public void update_user_detail(final String url)
     {
+        Log.d("bordingpoint2",url);
 
         progressBar2.setVisibility(View.VISIBLE);
         if (!validate()) {
@@ -528,7 +529,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             public void onResponse(String response) {
 
 
-                Log.d("bordingpoint2","response/" +response);
+                Log.d("bordingpoint2",url+"response/" +response);
                 progressBar2.setVisibility(View.GONE);
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -578,8 +579,12 @@ public class ProfilePerson extends Url implements View.OnClickListener {
                 params.put("zip", "1111");
                 params.put("email", email1);
                 params.put("state", "111");
-                params.put("password", pref.getString("password",""));
+                params.put("nic", nic1);
+                params.put("password",passwordtext);
 
+
+              /*  String g =gson.toJson(params);
+                Log.d("namesarray",g);*/
                 return params;
             }
         };
@@ -606,7 +611,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
     }
 
 
-    public void creatuser(String url)
+    public void creatuser(final String url)
     {
         progressBar2.setVisibility(View.VISIBLE);
         inProgress=true;
@@ -616,7 +621,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             public void onResponse(String response) {
 
 
-               Log.d("bordingpoint2","response/" +response);
+               Log.d("bordingpoint2",url+"/"+"response/" +response);
 
                 try {
 

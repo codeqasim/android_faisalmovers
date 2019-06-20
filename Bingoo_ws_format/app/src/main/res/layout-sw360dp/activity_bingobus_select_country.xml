@@ -55,7 +55,7 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:paddingLeft="15dp"
+                    android:paddingLeft="25dp"
                     android:paddingTop="4.5dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="15dp"
@@ -98,7 +98,7 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:lines="1"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:paddingTop="2.5dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="15dp"
@@ -117,28 +117,39 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <TextView android:id="@+id/link_signup"
+
+
+
+                <TextView
+
+                    android:id="@+id/signup"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="No account yet? "
+                    android:text="Create account"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/fm"
                     android:textSize="16dip"/>
+
+
+
 
 
             </android.support.v7.widget.LinearLayoutCompat>
 
 
-            <TextView android:id="@+id/signup"
+
+
+            <TextView
+                android:id="@+id/forget"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="Create one"
-                android:textColor="@color/fm"
+                android:text="forget passowrod "
                 android:gravity="center"
+                android:textColor="@color/colorError"
                 android:textSize="16dip"/>
-
-
 
 
 
@@ -150,9 +161,11 @@
                 android:background="@drawable/rectangle_blue1"
                 android:fontFamily="@font/sfpro_display_medium"
                 android:text="Login"
+                android:layout_marginBottom="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15sp"/>
+
 
 
 

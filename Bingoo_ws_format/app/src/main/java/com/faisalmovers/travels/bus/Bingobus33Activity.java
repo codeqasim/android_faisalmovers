@@ -125,6 +125,17 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             @Override
             public void onClick(View view) {
 
+
+                String numberofseat = seatnum.getText().toString();
+                SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+               // editor.putString("totalamountofseat", totalamountofseat);
+                editor.putString("numberofseat", numberofseat);
+                //editor.putString("seatcount", String.valueOf(seatcount));
+               // editor.putString("seatlist", seatlist);
+                editor.commit();
+
+
                 Intent i = new Intent(context, Bingobus28Activity.class);
                 i.putExtra("sampleObject", bingobus7Model);
                 context.startActivity(i);
@@ -627,7 +638,6 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
 
 

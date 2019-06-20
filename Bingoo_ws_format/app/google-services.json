@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "246015843023",
+    "firebase_url": "https://bingoowsformat.firebaseio.com",
+    "project_id": "bingoowsformat",
+    "storage_bucket": "bingoowsformat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246015843023:android:8142c9d2ec69f325",
+        "android_client_info": {
+          "package_name": "com.faisalmovers.travels.bus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246015843023-g7jk9a826bvd8ndkijko8vkvsi10vpu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faisalmovers.travels.bus",
+            "certificate_hash": "688a11343a31bf0411fa3909d1869cb0649d1920"
+          }
+        },
+        {
+          "client_id": "246015843023-o700p1j8v0t6pbv56mua2tt5dfsob1q1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsu0L0InmWWjdul4sRkx0GKdKh1uykgi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246015843023-o700p1j8v0t6pbv56mua2tt5dfsob1q1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

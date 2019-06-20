@@ -10,25 +10,39 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import model.Bingobus7Model;
+import model.Seat;
+import model.seatModel;
 
 public class Bingobus28Activity extends AppCompatActivity {
 
+
+    ArrayList<String> map =new ArrayList<>();
+    Gson gson = new Gson();;
     ImageView cancel;
-    TextView from ,to ,price,operator,seatcountt,total,busType;
+    TextView from ,to ,price,operator,seatcountt,total,busType,Seatsinfo;
     Context context =this;
     Bingobus7Model bingobus7Model;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus28);
         Intent da = getIntent();
         bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
-        String operator1 = bingobus7Model.getOperator();
+        String operator1 = bingobus7Model.getDepartureTime();
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-//
+         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+         editor = pref.edit();
 
         from = (TextView) findViewById(R.id.from);
         to = (TextView) findViewById(R.id.to);
@@ -38,6 +52,8 @@ public class Bingobus28Activity extends AppCompatActivity {
         to.setText(pref.getString("to", null));
         cancel = (ImageView) findViewById(R.id.cancel);
         operator= (TextView) findViewById(R.id.operator);
+        Seatsinfo= (TextView) findViewById(R.id.Seatsinfo);
+
         operator.setText(operator1);
         price.setText(bingobus7Model.getPrice());
 
@@ -59,8 +75,16 @@ public class Bingobus28Activity extends AppCompatActivity {
         {
             seatcountt.setText("0");
         }else {
-            seatcountt.setText(pref.getString("seatcount", null));
+
+
+
+            String numberofseat = pref.getString("numberofseat", " ");
+            seatcountt.setText(pref.getString("seatcount", " ") );
+            Seatsinfo.setText(numberofseat);
         }
+
+
+
 
 
         String numberseat = pref.getString("seatcount", null);
@@ -88,4 +112,11 @@ public class Bingobus28Activity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
 }
