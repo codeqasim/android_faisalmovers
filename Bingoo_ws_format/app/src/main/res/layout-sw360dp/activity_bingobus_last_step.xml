@@ -270,7 +270,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/rectangle_white_gray1boder"
+                android:background="@drawable/rectangle_white_gray1boder1"
                 android:orientation="vertical"
                 android:paddingLeft="16.7dp"
                 android:paddingTop="14.7dp"

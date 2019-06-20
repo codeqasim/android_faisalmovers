@@ -78,7 +78,7 @@ public class Bingobus_Select_CountryActivity extends Url {
             public void onClick(View view) {
 
                 if (!validate()) {
-                    Utils.showErrorToast(getApplicationContext(),"server issue");
+                    //Utils.showErrorToast(getApplicationContext(),"server issue");
                     return;
                 }else
                 {
