@@ -38,6 +38,9 @@ public class Webviewinvoice extends AppCompatActivity {
 
         progressBar2 = findViewById(R.id.progressBar2);
         web_view = (WebView) findViewById(R.id.webview);
+        web_view.getSettings().setJavaScriptEnabled(true);
+        web_view.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
         final ProgressBar pb = (ProgressBar) findViewById(R.id.pb);
         final TextView tv = (TextView) findViewById(R.id.tv);
         pb.setProgressTintList(ColorStateList.valueOf(Color.RED));

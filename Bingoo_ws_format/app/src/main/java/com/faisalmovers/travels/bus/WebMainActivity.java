@@ -32,6 +32,9 @@ public class WebMainActivity extends Url {
 
         link =invoicedetailsuser+link;
         webinvoice= (WebView) findViewById(R.id.webinvoice);
+        webinvoice.getSettings().setJavaScriptEnabled(true);
+        webinvoice.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
         /*webinvoice.getSettings().setSupportZoom(true);
         webinvoice.getSettings().setBuiltInZoomControls(true);
         webinvoice.getSettings().setDisplayZoomControls(false);*/
