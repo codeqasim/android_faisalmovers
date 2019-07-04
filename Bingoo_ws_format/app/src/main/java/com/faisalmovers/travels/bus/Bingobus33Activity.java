@@ -763,7 +763,6 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                 String id =  seat_id;
                 String no1 =  seat_on ;
                 String price =seat_fare;
-
                 Seat seat1 = new Seat(id+"",no1+"",price);
                 bookseats.add(seat1);
                 String json = gson.toJson(bookseats);
@@ -804,7 +803,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                         Log.d("seatholdseathold",allIds);
-                        unholdseat1(seatUnHoldweb,allIds);
+                        allunholdseat1(seatUnHoldweb,allIds);
 
                     }
                 });
@@ -830,7 +829,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
 
-    public void unholdseat1(final String url, final String seat_id )
+    public void allunholdseat1(final String url, final String seat_id )
     {
         progressBar2.setVisibility(View.VISIBLE);
         mRequestQueue = Volley.newRequestQueue(this);
@@ -840,7 +839,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 progressBar2.setVisibility(View.GONE);
 
-
+                Log.d("seatholdseathold11", seat_id+"/n"+response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String  status = jsonObject.getString("Status");
@@ -872,7 +871,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             protected Map<String, String> getParams()  {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("seat_id",seat_id);
+                params.put("seat_ids",seat_id);
                 String json  =gson.toJson(params) ;
                 //Log.d("seatholdseathold",json);
                 return params;

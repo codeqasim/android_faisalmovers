@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import Adapter.CitynameAdapter;
-import Adapter.CustomerAdapter;
+
+import Adapter.CustomerAdapter1;
 import model.Cities;
 import model.Customer;
 import util.Url;
@@ -38,7 +38,7 @@ import util.Utils;
 public class Bingobus4Activity extends Url {
 
     AutoCompleteTextView autoCompleteTextView;
-    CustomerAdapter adapter = null;
+    CustomerAdapter1 adapter = null;
     ArrayList<Customer> customers = null;
     int layout;
     ImageView back;
@@ -48,7 +48,7 @@ public class Bingobus4Activity extends Url {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     String responmessage;
-    CitynameAdapter citynameAdapter;
+
     ProgressBar progressBar ;
     String data;
     Context context=this;
@@ -66,7 +66,7 @@ public class Bingobus4Activity extends Url {
 
         data =getAssetJsonData(context);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-        adapter = new CustomerAdapter(this, customers);
+        adapter = new CustomerAdapter1(this, customers);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(1);
         back = (ImageView) findViewById(R.id.back);
@@ -218,7 +218,7 @@ public class Bingobus4Activity extends Url {
                   // adapter.setClickListener(this);
                    recyclerView.setAdapter(citynameAdapter);*/
 
-                    adapter = new CustomerAdapter(getApplicationContext(), customers);
+                    adapter = new CustomerAdapter1(getApplicationContext(), customers);
                     autoCompleteTextView.setAdapter(adapter);
                     autoCompleteTextView.setThreshold(1);
 

@@ -19,7 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Adapter.CustomerAdapter;
+import Adapter.CustomerAdapter1;
 import model.Cities;
 import model.Customer;
 import util.AppStatus;

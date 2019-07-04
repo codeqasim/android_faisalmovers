@@ -1,5 +1,6 @@
 package Adapter;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
 
 import model.Customer;
 
-public class CustomerAdapter extends ArrayAdapter<Customer> {
+public class CustomerAdapter1 extends ArrayAdapter<Customer> {
     int myPos = 0;
     ArrayList<Customer> customers, tempCustomer, suggestions;
 
-    public CustomerAdapter(Context context, ArrayList<Customer> objects) {
+    public CustomerAdapter1(Context context, ArrayList<Customer> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
         this.customers = objects;
         this.tempCustomer = new ArrayList<Customer>(objects);
@@ -45,7 +46,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
 
         if (txtCustomer != null)
             txtCustomer.setText(customer.getFirstName() + " " + customer.getLastName());
-     //   recentsearch.setText(customer.getFirstName() + " " + customer.getLastName());
+        //   recentsearch.setText(customer.getFirstName() + " " + customer.getLastName());
         if (ivCustomerImage != null && customer.getProfilePic() != -1)
             ivCustomerImage.setImageResource(customer.getProfilePic());
         // Now assign alternate color for rows
