@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -100,6 +102,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         if(nectcheckbuuton ==false)
         {
             nectcheckbuuton=false;
+            disableInput(phone);
         }else {
            // next.setVisibility(View.GONE);
             next.setText("Update");
@@ -711,5 +714,17 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
         mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(mStringRequest);
+    }
+
+
+    void disableInput(EditText editText){
+        editText.setInputType(InputType.TYPE_NULL);
+        editText.setTextIsSelectable(false);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return true;  // Blocks input from hardware keyboards.
+            }
+        });
     }
 }

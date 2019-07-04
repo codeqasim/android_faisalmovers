@@ -19,7 +19,8 @@ public class Url extends AppCompatActivity {
     public String invoicedetailsuser = "http://www.bookkaru.com/invoice?id=";
     public String login = "https://www.bookkaru.com/api/login/check?appKey=bookkaru";
     public String forgetpassowrd= "https://www.bookkaru.com/api/bus/forgotpassword?appKey=bookkaru";
-
+    public String seatHold= "https://www.bookkaru.com/api/bus/seatHold?appKey=bookkaru";
+    public String seatUnHoldweb= "https://www.bookkaru.com/api/bus/seatUnHold?appKey=bookkaru";
 }
 
 

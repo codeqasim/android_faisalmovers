@@ -1,9 +1,12 @@
 package com.faisalmovers.travels.bus;
 
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 	@SuppressWarnings("unused")
@@ -57,6 +60,9 @@ public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder> exte
 	 * @return Selected items count
 	 */
 	public int getSelectedItemCount() {
+
+
+
 		return selectedItems.size();
 	}
 

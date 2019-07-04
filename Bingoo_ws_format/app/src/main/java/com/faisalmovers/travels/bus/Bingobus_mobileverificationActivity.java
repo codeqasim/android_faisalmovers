@@ -148,6 +148,8 @@ public class Bingobus_mobileverificationActivity extends Url {
     public void onBackPressed(){
         super.onBackPressed();
         finish();
+
+       // startActivity(new Intent(getApplicationContext(),Bingobus_walkthruoghActivity.class));
     }
 
     private void sendAndRequestResponse(String url) {

@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.faisalmovers.travels.bus.SelectableAdapter;
 import model.seatModel;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
@@ -107,6 +110,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
 
                         }else{
+
 
 
                             if(getSelectedItemCount()>5){

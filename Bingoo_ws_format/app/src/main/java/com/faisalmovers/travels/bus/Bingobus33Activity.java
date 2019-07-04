@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,8 +19,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,7 +33,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Adapter.AirplaneAdapter;
 import model.AbstractItem;
@@ -43,6 +49,7 @@ import util.Utils;
 public class Bingobus33Activity extends Url implements OnSeatSelected{
 
     ArrayList<seatModel> map =new ArrayList<>();
+    ArrayList<String> seat_ids =new ArrayList<>();
     private static final int COLUMNS = 5;
     private TextView txtSeatSelected,seatnum;
     int count=0,seatcount=0;
@@ -94,9 +101,9 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         String fromCityId = pref.getString("fromcityid",null);
         String toCityId =  pref.getString("tocityid",null);
         final String selectdate =pref.getString("selectdate",null);
-        SharedPreferences.Editor editor = pref.edit();
+       /* SharedPreferences.Editor editor = pref.edit();
         editor.putString("seatcount", "0");
-        editor.commit();
+        editor.commit();*/
 
 
         String webseat = seatinfo+bingobus7Model.getOpId()+"&scheduleid="+scheduleid+"&depdate="+selectdate+"&fromcity="+fromCityId+"&tocity="+toCityId+"&deptime="+departureTime+"&depqtime="+querydepartureTime;
@@ -113,7 +120,11 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             @Override
             public void onClick(View view) {
 
-                finish();
+                dailogbox();
+
+
+
+        //        finish();
 
             }
         });
@@ -237,10 +248,17 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             map.remove(modelSeat);
 
             seatcount =seatcount-1;
+            unholdseat(seatUnHoldweb,modelSeat.getSeat_id());
 
         }else{
             map.add(modelSeat);
+
             seatcount =seatcount+1;
+
+            SharedPreferences  pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+            String origin =pref.getString("fromcityid", null);
+            String destination =pref.getString("tocityid", null);
+            seathold(seatHold,modelSeat.getSeat_id(),origin,destination);
         }
         seatnum.setText("");
         int totalPrice=0;
@@ -275,9 +293,133 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("seatcount", String.valueOf(seatcount));
+        editor.putString("seatcountdatanumber", String.valueOf(seatcount));
         editor.commit();
+        addarray();
     }
 
+
+    public void seathold(final String url, final String seat_id , final String origin, final String destination)
+    {
+        progressBar2.setVisibility(View.VISIBLE);
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressBar2.setVisibility(View.GONE);
+
+               // Log.d("seatholdseathold", " "+response);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String  status = jsonObject.getString("Status");
+                   // Log.d("seatholdseathold", " "+status);
+
+
+                    if (status.contentEquals("success"))
+                    {
+                        Utils.showInfoToast(context,"Your seat is hold");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("seatholdseathold","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+                //inProgress=false;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("seat_id",seat_id);
+                params.put("origin",origin);
+                params.put("destination",destination);
+                String json  =gson.toJson(params) ;
+                Log.d("seatholdseathold",json);
+                return params;
+
+
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
+    }
+
+
+
+    public void unholdseat(final String url, final String seat_id )
+    {
+        progressBar2.setVisibility(View.VISIBLE);
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressBar2.setVisibility(View.GONE);
+
+               // Log.d("seatholdseathold", "unhold"+"/n"+response);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String  status = jsonObject.getString("Status");
+                  //  Log.d("seatholdseathold", " "+status);
+
+
+                    if (status.contentEquals("success"))
+                    {
+                        Utils.showErrorToast(context,"Your seat is unhold");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("seatholdseathold","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+                //inProgress=false;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("seat_id",seat_id);
+                String json  =gson.toJson(params) ;
+            //    Log.d("seatholdseathold",json);
+                return params;
+
+
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
+    }
 
 
 
@@ -602,6 +744,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
     public void addarray()
     {
+        bookseats.clear();
+        seat_ids.clear();
         String seatlist = gson.toJson(map);
         Log.d("adddarraydata",seatlist);
 
@@ -615,7 +759,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                 String  seat_on = jsonObject.getString("seat_on");
                 String  seat_status = jsonObject.getString("seat_status");
 
-
+                seat_ids.add(seat_id);
                 String id =  seat_id;
                 String no1 =  seat_on ;
                 String price =seat_fare;
@@ -632,7 +776,11 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             }
 
 
-
+            String seatlistn = gson.toJson(bookseats);
+            SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("seatlist", seatlistn);
+            editor.commit();
 
 
         } catch (JSONException e) {
@@ -643,5 +791,98 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
     }
 
+    public  void dailogbox ()
+    {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        alertDialogBuilder.setMessage("Are you sure, unHold All Seats");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        String allIds = TextUtils.join(",", seat_ids);
+
+
+                        Log.d("seatholdseathold",allIds);
+                        unholdseat1(seatUnHoldweb,allIds);
+
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                //  DialogInterface.dismiss();
+
+                dialog.cancel();
+            }
+        });
+
+
+        alertDialogBuilder.show();
+
+        // alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.fm);
+        //alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.fm);
+
+
+
+    }
+
+
+
+    public void unholdseat1(final String url, final String seat_id )
+    {
+        progressBar2.setVisibility(View.VISIBLE);
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressBar2.setVisibility(View.GONE);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String  status = jsonObject.getString("Status");
+                    Log.d("seatholdseathold11", response);
+
+
+                    if (status.contentEquals("success"))
+                    {
+                      finish();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.d("seatholdseathold","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
+                progressBar2.setVisibility(View.GONE);
+                //This code is executed if there is an error.
+                //inProgress=false;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("seat_id",seat_id);
+                String json  =gson.toJson(params) ;
+                //Log.d("seatholdseathold",json);
+                return params;
+
+
+            }
+        };
+
+        mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(mStringRequest);
+    }
 
 }
