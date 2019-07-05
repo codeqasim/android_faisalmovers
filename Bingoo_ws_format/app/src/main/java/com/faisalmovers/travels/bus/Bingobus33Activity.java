@@ -120,7 +120,18 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             @Override
             public void onClick(View view) {
 
-                dailogbox();
+
+                Log.d("fromCityIdfromCityId", seatcount + "/");
+
+
+                if (seatcount >= 1)
+                {
+                    dailogbox();
+                }else
+                {
+                    finish();
+                }
+
 
 
 
@@ -248,7 +259,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             map.remove(modelSeat);
 
             seatcount =seatcount-1;
-            unholdseat(seatUnHoldweb,modelSeat.getSeat_id());
+            unholdseat(seatUnHold,modelSeat.getSeat_id());
 
         }else{
             map.add(modelSeat);
@@ -803,7 +814,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                         Log.d("seatholdseathold",allIds);
-                        allunholdseat1(seatUnHoldweb,allIds);
+                        allunholdseat1(multiSeatUnHold,allIds);
 
                     }
                 });
@@ -841,15 +852,22 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 Log.d("seatholdseathold11", seat_id+"/n"+response);
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String  status = jsonObject.getString("Status");
-                    Log.d("seatholdseathold11", response);
+                    JSONObject jsonObject1 = new JSONObject(response);
 
+                    JSONArray jsonArray =jsonObject1.getJSONArray("data");
 
-                    if (status.contentEquals("success"))
+                    for (int i =0; i<jsonArray.length();i++)
                     {
-                      finish();
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String Status = jsonObject.getString("Status");
+                        if (Status.contentEquals("success"))
+                        {
+                            Utils.showErrorToast(getApplicationContext(),"All seats  Unhold");
+                            finish();
+                        }
                     }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
