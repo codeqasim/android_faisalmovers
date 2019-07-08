@@ -16,6 +16,7 @@ import com.faisalmovers.travels.bus.OnSeatSelected;
 import com.faisalmovers.travels.bus.R;
 import com.faisalmovers.travels.bus.SelectableAdapter;
 import model.seatModel;
+import util.Utils;
 
 import java.util.List;
 
@@ -127,6 +128,9 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                             }
 
                         }
+                    }else
+                    {
+                        Utils.showErrorToast(mContext, "Seat already hold");
                     }
                 }
             });
@@ -138,6 +142,8 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
             }
             else if(model.getSeat_status().equals("Reserved"))
             {
+
+
                if (model.getGender().equals("Female"))
                {
                    holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.pink_seat : R.drawable.pink_seat);

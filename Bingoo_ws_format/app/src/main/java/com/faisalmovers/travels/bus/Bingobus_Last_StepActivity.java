@@ -374,6 +374,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             public void onErrorResponse(VolleyError error) {
 
                 searchbus.setVisibility(View.VISIBLE);
+                searchbus.setText("Try again");
                 Log.d("bordingpoint2","error/" +error);
                 Utils.showErrorToast(getApplicationContext(),"server issue");
                 progressBar2.setVisibility(View.GONE);

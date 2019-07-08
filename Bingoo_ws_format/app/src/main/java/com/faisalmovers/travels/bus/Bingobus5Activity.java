@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import Adapter.CustomerAdapter1;
+import Adapter.CustomerAdapterCity;
 import model.Cities;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,7 +40,7 @@ import util.Utils;
 public class Bingobus5Activity extends Url {
 
     AutoCompleteTextView autoCompleteTextView;
-    CustomerAdapter1 adapter = null;
+    CustomerAdapterCity adapter = null;
     ProgressBar progressBar ;
     ArrayList<Customer> customers = null;
     int layout;
@@ -143,7 +143,7 @@ public class Bingobus5Activity extends Url {
         });
 
 
-        adapter = new CustomerAdapter1(getApplicationContext(), customers);
+        adapter = new CustomerAdapterCity(getApplicationContext(), customers);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(1);
     }

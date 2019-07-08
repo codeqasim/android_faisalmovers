@@ -487,7 +487,7 @@ public class ProfilePerson extends Url implements View.OnClickListener {
             this.nic.setError(null);
         }
 
-        if (email1.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
             email.setError("enter a valid email address");
             valid = false;
         } else {
@@ -628,13 +628,15 @@ public class ProfilePerson extends Url implements View.OnClickListener {
 
                 try {
 
-
                     JSONObject main_json = new JSONObject(response);
-                     if(main_json.getJSONObject("error").getBoolean("status"))
+                    JSONObject error = main_json.getJSONObject("error");
+                    Boolean status = error.getBoolean("status");
+                    Log.d("bordingpoint2",status+"/"+"response/" +response);
+                    if(status==true)
                      {
 
-                         JSONObject error_object=main_json.getJSONObject("error");
-                         Utils.showErrorToast(getApplicationContext(),error_object.getString("msg"));
+                       //  JSONObject error_object=main_json.getJSONObject("error");
+                         Utils.showErrorToast(getApplicationContext(),error.getString("msg"));
                           progressBar2.setVisibility(View.GONE);
 
                      }

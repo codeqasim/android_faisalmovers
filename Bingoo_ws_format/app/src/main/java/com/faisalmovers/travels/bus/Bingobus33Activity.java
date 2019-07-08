@@ -330,7 +330,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                     if (status.contentEquals("success"))
                     {
-                        Utils.showInfoToast(context,"Your seat is hold");
+                       // Utils.showInfoToast(context,"Your seat is hold");
                     }
 
                 } catch (JSONException e) {
@@ -394,7 +394,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                     if (status.contentEquals("success"))
                     {
-                        Utils.showErrorToast(context,"Your seat is unhold");
+                      //  Utils.showErrorToast(context,"Your seat is unhold");
                     }
 
                 } catch (JSONException e) {
@@ -437,14 +437,15 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     @Override
     public void onBackPressed()
     {
-       /* Intent i = new Intent(Bingobus33Activity.this, ListinwsActivity.class);
-        finish();
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        startActivity(i);*/
-        // code here to show dialog
-        super.onBackPressed();
+        if (seatcount >= 1)
+        {
+            dailogbox();
+        }else
+        {
+            finish();
+        }
 
-        finish();
+
         // optional depending on your needs
     }
 
@@ -461,7 +462,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         Log.d("lifecycle3","onPause invoked" +price);
     }
 
-    private void  sendAndRequestResponse2(String url, final Context context ) {
+    private void  sendAndRequestResponse2(final String url, final Context context ) {
 
 
 
@@ -474,7 +475,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             public void onResponse(String response) {
 
 
-            Log.d("responceschek", response);
+            Log.d("responceschek", url);
                 progressBar2.setVisibility(View.GONE);
                 mainbusdesing.setVisibility(View.VISIBLE);
                 JSONObject parentObject = null;

@@ -15,12 +15,12 @@ import com.faisalmovers.travels.bus.R;
 import java.util.ArrayList;
 
 import model.Customer;
-
-public class CustomerAdapter1 extends ArrayAdapter<Customer> {
+@SuppressWarnings("unchecked")
+public class CustomerAdapterCity extends ArrayAdapter<Customer> {
     int myPos = 0;
     ArrayList<Customer> customers, tempCustomer, suggestions;
 
-    public CustomerAdapter1(Context context, ArrayList<Customer> objects) {
+    public CustomerAdapterCity(Context context, ArrayList<Customer> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
         this.customers = objects;
         this.tempCustomer = new ArrayList<Customer>(objects);

@@ -154,7 +154,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
             }
         });
         settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
+         editor = settings.edit();
         editor.putString("show", "yes");
         editor.commit();
 
@@ -170,7 +170,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
         downtext = (TextView) findViewById(R.id.downtext);
         swap = (ImageView) findViewById(R.id.swap);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         uptext.setText(pref.getString("from", null));
         downtext.setText(pref.getString("to", null));
 
@@ -182,6 +182,19 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 String s2 = downtext.getText().toString();
                 uptext.setText(s2);
                 downtext.setText(s1);
+
+
+
+
+
+                SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("from", pref.getString("to", null));
+                editor.putString("fromcityid",  pref.getString("tocityid", null));
+                editor.putString("to", pref.getString("from", null));
+                editor.putString("tocityid", pref.getString("fromcityid", null));
+                editor.commit();
+
             }
         });
 
