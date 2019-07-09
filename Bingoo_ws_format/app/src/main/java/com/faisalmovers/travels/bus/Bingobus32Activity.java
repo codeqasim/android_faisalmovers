@@ -105,9 +105,10 @@ public class Bingobus32Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Bingobus32Activity.this,Bingobus_Last_StepActivity.class);
-                finish();
+
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 startActivity(i);
+                finish();
             }
         });
 

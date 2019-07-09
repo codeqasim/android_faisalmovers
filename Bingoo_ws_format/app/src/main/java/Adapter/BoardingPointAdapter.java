@@ -94,6 +94,9 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
                     i.putExtra("vlaue", "2");
                     context.startActivity(i);
 
+
+
+
                 }else {
 
 

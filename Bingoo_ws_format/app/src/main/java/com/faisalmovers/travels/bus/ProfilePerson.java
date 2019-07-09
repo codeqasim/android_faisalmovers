@@ -98,11 +98,11 @@ public class ProfilePerson extends Url implements View.OnClickListener {
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
         nectcheckbuuton= pref.getBoolean("Check_Login", false);
-
+        disableInput(phone);
         if(nectcheckbuuton ==false)
         {
             nectcheckbuuton=false;
-            disableInput(phone);
+
         }else {
            // next.setVisibility(View.GONE);
             next.setText("Update");

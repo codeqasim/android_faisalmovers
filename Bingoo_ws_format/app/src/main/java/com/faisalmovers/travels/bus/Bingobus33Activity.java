@@ -160,7 +160,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 Intent i = new Intent(context, Bingobus28Activity.class);
                 i.putExtra("sampleObject", bingobus7Model);
-                context.startActivity(i);
+                startActivity(i);
+                finish();
 
             }
         });
@@ -255,7 +256,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     @Override
     public void onSeatSelected(seatModel modelSeat) {
 
-        if( map.contains(modelSeat)){
+        if( map.contains(modelSeat))
+        {
             map.remove(modelSeat);
 
             seatcount =seatcount-1;
@@ -266,10 +268,10 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
             seatcount =seatcount+1;
 
-            SharedPreferences  pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+           /* SharedPreferences  pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
             String origin =pref.getString("fromcityid", null);
             String destination =pref.getString("tocityid", null);
-            seathold(seatHold,modelSeat.getSeat_id(),origin,destination);
+            seathold(seatHold,modelSeat.getSeat_id(),origin,destination);*/
         }
         seatnum.setText("");
         int totalPrice=0;
@@ -319,7 +321,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
             public void onResponse(String response) {
                 progressBar2.setVisibility(View.GONE);
 
-               // Log.d("seatholdseathold", " "+response);
+                Log.d("seatidtest", "hold /"+response);
 
 
                 try {
@@ -383,7 +385,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
                 progressBar2.setVisibility(View.GONE);
 
-               // Log.d("seatholdseathold", "unhold"+"/n"+response);
+                Log.d("seatholdseathold", "unhold"+"/n"+response);
 
 
                 try {
@@ -526,7 +528,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                             GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 4);
-                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models,progressBar2);
 
                          /*   mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                                 @Override
@@ -582,7 +584,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                             GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
-                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models,progressBar2);
 /*
                             mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                                 @Override
@@ -640,7 +642,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                             GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
-                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models,progressBar2);
 
                           /*  mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                                 @Override
@@ -702,7 +704,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
 
 
                             GridLayoutManager  mLayoutManager = new GridLayoutManager(context, 5);
-                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models);
+                            final AirplaneAdapter mAdapter = new AirplaneAdapter(context,list_models,progressBar2);
 
                            /* mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                                 @Override
@@ -805,7 +807,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
     public  void dailogbox ()
     {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-        alertDialogBuilder.setMessage("Are you sure, unHold All Seats");
+        alertDialogBuilder.setMessage("Are you sure you want to exit?");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -863,7 +865,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                         String Status = jsonObject.getString("Status");
                         if (Status.contentEquals("success"))
                         {
-                            Utils.showErrorToast(getApplicationContext(),"All seats  Unhold");
+                           // Utils.showErrorToast(getApplicationContext(),"All seats  Unhold");
                             finish();
                         }
                     }

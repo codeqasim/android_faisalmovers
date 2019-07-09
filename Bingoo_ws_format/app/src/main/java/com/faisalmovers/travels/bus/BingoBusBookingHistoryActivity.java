@@ -218,7 +218,8 @@ public class BingoBusBookingHistoryActivity extends Url implements View.OnClickL
     public void onBackPressed() {
 
        // dailogbox();
-        finish();
+        Intent i = new Intent(context, Bingobus24Activity.class);
+        context.startActivity(i);
 
     }
 

@@ -12,7 +12,7 @@ public class Url extends AppCompatActivity {
     public  String cityweb = "https://www.bookkaru.com/api/bus/cities?appKey=bookkaru";
     public  String businfoweb ="https://www.bookkaru.com/api/bus/search?appKey=bookkaru&fromcity=";
     public  String seatinfo =   "https://www.bookkaru.com/api/bus/seatsinfo?appKey=bookkaru&operator=";
-    public  String urlseatbook =  "https://www.bookkaru.com/api/bus/book?appKey=bookkaru";
+    public  String urlseatbook =  "https://www.bookkaru.com/api/bus/bookv2?appKey=bookkaru";
     public String signupurl=   "https://www.bookkaru.com/api/login/signup?appKey=bookkaru";
     public String updateprofiledata = "https://www.bookkaru.com/api/login/updateprofile?appKey=bookkaru";
     public String  yourbookinghistory = "https://www.bookkaru.com/api/invoice/list?appKey=bookkaru&userid=";
@@ -22,6 +22,10 @@ public class Url extends AppCompatActivity {
     public String seatHold= "https://www.bookkaru.com/api/bus/seatHold?appKey=bookkaru";
     public String seatUnHold= "https://www.bookkaru.com/api/bus/seatUnHold?appKey=bookkaru";
     public String multiSeatUnHold= "https://www.bookkaru.com/api/bus/multiSeatUnHold?appKey=bookkaru";
+
+
+    public Url() {
+    }
 }
 
 
