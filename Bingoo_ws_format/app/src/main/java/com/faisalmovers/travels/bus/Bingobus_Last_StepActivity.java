@@ -122,7 +122,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         topoint.setText(pref.getString("to", null));;
         locpick.setText(pref.getString("city", null));
        /* locdrop.setText(pref.getString("city1", null));*/
-        locdrop.setText(pref.getString("to", null) +"- " +bingobus7Model.getArrivalTime());
+        locdrop.setText(pref.getString("to", null));
         totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
         totalseatnum.setText( "SeatNo = { "+ pref.getString("numberofseat", null) +" }");
         String mobileverificationefullname =pref.getString("name",null);
@@ -340,7 +340,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                         String booking_id = json_object.getString("booking_id");
                        // addhistory(bm);
                         progressBar2.setVisibility(View.GONE);
-                        Utils.showSuccesToast(getApplicationContext(),"seat BOOKED");
+                      //  Utils.showSuccesToast(getApplicationContext(),"seat BOOKED");
                         Intent intent1 = new Intent(getApplicationContext(),Webviewinvoice.class);
                         intent1.putExtra("weburl",url);
                         startActivity(intent1);

@@ -161,7 +161,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                 Intent i = new Intent(context, Bingobus28Activity.class);
                 i.putExtra("sampleObject", bingobus7Model);
                 startActivity(i);
-                finish();
+               // finish();
 
             }
         });
@@ -206,6 +206,7 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
                    Intent i = new Intent(context, Bingobus31Activity.class);
                    i.putExtra("sampleObject", bingobus7Model);
                    context.startActivity(i);
+                   //finish();
                }else
                {
                    Utils.showErrorToast(getApplicationContext()," sealect seat ");
@@ -904,5 +905,8 @@ public class Bingobus33Activity extends Url implements OnSeatSelected{
         mStringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(mStringRequest);
     }
+
+
+
 
 }
