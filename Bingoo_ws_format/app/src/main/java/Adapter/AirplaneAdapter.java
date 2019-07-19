@@ -143,7 +143,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
                             }else{
 
-
+                                progressBar2.setVisibility(View.VISIBLE);
                                 Url url = new Url();
                                 SharedPreferences  pref = mContext.getSharedPreferences("MyPref", MODE_PRIVATE);
                                 String origin =pref.getString("fromcityid", null);
@@ -189,7 +189,6 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
     public void seathold(final String url, final String seat_id , final String origin, final String destination, final int position, final EdgeItem item, final EdgeViewHolder holder )
     {
         gson = new Gson();
-        progressBar2.setVisibility(View.VISIBLE);
         mRequestQueue = Volley.newRequestQueue(mContext);
         mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

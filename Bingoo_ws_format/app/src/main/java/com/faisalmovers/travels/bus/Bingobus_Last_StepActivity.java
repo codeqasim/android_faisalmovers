@@ -49,8 +49,12 @@ import util.Utils;
 
 public class Bingobus_Last_StepActivity extends Url implements View.OnClickListener {
 
+
+    LinearLayout male2, male3, male4, male5, male6;
+    LinearLayout female2, female3, female4, female5, female6;
     LinearLayout male, female;//bycash,easypisa;
-    TextView txtmale, txtfemale;
+    TextView txtmale,txtmale2,txtmale3,txtmale4,txtmale5,txtmale6;
+    TextView txtfemale,txtfemale2,txtfemale3,txtfemale4,txtfemale5,txtfemale6;
     ImageView img1, img2, back;//,img1easypasa,img2easypasa;
     TextView searchbus;
     Context context = this;
@@ -83,11 +87,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         gson = new Gson();
 
 
-
-
-
-
-
         //bycash = (LinearLayout)findViewById(R.id.bycash);
         // easypisa = (LinearLayout)findViewById(R.id.easypisa);
         male = (LinearLayout) findViewById(R.id.male);
@@ -111,9 +110,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         progressBar2.setVisibility(View.GONE);
-
-
-
 
 
 //        pickup = findViewById(R.id.pickup);
@@ -225,6 +221,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             txtfemale.setTextColor(Color.parseColor("#91959d"));
             editor.putString("gander", "2");
             editor.commit();
+
+
+
+
         }
 
 
@@ -263,14 +263,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         //   loadhistorydata();
 
 
+        String seatcount = pref.getString("seatcount", null);
+        int setcounter = Integer.parseInt(seatcount);
+        layoutset(setcounter);
 
-        String  seatcount  =pref.getString("seatcount", null);
-        int setcounter=Integer.parseInt(seatcount);
-
-        if (setcounter > 1)
-        {
-            layoutset(setcounter);
-        }
 
 
     }
@@ -490,46 +486,190 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
-        layout2=findViewById(R.id.layout2);
-        layout3=findViewById(R.id.layout3);
-        layout4=findViewById(R.id.layout4);
-        layout5=findViewById(R.id.layout5);
-        layout6=findViewById(R.id.layout6);
 
-        if(seatcount==2)
-        {
+
+
+        layout2 = findViewById(R.id.layout2);
+        layout3 = findViewById(R.id.layout3);
+        layout4 = findViewById(R.id.layout4);
+        layout5 = findViewById(R.id.layout5);
+        layout6 = findViewById(R.id.layout6);
+        layout2.setVisibility(View.GONE);
+        layout3.setVisibility(View.GONE);
+        layout4.setVisibility(View.GONE);
+        layout5.setVisibility(View.GONE);
+        layout6.setVisibility(View.GONE);
+        gnderlayoutfind();
+        if (seatcount == 2) {
+            layout2.setVisibility(View.VISIBLE);
+
+
+            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale2.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale2.setTextColor(Color.parseColor("#91959d"));
+
+        } else if (seatcount == 3) {
+            layout2.setVisibility(View.VISIBLE);
+            layout3.setVisibility(View.VISIBLE);
+
+            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+
+            txtmale2.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale2.setTextColor(Color.parseColor("#91959d"));
+
+
+
+            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale3.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale3.setTextColor(Color.parseColor("#91959d"));
+
+
+
+        } else if (seatcount == 4) {
+            layout2.setVisibility(View.VISIBLE);
+            layout3.setVisibility(View.VISIBLE);
+            layout4.setVisibility(View.VISIBLE);
+
+
+
+            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale2.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale2.setTextColor(Color.parseColor("#91959d"));
+
+            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale3.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale3.setTextColor(Color.parseColor("#91959d"));
+
+            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+
+        } else if (seatcount == 5) {
+            layout2.setVisibility(View.VISIBLE);
+            layout3.setVisibility(View.VISIBLE);
+            layout4.setVisibility(View.VISIBLE);
+            layout5.setVisibility(View.VISIBLE);
+
+            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale2.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale2.setTextColor(Color.parseColor("#91959d"));
+
+            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale3.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale3.setTextColor(Color.parseColor("#91959d"));
+
+
+            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale4.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale4.setTextColor(Color.parseColor("#91959d"));
+
+
+            male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale5.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale5.setTextColor(Color.parseColor("#91959d"));
+
+
+        }
+        else if (seatcount == 6) {
+            layout2.setVisibility(View.VISIBLE);
+            layout3.setVisibility(View.VISIBLE);
+            layout4.setVisibility(View.VISIBLE);
+            layout5.setVisibility(View.VISIBLE);
+            layout6.setVisibility(View.VISIBLE);
+
+
+            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale2.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale2.setTextColor(Color.parseColor("#91959d"));
+
+            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale3.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale3.setTextColor(Color.parseColor("#91959d"));
+
+
+            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale4.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale4.setTextColor(Color.parseColor("#91959d"));
+
+            male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale5.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale5.setTextColor(Color.parseColor("#91959d"));
+
+            male6.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female6.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale6.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale6.setTextColor(Color.parseColor("#91959d"));
+
+
+        }
+
+        else {
+            layout2.setVisibility(View.GONE);
             layout3.setVisibility(View.GONE);
             layout4.setVisibility(View.GONE);
             layout5.setVisibility(View.GONE);
             layout6.setVisibility(View.GONE);
-        } if(seatcount==3)
-        {
-            layout4.setVisibility(View.GONE);
-            layout5.setVisibility(View.GONE);
-            layout6.setVisibility(View.GONE);
-
-        } if(seatcount==4)
-        {
-            layout5.setVisibility(View.GONE);
-            layout6.setVisibility(View.GONE);
-        } if(seatcount==5)
-        {
-            layout6.setVisibility(View.GONE);
-        }else
-        {
-
         }
 
 
 
 
 
-
-     //   if ()
-
+        //   if ()
 
 
+    }
 
+    public void gnderlayoutfind() {
+
+
+         txtmale2=findViewById(R.id.txtmale2);
+         txtmale3=findViewById(R.id.txtmale2);
+         txtmale4=findViewById(R.id.txtmale2);
+         txtmale5=findViewById(R.id.txtmale2);
+         txtmale6=findViewById(R.id.txtmale2);
+
+
+        txtfemale2=findViewById(R.id.txtfemale2);
+        txtfemale3=findViewById(R.id.txtfemale3);
+        txtfemale4=findViewById(R.id.txtfemale4);
+        txtfemale5=findViewById(R.id.txtfemale5);
+        txtfemale6=findViewById(R.id.txtfemale6);;
+
+
+
+
+
+        male2 = (LinearLayout) findViewById(R.id.male2);
+        female2 = (LinearLayout) findViewById(R.id.female2);
+
+
+        male3 = (LinearLayout) findViewById(R.id.male3);
+        female3 = (LinearLayout) findViewById(R.id.female3);
+
+
+        male4 = (LinearLayout) findViewById(R.id.male4);
+        female4 = (LinearLayout) findViewById(R.id.female2);
+
+
+        male5 = (LinearLayout) findViewById(R.id.male5);
+        female5 = (LinearLayout) findViewById(R.id.female5);
+
+
+        male6 = (LinearLayout) findViewById(R.id.male6);
+        female6 = (LinearLayout) findViewById(R.id.female6);
 
 
     }

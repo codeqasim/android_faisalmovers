@@ -1,6 +1,6 @@
 package com.faisalmovers.travels.bus;
 
-import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -665,7 +665,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
     }
 
-    @SuppressLint("ResourceAsColor")
+
     public  void dailogbox ()
     {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
