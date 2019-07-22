@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -50,8 +51,13 @@ import util.Utils;
 public class Bingobus_Last_StepActivity extends Url implements View.OnClickListener {
 
 
+    JsonObject jsObj;
+    String mobileverificationemail;
     LinearLayout male2, male3, male4, male5, male6;
     LinearLayout female2, female3, female4, female5, female6;
+    EditText fullname2,fullname3,fullname4,fullname5,fullname6;
+    EditText nicnumber2,nicnumber3,nicnumber4,nicnumber5,nicnumber6;
+    EditText age2,age3,age4,age5,age6;
     LinearLayout male, female;//bycash,easypisa;
     TextView txtmale,txtmale2,txtmale3,txtmale4,txtmale5,txtmale6;
     TextView txtfemale,txtfemale2,txtfemale3,txtfemale4,txtfemale5,txtfemale6;
@@ -71,7 +77,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
     String gender2,gender3,gender4,gender5,gender6;
     //Bingobus7Model bingobus7Model;
-
     LinearLayout layout2, layout3, layout4, layout5, layout6;
     Intent da;
 
@@ -81,150 +86,14 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         setContentView(R.layout.activity_bingobus_last_step);
 
 
+        jsObj = new JsonObject();
         da = getIntent();
        // bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
         gson = new Gson();
         gnderlayoutfind();
 
-        //bycash = (LinearLayout)findViewById(R.id.bycash);
-        // easypisa = (LinearLayout)findViewById(R.id.easypisa);
-        male = (LinearLayout) findViewById(R.id.male);
-        female = (LinearLayout) findViewById(R.id.female);
-        txtmale = (TextView) findViewById(R.id.txtmale);
-        txtfemale = (TextView) findViewById(R.id.txtfemale);
-        searchbus = (TextView) findViewById(R.id.searchbus);
-        back = (ImageView) findViewById(R.id.back);
-        pickupfrom = (TextView) findViewById(R.id.from);
-        topoint = (TextView) findViewById(R.id.to);
-
-        locpick = (TextView) findViewById(R.id.pickup);
-        locdrop = (TextView) findViewById(R.id.dropping);
-
-        totalamount = (TextView) findViewById(R.id.total);
-        totalseatnum = (TextView) findViewById(R.id.seatnum);
 
 
-        nicnumber = (EditText) findViewById(R.id.nicnumber);
-        fullname = (EditText) findViewById(R.id.fullname);
-
-        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-        progressBar2.setVisibility(View.GONE);
-
-
-//        pickup = findViewById(R.id.pickup);
-//        dropping = findViewById(R.id.dropping);
-//        from = findViewById(R.id.from);
-//        to = findViewById(R.id.to);
-//
-//
-
-       /* findViewById(R.id.nicnumber).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-*/
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        editor = pref.edit();
-//
-        pickupfrom.setText(pref.getString("from", null));
-        topoint.setText(pref.getString("to", null));
-        ;
-        locpick.setText(pref.getString("city", null));
-        /* locdrop.setText(pref.getString("city1", null));*/
-        locdrop.setText(pref.getString("to", null));
-        totalamount.setText("TOTAL : Rs " + pref.getString("totalamountofseat", null));
-        totalseatnum.setText("SeatNo = { " + pref.getString("numberofseat", null) + " }");
-        String mobileverificationefullname = pref.getString("name", null);
-        String mobileverificationenic = pref.getString("nic", null);
-
-        fullname.setText(mobileverificationefullname);
-        nicnumber.setText(mobileverificationenic);
-//
-//        editor.clear();
-//        editor.commit();
-//
-
-
-        //  img1easypasa,img2easypasa
-
-       /* img1 = (ImageView)findViewById(R.id.img1);
-        img2 = (ImageView)findViewById(R.id.img2);
-
-        img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
-        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
-/*
-
-        img1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                img1.setVisibility(View.GONE);
-                img2.setVisibility(View.VISIBLE);
-            }
-        });
-
-        img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                img2.setVisibility(View.GONE);
-                img1.setVisibility(View.VISIBLE);
-            }
-        });
-*/
-
-/*
-        img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
-        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
-
-       /* img1easypasa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                img1easypasa.setVisibility(View.GONE);
-                img2easypasa.setVisibility(View.VISIBLE);
-            }
-        });
-
-        img2easypasa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                img2easypasa.setVisibility(View.GONE);
-                img1easypasa.setVisibility(View.VISIBLE);
-            }
-        });*/
-
-
-        String gander = pref.getString("gander", null);
-
-        if (gander.equals("1")) {
-            female.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            male.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtfemale.setTextColor(Color.parseColor("#ffffff"));
-            txtmale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "1");
-            editor.commit();
-
-        } else if (gander.equals("2")) {
-
-            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "2");
-            editor.commit();
-        } else {
-
-            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "2");
-            editor.commit();
-
-
-
-
-        }
 
 
         searchbus.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +108,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                     Utils.showErrorToast(getApplicationContext(), " required info  ");
                 } else {
 
-
+                     validtions(6);
                  /*   searchbus.setVisibility(View.GONE);
                     progressBar2.setVisibility(View.VISIBLE);
                     bookseatintway();*/
@@ -248,34 +117,17 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         });
         male.setOnClickListener(this);
         female.setOnClickListener(this);
-
         male2.setOnClickListener(this);
         female2.setOnClickListener(this);
-
         male3.setOnClickListener(this);
         female3.setOnClickListener(this);
-
         male4.setOnClickListener(this);
         female4.setOnClickListener(this);
-
         male5.setOnClickListener(this);
         female5.setOnClickListener(this);
-
         male6.setOnClickListener(this);
         female6.setOnClickListener(this);
-
         back.setOnClickListener(this);
-        //   easypisa.setOnClickListener(this);
-        //   bycash.setOnClickListener(this);
-
-     /*   img1.setVisibility(View.GONE);
-        img2.setVisibility(View.VISIBLE);
-        img2easypasa.setVisibility(View.GONE);
-        img1easypasa.setVisibility(View.VISIBLE);
-*/
-
-
-        //   loadhistorydata();
 
 
         String seatcount = pref.getString("seatcount", null);
@@ -497,13 +349,14 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     }
 
     public void bookseatintway() {
+
         String fromCityId = pref.getString("fromcityid", null);
         String toCityId = pref.getString("tocityid", null);
         String selectdate = pref.getString("selectdate", null);
         String seatlist = pref.getString("seatlist", null);
         String mobileverification = pref.getString("mobileverification", null);
         String bordingpoint = pref.getString("boardingpointid", null);
-        String mobileverificationemail = pref.getString("email", null);
+        mobileverificationemail = pref.getString("email", null);
         String mobileverificationefullname = pref.getString("name", null);
         String mobileverificationenic = pref.getString("nic", null);
         String gander = pref.getString("gander", null);
@@ -524,7 +377,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         }
 
 
-        JsonObject jsObj = new JsonObject();
+
         jsObj.addProperty("age", "29");
         jsObj.addProperty("email", mobileverificationemail);
         jsObj.addProperty("first_name", mobileverificationefullname);
@@ -566,6 +419,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     public void layoutset(int seatcount) {
 
         gnderlayoutfind();
+       // validtions(seatcount);
         layout2 = findViewById(R.id.layout2);
         layout3 = findViewById(R.id.layout3);
         layout4 = findViewById(R.id.layout4);
@@ -638,8 +492,29 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     public void gnderlayoutfind() {
 
+        male = (LinearLayout) findViewById(R.id.male);
+        female = (LinearLayout) findViewById(R.id.female);
+        txtmale = (TextView) findViewById(R.id.txtmale);
+        txtfemale = (TextView) findViewById(R.id.txtfemale);
+        searchbus = (TextView) findViewById(R.id.searchbus);
+        back = (ImageView) findViewById(R.id.back);
+        pickupfrom = (TextView) findViewById(R.id.from);
+        topoint = (TextView) findViewById(R.id.to);
+        locpick = (TextView) findViewById(R.id.pickup);
+        locdrop = (TextView) findViewById(R.id.dropping);
+        totalamount = (TextView) findViewById(R.id.total);
+        totalseatnum = (TextView) findViewById(R.id.seatnum);
+        nicnumber = (EditText) findViewById(R.id.nicnumber);
+        fullname = (EditText) findViewById(R.id.fullname);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar2.setVisibility(View.GONE);
 
-         txtmale2=findViewById(R.id.txtmale2);
+
+
+
+
+
+        txtmale2=findViewById(R.id.txtmale2);
          txtmale3=findViewById(R.id.txtmale3);
          txtmale4=findViewById(R.id.txtmale4);
          txtmale5=findViewById(R.id.txtmale5);
@@ -702,5 +577,370 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         txtmale2.setTextColor(Color.parseColor("#ffffff"));
         txtfemale2.setTextColor(Color.parseColor("#91959d"));
         gender2="male";
+
+
+        loaddata();
+    }
+
+
+    public  Boolean validtions(int seatcount)
+    {
+
+        Boolean checker=false;
+        fullname2 = findViewById(R.id.fullname2);
+        fullname3 = findViewById(R.id.fullname3);
+        fullname4 = findViewById(R.id.fullname4);
+        fullname5 = findViewById(R.id.fullname5);
+        fullname6 = findViewById(R.id.fullname6);
+
+        nicnumber2 = findViewById(R.id.nicnumber2);
+        nicnumber3 = findViewById(R.id.nicnumber3);
+        nicnumber4 = findViewById(R.id.nicnumber4);
+        nicnumber5 = findViewById(R.id.nicnumber5);
+        nicnumber6 = findViewById(R.id.nicnumber6);
+
+        age2 = findViewById(R.id.age2);
+        age3 = findViewById(R.id.age3);
+        age4 = findViewById(R.id.age4);
+        age5 = findViewById(R.id.age5);
+        age6 = findViewById(R.id.age6);
+
+
+
+
+        if (seatcount == 2) {
+
+            if (fullname2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }else
+            {
+                checker=true;
+
+
+
+                make_jsonobject_users(2 );
+
+
+            }
+
+        }
+        else if(seatcount == 3)
+        {
+            if (fullname2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else
+            {
+                checker=true;
+                make_jsonobject_users(3 );
+            }
+        }else if(seatcount == 4)
+        {
+            if (fullname2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if(fullname4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else
+            {
+                checker=true;
+                make_jsonobject_users(4 );
+            }
+        }
+        else if(seatcount == 5)
+        {
+            if (fullname2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else
+            {
+                checker=true;
+                make_jsonobject_users(5 );
+            }
+        }
+
+        else if(seatcount == 6)
+        {
+            if (fullname2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age2.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age3.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+
+            else if (fullname4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age4.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (fullname5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age5.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (fullname6.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber6.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }
+            else if (age6.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            }else
+            {
+                checker=true;
+                make_jsonobject_users(6 );
+            }
+
+
+        }
+
+
+        return checker;
+    }
+
+
+    public void loaddata()
+    {
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
+        pickupfrom.setText(pref.getString("from", null));
+        topoint.setText(pref.getString("to", null));
+        ;
+        locpick.setText(pref.getString("city", null));
+        /* locdrop.setText(pref.getString("city1", null));*/
+        locdrop.setText(pref.getString("to", null));
+        totalamount.setText("TOTAL : Rs " + pref.getString("totalamountofseat", null));
+        totalseatnum.setText("SeatNo = { " + pref.getString("numberofseat", null) + " }");
+        String mobileverificationefullname = pref.getString("name", null);
+        String mobileverificationenic = pref.getString("nic", null);
+        fullname.setText(mobileverificationefullname);
+        nicnumber.setText(mobileverificationenic);
+        String gander = pref.getString("gander", null);
+
+        if (gander.equals("1")) {
+            female.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            male.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtfemale.setTextColor(Color.parseColor("#ffffff"));
+            txtmale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "1");
+            editor.commit();
+
+        } else if (gander.equals("2")) {
+
+            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "2");
+            editor.commit();
+        } else {
+
+            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "2");
+            editor.commit();
+
+
+
+
+        }
+
+    }
+
+
+    public void make_jsonobject_users(int position )
+    {
+
+
+        String full_name2 =""+fullname2.getText();
+        String full_name3=""+fullname3 .getText();
+        String full_name4=""+fullname4 .getText();
+        String full_name5=""+fullname5 .getText();
+        String full_name6=""+fullname6 .getText();
+
+        String nic_number2=""+nicnumber2.getText();
+        String nic_number3=""+nicnumber3.getText();
+        String nic_number4=""+nicnumber4.getText();
+        String nic_number5=""+nicnumber5.getText();
+        String nic_number6=""+nicnumber6.getText();
+
+        String age__2=""+age2.getText();
+        String age_3=""+age3.getText();
+        String age_4=""+age4.getText();
+        String age_5=""+age5.getText();
+        String age_6=""+age6.getText();
+
+
+
+      for (int i =1;i<position;i++)
+      {
+          if (i==2)
+          {
+
+
+              jsObj.addProperty("age", age__2);
+              jsObj.addProperty("email", mobileverificationemail);
+              jsObj.addProperty("first_name", full_name2);
+              jsObj.addProperty("gender", gender2);
+              jsObj.addProperty("last_name", " ");
+              jsObj.addProperty("nic", nic_number2);
+
+
+
+
+          } else if(i==3)
+         {
+
+          jsObj.addProperty("age", age_3);
+          jsObj.addProperty("email", mobileverificationemail);
+          jsObj.addProperty("first_name", full_name3);
+          jsObj.addProperty("gender", gender3);
+          jsObj.addProperty("last_name", " ");
+          jsObj.addProperty("nic", nic_number3);
+
+
+
+
+         }
+          else if (i==4)
+          {
+
+              jsObj.addProperty("age", age_4);
+              jsObj.addProperty("email", mobileverificationemail);
+              jsObj.addProperty("first_name", full_name4);
+              jsObj.addProperty("gender", gender4);
+              jsObj.addProperty("last_name", " ");
+              jsObj.addProperty("nic", nic_number4);
+
+
+
+
+          }
+          else  if(i==5)
+          {
+
+              jsObj.addProperty("age", age_5);
+              jsObj.addProperty("email", mobileverificationemail);
+              jsObj.addProperty("first_name", full_name5);
+              jsObj.addProperty("gender", gender5);
+              jsObj.addProperty("last_name", " ");
+              jsObj.addProperty("nic", nic_number5);
+
+
+
+          }
+          else  if(i==6)
+          {
+
+              jsObj.addProperty("age", age_6);
+              jsObj.addProperty("email", mobileverificationemail);
+              jsObj.addProperty("first_name", full_name6);
+              jsObj.addProperty("gender", gender6);
+              jsObj.addProperty("last_name", " ");
+              jsObj.addProperty("nic", nic_number6);
+
+
+
+          }
+
+
+      }
+
+
+        String g = gson.toJson(jsObj);
+        g = "[" + g + "]";
+        Log.d("gggggg", " " + g);
+
+
     }
 }
