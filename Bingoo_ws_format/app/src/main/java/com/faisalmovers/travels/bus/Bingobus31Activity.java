@@ -36,7 +36,7 @@ public class Bingobus31Activity extends AppCompatActivity {
 
 
     ArrayList<String> dropingpoint = new ArrayList<>() ;
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus31);

@@ -69,9 +69,8 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     String firtnamestart = " ";
     EditText nicnumber, fullname;
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
-
-
-    Bingobus7Model bingobus7Model;
+    String gender2,gender3,gender4,gender5,gender6;
+    //Bingobus7Model bingobus7Model;
 
     LinearLayout layout2, layout3, layout4, layout5, layout6;
     Intent da;
@@ -83,9 +82,9 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
         da = getIntent();
-        bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
+       // bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
         gson = new Gson();
-
+        gnderlayoutfind();
 
         //bycash = (LinearLayout)findViewById(R.id.bycash);
         // easypisa = (LinearLayout)findViewById(R.id.easypisa);
@@ -241,14 +240,30 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 } else {
 
 
-                    searchbus.setVisibility(View.GONE);
+                 /*   searchbus.setVisibility(View.GONE);
                     progressBar2.setVisibility(View.VISIBLE);
-                    bookseatintway();
+                    bookseatintway();*/
                 }
             }
         });
         male.setOnClickListener(this);
         female.setOnClickListener(this);
+
+        male2.setOnClickListener(this);
+        female2.setOnClickListener(this);
+
+        male3.setOnClickListener(this);
+        female3.setOnClickListener(this);
+
+        male4.setOnClickListener(this);
+        female4.setOnClickListener(this);
+
+        male5.setOnClickListener(this);
+        female5.setOnClickListener(this);
+
+        male6.setOnClickListener(this);
+        female6.setOnClickListener(this);
+
         back.setOnClickListener(this);
         //   easypisa.setOnClickListener(this);
         //   bycash.setOnClickListener(this);
@@ -265,7 +280,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
         String seatcount = pref.getString("seatcount", null);
         int setcounter = Integer.parseInt(seatcount);
-        layoutset(setcounter);
+        layoutset(6);
 
 
 
@@ -293,32 +308,98 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 break;
 
 
+            case R.id.male2:
+                male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtmale2.setTextColor(Color.parseColor("#ffffff"));
+                txtfemale2.setTextColor(Color.parseColor("#91959d"));
+                gender2="male";
+                break;
+
+            case R.id.female2:
+                female2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                male2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtfemale2.setTextColor(Color.parseColor("#ffffff"));
+                txtmale2.setTextColor(Color.parseColor("#91959d"));
+                gender2="female";
+                break;
+
+
+            case R.id.male3:
+                male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtmale3.setTextColor(Color.parseColor("#ffffff"));
+                txtfemale3.setTextColor(Color.parseColor("#91959d"));
+                gender3="male";
+                break;
+
+            case R.id.female3:
+                female3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                male3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtfemale3.setTextColor(Color.parseColor("#ffffff"));
+                txtmale3.setTextColor(Color.parseColor("#91959d"));
+                gender3="female";
+                break;
+
+
+            case R.id.male4:
+                male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtmale4.setTextColor(Color.parseColor("#ffffff"));
+                txtfemale4.setTextColor(Color.parseColor("#91959d"));
+                gender4="male";
+                break;
+
+            case R.id.female4:
+                female4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                male4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtfemale4.setTextColor(Color.parseColor("#ffffff"));
+                txtmale4.setTextColor(Color.parseColor("#91959d"));
+                gender4="female";
+                break;
+
+
+            case R.id.male5:
+                male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtmale5.setTextColor(Color.parseColor("#ffffff"));
+                txtfemale5.setTextColor(Color.parseColor("#91959d"));
+                gender5="male";
+                break;
+
+            case R.id.female5:
+                female5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                male5.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtfemale5.setTextColor(Color.parseColor("#ffffff"));
+                txtmale5.setTextColor(Color.parseColor("#91959d"));
+                gender5="female";
+                break;
+
+
+
+            case R.id.male6:
+                male6.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                female6.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtmale6.setTextColor(Color.parseColor("#ffffff"));
+                txtfemale6.setTextColor(Color.parseColor("#91959d"));
+                gender6="male";
+                break;
+
+            case R.id.female6:
+                female6.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+                male6.setBackgroundResource(R.drawable.rectangle_cure_gray);
+                txtfemale6.setTextColor(Color.parseColor("#ffffff"));
+                txtmale6.setTextColor(Color.parseColor("#91959d"));
+                gender6="female";
+                break;
+
+
+
             case R.id.back:
                 finish();
                 break;
 
-            /*     case R.id.easypisa:
 
-             *//*   img1.setVisibility(View.VISIBLE);
-                img2.setVisibility(View.GONE);
-
-                img1easypasa.setVisibility(View.GONE);
-                img2easypasa.setVisibility(View.VISIBLE);*//*
-                break;
-
-
-
-            case R.id.bycash:
-
-
-               *//* img1.setVisibility(View.GONE);
-                img2.setVisibility(View.VISIBLE);
-
-
-                img2easypasa.setVisibility(View.GONE);
-                img1easypasa.setVisibility(View.VISIBLE);
-*//*
-                break;*/
 
 
         }
@@ -455,7 +536,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         g = "[" + g + "]";
         Log.d("gggggg", " " + g);
         String url = urlseatbook;
-        postrequest(selectdate, url, seatlist, toCityId, fromCityId, mobileverification, mobileverificationemail, bingobus7Model, id, mobileverificationenic, g, bordingpoint, "0");
+//        postrequest(selectdate, url, seatlist, toCityId, fromCityId, mobileverification, mobileverificationemail, bingobus7Model, id, mobileverificationenic, g, bordingpoint, "0");
 
     }
 
@@ -484,11 +565,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     public void layoutset(int seatcount) {
 
-
-
-
-
-
+        gnderlayoutfind();
         layout2 = findViewById(R.id.layout2);
         layout3 = findViewById(R.id.layout3);
         layout4 = findViewById(R.id.layout4);
@@ -499,32 +576,14 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         layout4.setVisibility(View.GONE);
         layout5.setVisibility(View.GONE);
         layout6.setVisibility(View.GONE);
-        gnderlayoutfind();
         if (seatcount == 2) {
             layout2.setVisibility(View.VISIBLE);
-
-
-            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale2.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale2.setTextColor(Color.parseColor("#91959d"));
 
         } else if (seatcount == 3) {
             layout2.setVisibility(View.VISIBLE);
             layout3.setVisibility(View.VISIBLE);
 
-            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
 
-            txtmale2.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale2.setTextColor(Color.parseColor("#91959d"));
-
-
-
-            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale3.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale3.setTextColor(Color.parseColor("#91959d"));
 
 
 
@@ -535,18 +594,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
-            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale2.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale2.setTextColor(Color.parseColor("#91959d"));
 
-            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale3.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale3.setTextColor(Color.parseColor("#91959d"));
-
-            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
 
         } else if (seatcount == 5) {
             layout2.setVisibility(View.VISIBLE);
@@ -554,27 +602,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             layout4.setVisibility(View.VISIBLE);
             layout5.setVisibility(View.VISIBLE);
 
-            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale2.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale2.setTextColor(Color.parseColor("#91959d"));
-
-            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale3.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale3.setTextColor(Color.parseColor("#91959d"));
-
-
-            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale4.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale4.setTextColor(Color.parseColor("#91959d"));
-
-
-            male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale5.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale5.setTextColor(Color.parseColor("#91959d"));
 
 
         }
@@ -586,31 +613,8 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             layout6.setVisibility(View.VISIBLE);
 
 
-            male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale2.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale2.setTextColor(Color.parseColor("#91959d"));
-
-            male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale3.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale3.setTextColor(Color.parseColor("#91959d"));
 
 
-            male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale4.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale4.setTextColor(Color.parseColor("#91959d"));
-
-            male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale5.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale5.setTextColor(Color.parseColor("#91959d"));
-
-            male6.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female6.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale6.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale6.setTextColor(Color.parseColor("#91959d"));
 
 
         }
@@ -636,10 +640,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
          txtmale2=findViewById(R.id.txtmale2);
-         txtmale3=findViewById(R.id.txtmale2);
-         txtmale4=findViewById(R.id.txtmale2);
-         txtmale5=findViewById(R.id.txtmale2);
-         txtmale6=findViewById(R.id.txtmale2);
+         txtmale3=findViewById(R.id.txtmale3);
+         txtmale4=findViewById(R.id.txtmale4);
+         txtmale5=findViewById(R.id.txtmale5);
+         txtmale6=findViewById(R.id.txtmale6);
 
 
         txtfemale2=findViewById(R.id.txtfemale2);
@@ -661,7 +665,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
         male4 = (LinearLayout) findViewById(R.id.male4);
-        female4 = (LinearLayout) findViewById(R.id.female2);
+        female4 = (LinearLayout) findViewById(R.id.female4);
 
 
         male5 = (LinearLayout) findViewById(R.id.male5);
@@ -672,5 +676,31 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         female6 = (LinearLayout) findViewById(R.id.female6);
 
 
+
+        male6.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+        female6.setBackgroundResource(R.drawable.rectangle_cure_gray);
+        txtmale6.setTextColor(Color.parseColor("#ffffff"));
+        txtfemale6.setTextColor(Color.parseColor("#91959d"));
+        gender6="male";
+        male5.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+        female5.setBackgroundResource(R.drawable.rectangle_cure_gray);
+        txtmale5.setTextColor(Color.parseColor("#ffffff"));
+        txtfemale5.setTextColor(Color.parseColor("#91959d"));
+        gender5="male";
+        male4.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+        female4.setBackgroundResource(R.drawable.rectangle_cure_gray);
+        txtmale4.setTextColor(Color.parseColor("#ffffff"));
+        txtfemale4.setTextColor(Color.parseColor("#91959d"));
+        gender4="male";
+        male3.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+        female3.setBackgroundResource(R.drawable.rectangle_cure_gray);
+        txtmale3.setTextColor(Color.parseColor("#ffffff"));
+        txtfemale3.setTextColor(Color.parseColor("#91959d"));
+        gender3="male";
+        male2.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+        female2.setBackgroundResource(R.drawable.rectangle_cure_gray);
+        txtmale2.setTextColor(Color.parseColor("#ffffff"));
+        txtfemale2.setTextColor(Color.parseColor("#91959d"));
+        gender2="male";
     }
 }

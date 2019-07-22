@@ -56,7 +56,7 @@ public class Bingobus5Activity extends Url {
 
     String data;
 
-    @Override
+  //  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bigobus5);
