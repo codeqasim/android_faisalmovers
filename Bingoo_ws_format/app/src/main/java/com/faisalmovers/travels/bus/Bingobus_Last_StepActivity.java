@@ -8,7 +8,9 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -50,9 +52,10 @@ import util.Utils;
 
 public class Bingobus_Last_StepActivity extends Url implements View.OnClickListener {
 
+    JSONArray jsonArray = new JSONArray();
+    JSONObject PASSENGER1,PASSENGER2,PASSENGER3,PASSENGER4,PASSENGER5,PASSENGER6;
 
-    JsonObject jsObj;
-    String mobileverificationemail;
+    String mobileverificationemail,mobileverificationefullname, gander, mobileverificationenic;
     LinearLayout male2, male3, male4, male5, male6;
     LinearLayout female2, female3, female4, female5, female6;
     EditText fullname2,fullname3,fullname4,fullname5,fullname6;
@@ -76,45 +79,25 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     EditText nicnumber, fullname;
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
     String gender2,gender3,gender4,gender5,gender6;
-    //Bingobus7Model bingobus7Model;
+    Bingobus7Model bingobus7Model;
     LinearLayout layout2, layout3, layout4, layout5, layout6;
     Intent da;
-
+    int setcounter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus_last_step);
 
 
-        jsObj = new JsonObject();
+
         da = getIntent();
-       // bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
+        bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
         gson = new Gson();
         gnderlayoutfind();
 
 
 
 
-
-        searchbus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Log.d("malikkkkkkkkk", " " + fullname.getText());
-                fullname.getText();
-                if (fullname.getText().toString().trim().equals("")) {
-                    Utils.showErrorToast(getApplicationContext(), " required info  ");
-                } else if (nicnumber.getText().toString().trim().equals("")) {
-                    Utils.showErrorToast(getApplicationContext(), " required info  ");
-                } else {
-
-                     validtions(6);
-                 /*   searchbus.setVisibility(View.GONE);
-                    progressBar2.setVisibility(View.VISIBLE);
-                    bookseatintway();*/
-                }
-            }
-        });
         male.setOnClickListener(this);
         female.setOnClickListener(this);
         male2.setOnClickListener(this);
@@ -129,12 +112,26 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         female6.setOnClickListener(this);
         back.setOnClickListener(this);
 
-
+        //setcounter=2;
         String seatcount = pref.getString("seatcount", null);
-        int setcounter = Integer.parseInt(seatcount);
-        layoutset(6);
+         setcounter = Integer.parseInt(seatcount);
+        layoutset(setcounter);
+
+        searchbus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
+                Boolean vailddata=validtions(setcounter);
+                Log.d("gggg", " " + vailddata);
+                if (vailddata==true)
+                {
+                    bookseatintway();
+                }
+
+
+            }
+        });
 
     }
 
@@ -356,40 +353,22 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         String seatlist = pref.getString("seatlist", null);
         String mobileverification = pref.getString("mobileverification", null);
         String bordingpoint = pref.getString("boardingpointid", null);
-        mobileverificationemail = pref.getString("email", null);
-        String mobileverificationefullname = pref.getString("name", null);
-        String mobileverificationenic = pref.getString("nic", null);
-        String gander = pref.getString("gander", null);
+
         String id = pref.getString("id", " ");
 
         Log.d("gandergander", " ///" + gander);
 
 
-        if (gander.equals("2")) {
-            gander = "male";
-            firtnamestart = "Mr ";
-
-
-        } else {
-            gander = "female";
-            firtnamestart = "Miss ";
-
-        }
 
 
 
-        jsObj.addProperty("age", "29");
-        jsObj.addProperty("email", mobileverificationemail);
-        jsObj.addProperty("first_name", mobileverificationefullname);
-        jsObj.addProperty("gender", gander);
-        jsObj.addProperty("last_name", " ");
-        jsObj.addProperty("nic", mobileverificationenic);
 
-        String g = gson.toJson(jsObj);
-        g = "[" + g + "]";
+
+     String g =  jsonArray.toString();;
+        //g = "[" + g + "]";
         Log.d("gggggg", " " + g);
-        String url = urlseatbook;
-//        postrequest(selectdate, url, seatlist, toCityId, fromCityId, mobileverification, mobileverificationemail, bingobus7Model, id, mobileverificationenic, g, bordingpoint, "0");
+     String url = urlseatbook;
+      postrequest(selectdate, url, seatlist, toCityId, fromCityId, mobileverification, mobileverificationemail, bingobus7Model, id, mobileverificationenic, g, bordingpoint, "0");
 
     }
 
@@ -607,8 +586,27 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
+        if (seatcount == 1) {
 
-        if (seatcount == 2) {
+            if (fullname.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else if (nicnumber.getText().toString().trim().equals("")) {
+                Utils.showErrorToast(getApplicationContext(), " required info  ");
+            } else {
+
+                checker=true;
+                make_jsonobject_users(1 );
+
+                 /*   searchbus.setVisibility(View.GONE);
+                    progressBar2.setVisibility(View.VISIBLE);
+                    bookseatintway();*/
+            }
+
+
+
+
+        }
+       else if (seatcount == 2) {
 
             if (fullname2.getText().toString().trim().equals("")) {
                 Utils.showErrorToast(getApplicationContext(), " required info  ");
@@ -776,7 +774,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
             }else
             {
                 checker=true;
-                make_jsonobject_users(6 );
+                make_jsonobject_users(6);
             }
 
 
@@ -793,17 +791,19 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         editor = pref.edit();
         pickupfrom.setText(pref.getString("from", null));
         topoint.setText(pref.getString("to", null));
-        ;
         locpick.setText(pref.getString("city", null));
         /* locdrop.setText(pref.getString("city1", null));*/
         locdrop.setText(pref.getString("to", null));
         totalamount.setText("TOTAL : Rs " + pref.getString("totalamountofseat", null));
         totalseatnum.setText("SeatNo = { " + pref.getString("numberofseat", null) + " }");
-        String mobileverificationefullname = pref.getString("name", null);
-        String mobileverificationenic = pref.getString("nic", null);
+        mobileverificationefullname = pref.getString("name", null);
+         mobileverificationenic = pref.getString("nic", null);
         fullname.setText(mobileverificationefullname);
         nicnumber.setText(mobileverificationenic);
-        String gander = pref.getString("gander", null);
+         gander = pref.getString("gander", null);
+
+
+
 
         if (gander.equals("1")) {
             female.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
@@ -835,6 +835,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
         }
 
+
+        //fullname , nic main user disble ( write )
+        disableInput(fullname);
+        disableInput(nicnumber);
     }
 
 
@@ -860,48 +864,93 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         String age_5=""+age5.getText();
         String age_6=""+age6.getText();
 
+         PASSENGER1 = new JSONObject();
+         PASSENGER2 = new JSONObject();
+         PASSENGER3 = new JSONObject();
+         PASSENGER4 = new JSONObject();
+         PASSENGER5 = new JSONObject();
+         PASSENGER6 = new JSONObject();
 
 
-      for (int i =1;i<position;i++)
+      for (int i =0;i<=position;i++)
       {
-          if (i==2)
+
+          if (i==1)
           {
 
+              try {
 
-              jsObj.addProperty("age", age__2);
-              jsObj.addProperty("email", mobileverificationemail);
-              jsObj.addProperty("first_name", full_name2);
-              jsObj.addProperty("gender", gender2);
-              jsObj.addProperty("last_name", " ");
-              jsObj.addProperty("nic", nic_number2);
+                  PASSENGER1.put("age", "29");
+                  PASSENGER1.put("email", mobileverificationemail);
+                  PASSENGER1.put("first_name", mobileverificationefullname);
+                  PASSENGER1.put("gender", gander);
+                  PASSENGER1.put("last_name", " ");
+                  PASSENGER1.put("nic", mobileverificationenic);
+                  jsonArray.put(PASSENGER1);
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
 
+
+
+          }
+
+          else   if (i==2)
+          {
+
+              try {
+
+                  PASSENGER2.put("age", age__2);
+                  PASSENGER2.put("email", mobileverificationemail);
+                  PASSENGER2.put("first_name", full_name2);
+                  PASSENGER2.put("gender", gender2);
+                  PASSENGER2.put("last_name", " ");
+                  PASSENGER2.put("nic", nic_number2);
+                  jsonArray.put(PASSENGER2);
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
 
 
 
           } else if(i==3)
          {
 
-          jsObj.addProperty("age", age_3);
-          jsObj.addProperty("email", mobileverificationemail);
-          jsObj.addProperty("first_name", full_name3);
-          jsObj.addProperty("gender", gender3);
-          jsObj.addProperty("last_name", " ");
-          jsObj.addProperty("nic", nic_number3);
 
+             try {
 
+                 PASSENGER3.put("age", age_3);
+                 PASSENGER3.put("email", mobileverificationemail);
+                 PASSENGER3.put("first_name", full_name3);
+                 PASSENGER3.put("gender", gender3);
+                 PASSENGER3.put("last_name", " ");
+                 PASSENGER3.put("nic", nic_number3);
+                 jsonArray.put(PASSENGER3);
+             } catch (JSONException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+             }
 
 
          }
           else if (i==4)
           {
 
-              jsObj.addProperty("age", age_4);
-              jsObj.addProperty("email", mobileverificationemail);
-              jsObj.addProperty("first_name", full_name4);
-              jsObj.addProperty("gender", gender4);
-              jsObj.addProperty("last_name", " ");
-              jsObj.addProperty("nic", nic_number4);
+              try {
 
+                  PASSENGER4.put("age", age_4);
+                  PASSENGER4.put("email", mobileverificationemail);
+                  PASSENGER4.put("first_name", full_name4);
+                  PASSENGER4.put("gender", gender4);
+                  PASSENGER4.put("last_name", " ");
+                  PASSENGER4.put("nic", nic_number4);
+                  jsonArray.put(PASSENGER4);
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
 
 
 
@@ -909,12 +958,19 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
           else  if(i==5)
           {
 
-              jsObj.addProperty("age", age_5);
-              jsObj.addProperty("email", mobileverificationemail);
-              jsObj.addProperty("first_name", full_name5);
-              jsObj.addProperty("gender", gender5);
-              jsObj.addProperty("last_name", " ");
-              jsObj.addProperty("nic", nic_number5);
+              try {
+
+                  PASSENGER5.put("age", age_5);
+                  PASSENGER5.put("email", mobileverificationemail);
+                  PASSENGER5.put("first_name", full_name5);
+                  PASSENGER5.put("gender", gender5);
+                  PASSENGER5.put("last_name", " ");
+                  PASSENGER5.put("nic", nic_number5);
+                  jsonArray.put(PASSENGER5);
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
 
 
 
@@ -922,13 +978,19 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
           else  if(i==6)
           {
 
-              jsObj.addProperty("age", age_6);
-              jsObj.addProperty("email", mobileverificationemail);
-              jsObj.addProperty("first_name", full_name6);
-              jsObj.addProperty("gender", gender6);
-              jsObj.addProperty("last_name", " ");
-              jsObj.addProperty("nic", nic_number6);
+              try {
 
+                  PASSENGER6.put("age", age_6);
+                  PASSENGER6.put("email", mobileverificationemail);
+                  PASSENGER6.put("first_name", full_name6);
+                  PASSENGER6.put("gender", gender6);
+                  PASSENGER6.put("last_name", " ");
+                  PASSENGER6.put("nic", nic_number6);
+                  jsonArray.put(PASSENGER6);
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
 
 
           }
@@ -937,10 +999,24 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
       }
 
 
-        String g = gson.toJson(jsObj);
-        g = "[" + g + "]";
-        Log.d("gggggg", " " + g);
 
 
+
+
+     /* String jsonStr = jsonArray.toString();
+        Log.d("gggggg", " " + jsonStr);*/
+
+
+    }
+
+    void disableInput(EditText editText){
+        editText.setInputType(InputType.TYPE_NULL);
+        editText.setTextIsSelectable(false);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return true;  // Blocks input from hardware keyboards.
+            }
+        });
     }
 }

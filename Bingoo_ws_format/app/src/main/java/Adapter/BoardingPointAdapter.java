@@ -77,7 +77,7 @@ public class BoardingPointAdapter extends RecyclerView.Adapter<BoardingPointAdap
                notifyDataSetChanged();
                 SharedPreferences pref = context.getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-              editor.putString("city", holder.city.getText().toString()+ " - "+ lists.getTime());
+              editor.putString("city", holder.city.getText().toString()+ lists.getTime());
                 editor.putString("boardingpointid", id);// Storing string name
               editor.commit();
 
