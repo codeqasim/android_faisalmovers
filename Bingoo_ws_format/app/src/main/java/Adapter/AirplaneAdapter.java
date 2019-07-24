@@ -143,16 +143,16 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
                             }else{
 
-                             /*   progressBar2.setVisibility(View.VISIBLE);
+                               progressBar2.setVisibility(View.VISIBLE);
                                 Url url = new Url();
                                 SharedPreferences  pref = mContext.getSharedPreferences("MyPref", MODE_PRIVATE);
                                 String origin =pref.getString("fromcityid", null);
                                 String destination =pref.getString("tocityid", null);
-                                seathold(url.seatHold,model.getSeat_id(),origin,destination,position,item, holder);*/
+                                seathold(url.seatHold,model.getSeat_id(),origin,destination,position,item, holder);
 
-                                toggleSelection(position);
+                               /* toggleSelection(position);
                                 mOnSeatSelected.onSeatSelected(item.getLabel());
-                              holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.green_sit);
+                              holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.green_sit);*/
                             }
 
                         }
