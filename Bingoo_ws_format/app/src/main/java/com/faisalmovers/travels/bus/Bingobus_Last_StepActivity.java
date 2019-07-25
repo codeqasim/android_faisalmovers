@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -52,10 +51,12 @@ import util.Utils;
 
 public class Bingobus_Last_StepActivity extends Url implements View.OnClickListener {
 
+
+    String mobileverificationefullname,mobileverificationemail,mobileverificationenic,gander,id;
+    String gender2,gender3,gender4,gender5,gender6;
     JSONArray jsonArray = new JSONArray();
     JSONObject PASSENGER1,PASSENGER2,PASSENGER3,PASSENGER4,PASSENGER5,PASSENGER6;
-
-    String mobileverificationemail,mobileverificationefullname, gander, mobileverificationenic;
+    LinearLayout layout2, layout3, layout4, layout5, layout6;
     LinearLayout male2, male3, male4, male5, male6;
     LinearLayout female2, female3, female4, female5, female6;
     EditText fullname2,fullname3,fullname4,fullname5,fullname6;
@@ -66,36 +67,203 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     TextView txtfemale,txtfemale2,txtfemale3,txtfemale4,txtfemale5,txtfemale6;
     ImageView img1, img2, back;//,img1easypasa,img2easypasa;
     TextView searchbus;
-    Context context = this;
-    TextView pickupfrom, topoint, totalamount, totalseatnum;
-    TextView locpick, locdrop;
+    Context context=this;
+    TextView pickupfrom,topoint,totalamount ,totalseatnum;
+    TextView locpick,locdrop;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Gson gson;
     ProgressBar progressBar2;
-    String firtnamestart = " ";
-    EditText nicnumber, fullname;
+    String firtnamestart=" ";
+    EditText nicnumber,fullname;
     ArrayList<Bingobus7Model> historyload = new ArrayList<>();
-    String gender2,gender3,gender4,gender5,gender6;
-    Bingobus7Model bingobus7Model;
-    LinearLayout layout2, layout3, layout4, layout5, layout6;
-    Intent da;
     int setcounter;
+    Bingobus7Model bingobus7Model;
+    Intent da;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bingobus_last_step);
 
 
-
         da = getIntent();
-        bingobus7Model = (Bingobus7Model) da.getSerializableExtra("sampleObject");
+        bingobus7Model = (Bingobus7Model)da.getSerializableExtra("sampleObject");
         gson = new Gson();
-        gnderlayoutfind();
+        //bycash = (LinearLayout)findViewById(R.id.bycash);
+        // easypisa = (LinearLayout)findViewById(R.id.easypisa);
+        male = (LinearLayout)findViewById(R.id.male);
+        female = (LinearLayout)findViewById(R.id.female);
+        txtmale = (TextView) findViewById(R.id.txtmale);
+        txtfemale = (TextView) findViewById(R.id.txtfemale);
+        searchbus = (TextView) findViewById(R.id.searchbus);
+        back = (ImageView) findViewById(R.id.back);
+        pickupfrom = (TextView) findViewById(R.id.from);
+        topoint = (TextView) findViewById(R.id.to);
+
+        locpick = (TextView) findViewById(R.id.pickup);
+        locdrop = (TextView) findViewById(R.id.dropping);
+
+        totalamount = (TextView) findViewById(R.id.total);
+        totalseatnum = (TextView) findViewById(R.id.seatnum);
 
 
+        nicnumber = (EditText) findViewById(R.id.nicnumber);
+        fullname = (EditText) findViewById(R.id.fullname);
+
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar2.setVisibility(View.GONE);
+//        pickup = findViewById(R.id.pickup);
+//        dropping = findViewById(R.id.dropping);
+//        from = findViewById(R.id.from);
+//        to = findViewById(R.id.to);
+//
+//
+
+       /* findViewById(R.id.nicnumber).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+*/
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
+//
+        pickupfrom.setText(pref.getString("from", null));
+        topoint.setText(pref.getString("to", null));;
+        locpick.setText(pref.getString("city", null));
+        /* locdrop.setText(pref.getString("city1", null));*/
+        locdrop.setText(pref.getString("to", null) +"- " +bingobus7Model.getArrivalTime());
+        totalamount.setText("TOTAL : Rs "+pref.getString("totalamountofseat", null));
+        totalseatnum.setText( "SeatNo = { "+ pref.getString("numberofseat", null) +" }");
+         mobileverificationefullname =pref.getString("name",null);
+         mobileverificationenic =pref.getString("nic",null);
+
+        fullname.setText(mobileverificationefullname);
+        nicnumber.setText(mobileverificationenic);
+        disableInput(fullname);
+        disableInput(nicnumber);
+//
+//        editor.clear();
+//        editor.commit();
+//
+
+
+        //  img1easypasa,img2easypasa
+
+       /* img1 = (ImageView)findViewById(R.id.img1);
+        img2 = (ImageView)findViewById(R.id.img2);
+
+        img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
+        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
+/*
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img1.setVisibility(View.GONE);
+                img2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img2.setVisibility(View.GONE);
+                img1.setVisibility(View.VISIBLE);
+            }
+        });
+*/
+
+/*
+        img1easypasa = (ImageView)findViewById(R.id.img1easypasa);
+        img2easypasa = (ImageView)findViewById(R.id.img2easypasa);*/
+
+       /* img1easypasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img1easypasa.setVisibility(View.GONE);
+                img2easypasa.setVisibility(View.VISIBLE);
+            }
+        });
+
+        img2easypasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img2easypasa.setVisibility(View.GONE);
+                img1easypasa.setVisibility(View.VISIBLE);
+            }
+        });*/
+
+
+        gander =pref.getString("gander",null);
+        mobileverification = pref.getString("mobileverification",null);
+        mobileverificationemail =pref.getString("email",null);
+        mobileverificationefullname =pref.getString("name",null);
+        mobileverificationenic =pref.getString("nic",null);
+        gander =pref.getString("gander",null);
+        id =pref.getString("id"," ");
+
+        if(gander.equals("1"))
+        {
+            female.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            male.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtfemale.setTextColor(Color.parseColor("#ffffff"));
+            txtmale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "1");
+            editor.commit();
+
+        }else if(gander.equals("2"))
+        {
+
+            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "2");
+            editor.commit();
+        }
+        else {
+
+            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
+            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
+            txtmale.setTextColor(Color.parseColor("#ffffff"));
+            txtfemale.setTextColor(Color.parseColor("#91959d"));
+            editor.putString("gander", "2");
+            editor.commit();
+        }
+
+        String seatcount = pref.getString("seatcount", null);
+        setcounter = Integer.parseInt(seatcount);
+        layoutset(setcounter);
+
+
+
+        searchbus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                Boolean vailddata=validtions(setcounter);
+                Log.d("gggg", " " + vailddata);
+                if (vailddata==true)
+                {
+
+                    searchbus.setVisibility(View.GONE);
+                    progressBar2.setVisibility(View.VISIBLE);
+                    bookseatintway();
+                }
+
+
+
+
+            }
+        });
 
 
         male.setOnClickListener(this);
@@ -111,27 +279,18 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         male6.setOnClickListener(this);
         female6.setOnClickListener(this);
         back.setOnClickListener(this);
+        //   easypisa.setOnClickListener(this);
+        //   bycash.setOnClickListener(this);
 
-        //setcounter=2;
-        String seatcount = pref.getString("seatcount", null);
-         setcounter = Integer.parseInt(seatcount);
-        layoutset(setcounter);
-
-        searchbus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                Boolean vailddata=validtions(setcounter);
-                Log.d("gggg", " " + vailddata);
-                if (vailddata==true)
-                {
-                    bookseatintway();
-                }
+     /*   img1.setVisibility(View.GONE);
+        img2.setVisibility(View.VISIBLE);
+        img2easypasa.setVisibility(View.GONE);
+        img1easypasa.setVisibility(View.VISIBLE);
+*/
 
 
-            }
-        });
+        //   loadhistorydata();
+
 
     }
 
@@ -248,6 +407,28 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 finish();
                 break;
 
+            /*     case R.id.easypisa:
+
+             *//*   img1.setVisibility(View.VISIBLE);
+                img2.setVisibility(View.GONE);
+
+                img1easypasa.setVisibility(View.GONE);
+                img2easypasa.setVisibility(View.VISIBLE);*//*
+                break;
+
+
+
+            case R.id.bycash:
+
+
+               *//* img1.setVisibility(View.GONE);
+                img2.setVisibility(View.VISIBLE);
+
+
+                img2easypasa.setVisibility(View.GONE);
+                img1easypasa.setVisibility(View.VISIBLE);
+*//*
+                break;*/
 
 
 
@@ -256,20 +437,24 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     }
 
-    public void postrequest(final String depdate, String url, final String seatlist, final String toCityId, final String fromCityId, final String mNumber, final String email, final Bingobus7Model bm, final String id, final String nic, final String passenger_form, final String boardingpoint, final String coupon_id) {
+    public void postrequest(final String depdate , String url , final String seatlist , final String toCityId , final String fromCityId, final String mNumber, final String email, final Bingobus7Model bm, final String id, final String nic, final String passenger_form, final String boardingpoint, final String coupon_id)
+    {
         mRequestQueue = Volley.newRequestQueue(this);
-        mStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        mStringRequest  = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
 
-                Log.d("bordingpoint2", "response/" + response);
+                Log.d("bordingpoint2","response/" +response);
 
-                try {
+                try
+                {
                     JSONObject jsonObject1 = new JSONObject(response);
                     JSONObject json_object = jsonObject1.getJSONObject("response");
 
                     if (json_object.getString("error").equals("no")) {
+
+
 
 
                         seatsnull();
@@ -277,15 +462,20 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                         String booking_id = json_object.getString("booking_id");
                         // addhistory(bm);
                         progressBar2.setVisibility(View.GONE);
-                        //  Utils.showSuccesToast(getApplicationContext(),"seat BOOKED");
-                        Intent intent1 = new Intent(getApplicationContext(), Webviewinvoice.class);
-                        intent1.putExtra("weburl", url);
+                        //Utils.showSuccesToast(getApplicationContext(),"seat Hold");
+                        Intent intent1 = new Intent(getApplicationContext(),Webviewinvoice.class);
+                        intent1.putExtra("weburl",url);
                         startActivity(intent1);
 
 
-                    } else {
 
 
+
+                    }else{
+
+
+                        searchbus.setVisibility(View.VISIBLE);
+                        searchbus.setText("Try again");
                         Utils.showErrorToast(getApplicationContext(), json_object.getString("msg"));
                         progressBar2.setVisibility(View.GONE);
                        /* Toast.makeText(getApplicationContext(), json_object.getString("msg"), Toast.LENGTH_LONG).show();
@@ -293,11 +483,12 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                     }
 
 
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                     e.printStackTrace();
 
 
-                    Utils.showErrorToast(getApplicationContext(), "server issue");
+                    Utils.showErrorToast(getApplicationContext(),"server issue");
                     progressBar2.setVisibility(View.GONE);
                 }
 
@@ -308,34 +499,34 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
                 searchbus.setVisibility(View.VISIBLE);
                 searchbus.setText("Try again");
-                Log.d("bordingpoint2", "error/" + error);
-                Utils.showErrorToast(getApplicationContext(), "server issue");
+                Log.d("bordingpoint2","error/" +error);
+                Utils.showErrorToast(getApplicationContext(),"server issue");
                 progressBar2.setVisibility(View.GONE);
                 //This code is executed if there is an error.
             }
         }) {
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams()  {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("seatlist", seatlist);
-                params.put("opid", bm.getOpId());
-                params.put("notifyable_user_email", email);
-                params.put("notifyable_user_mobile", mNumber);
-                params.put("schid", bm.getScheduleID());
-                params.put("depdate", depdate);
-                params.put("deptime", bm.getQuerydepartureTime2());
-                params.put("passenger_form", passenger_form);
-                params.put("previousBookingId", "0");
-                params.put("fromcity", fromCityId);
-                params.put("tocity", toCityId);
-                params.put("couponid", coupon_id);
-                params.put("userId", id);
-                params.put("nic", nic);
-                params.put("boardingpoint", boardingpoint);
+                params.put("seatlist",seatlist);
+                params.put("opid",bm.getOpId());
+                params.put("notifyable_user_email",email);
+                params.put("notifyable_user_mobile",mNumber);
+                params.put("schid",bm.getScheduleID());
+                params.put("depdate",depdate);
+                params.put("deptime",bm.getQuerydepartureTime2());
+                params.put("passenger_form",passenger_form);
+                params.put("previousBookingId","0");
+                params.put("fromcity",fromCityId);
+                params.put("tocity",toCityId);
+                params.put("couponid",coupon_id);
+                params.put("userId",id);
+                params.put("nic",nic);
+                params.put("boardingpoint",boardingpoint);
 
-                String g = gson.toJson(params);
-                Log.d("boardingpoint", g);
+                String g= gson.toJson(params);
+                Log.d("boardingpoint",g);
                 return params;
             }
         };
@@ -345,32 +536,51 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     }
 
-    public void bookseatintway() {
+    public void bookseatintway()
+    {
 
-        String fromCityId = pref.getString("fromcityid", null);
-        String toCityId = pref.getString("tocityid", null);
-        String selectdate = pref.getString("selectdate", null);
-        String seatlist = pref.getString("seatlist", null);
-        String mobileverification = pref.getString("mobileverification", null);
+        String fromCityId = pref.getString("fromcityid",null);
+        String toCityId =  pref.getString("tocityid",null);
+        String selectdate =pref.getString("selectdate",null);
+        String seatlist =pref.getString("seatlist",null);
         String bordingpoint = pref.getString("boardingpointid", null);
 
-        String id = pref.getString("id", " ");
 
-        Log.d("gandergander", " ///" + gander);
-
+        Log.d("gandergander"," ///"+gander);
 
 
+        if(gander.equals("2"))
+        {
+            gander="male";
+            firtnamestart ="Mr ";
+
+
+        }else {
+            gander ="female";
+            firtnamestart = "Miss ";
+
+        }
 
 
 
 
-     String g =  jsonArray.toString();;
-        //g = "[" + g + "]";
-        Log.d("gggggg", " " + g);
-     String url = urlseatbook;
-      postrequest(selectdate, url, seatlist, toCityId, fromCityId, mobileverification, mobileverificationemail, bingobus7Model, id, mobileverificationenic, g, bordingpoint, "0");
+
+      JsonObject jsObj = new JsonObject();
+        jsObj.addProperty("age", "29");
+        jsObj.addProperty("email", mobileverificationemail);
+        jsObj.addProperty("first_name", mobileverificationefullname);
+        jsObj.addProperty("gender", gander);
+        jsObj.addProperty("last_name", " ");
+        jsObj.addProperty("nic", mobileverificationenic);
+
+        String passenger_form = jsonArray.toString();;
+        String url = urlseatbook;
+
+
+        postrequest(selectdate,url,seatlist ,toCityId,fromCityId,mobileverification,mobileverificationemail,bingobus7Model,id,mobileverificationenic ,passenger_form,bordingpoint,"0");
 
     }
+
 
 
     @Override
@@ -389,16 +599,17 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
     }
 
 
-    public void seatsnull() {
-        editor.putString("seatlist", " ");
+
+    public  void seatsnull()
+    {
+        editor.putString("seatlist"," ");
         editor.commit();
     }
-
 
     public void layoutset(int seatcount) {
 
         gnderlayoutfind();
-       // validtions(seatcount);
+        // validtions(seatcount);
         layout2 = findViewById(R.id.layout2);
         layout3 = findViewById(R.id.layout3);
         layout4 = findViewById(R.id.layout4);
@@ -469,6 +680,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     }
 
+
     public void gnderlayoutfind() {
 
         male = (LinearLayout) findViewById(R.id.male);
@@ -494,10 +706,10 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
         txtmale2=findViewById(R.id.txtmale2);
-         txtmale3=findViewById(R.id.txtmale3);
-         txtmale4=findViewById(R.id.txtmale4);
-         txtmale5=findViewById(R.id.txtmale5);
-         txtmale6=findViewById(R.id.txtmale6);
+        txtmale3=findViewById(R.id.txtmale3);
+        txtmale4=findViewById(R.id.txtmale4);
+        txtmale5=findViewById(R.id.txtmale5);
+        txtmale6=findViewById(R.id.txtmale6);
 
 
         txtfemale2=findViewById(R.id.txtfemale2);
@@ -558,9 +770,19 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         gender2="male";
 
 
-        loaddata();
+       // loaddata();
     }
 
+    void disableInput(EditText editText){
+        editText.setInputType(InputType.TYPE_NULL);
+        editText.setTextIsSelectable(false);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return true;  // Blocks input from hardware keyboards.
+            }
+        });
+    }
 
     public  Boolean validtions(int seatcount)
     {
@@ -606,7 +828,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
         }
-       else if (seatcount == 2) {
+        else if (seatcount == 2) {
 
             if (fullname2.getText().toString().trim().equals("")) {
                 Utils.showErrorToast(getApplicationContext(), " required info  ");
@@ -784,64 +1006,6 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         return checker;
     }
 
-
-    public void loaddata()
-    {
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        editor = pref.edit();
-        pickupfrom.setText(pref.getString("from", null));
-        topoint.setText(pref.getString("to", null));
-        locpick.setText(pref.getString("city", null));
-        /* locdrop.setText(pref.getString("city1", null));*/
-        locdrop.setText(pref.getString("to", null));
-        totalamount.setText("TOTAL : Rs " + pref.getString("totalamountofseat", null));
-        totalseatnum.setText("SeatNo = { " + pref.getString("numberofseat", null) + " }");
-        mobileverificationefullname = pref.getString("name", null);
-         mobileverificationenic = pref.getString("nic", null);
-        fullname.setText(mobileverificationefullname);
-        nicnumber.setText(mobileverificationenic);
-         gander = pref.getString("gander", null);
-
-
-
-
-        if (gander.equals("1")) {
-            female.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            male.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtfemale.setTextColor(Color.parseColor("#ffffff"));
-            txtmale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "1");
-            editor.commit();
-
-        } else if (gander.equals("2")) {
-
-            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "2");
-            editor.commit();
-        } else {
-
-            male.setBackgroundResource(R.drawable.rectangle_cure_blue1green);
-            female.setBackgroundResource(R.drawable.rectangle_cure_gray);
-            txtmale.setTextColor(Color.parseColor("#ffffff"));
-            txtfemale.setTextColor(Color.parseColor("#91959d"));
-            editor.putString("gander", "2");
-            editor.commit();
-
-
-
-
-        }
-
-
-        //fullname , nic main user disble ( write )
-        disableInput(fullname);
-        disableInput(nicnumber);
-    }
-
-
     public void make_jsonobject_users(int position )
     {
 
@@ -864,139 +1028,139 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
         String age_5=""+age5.getText();
         String age_6=""+age6.getText();
 
-         PASSENGER1 = new JSONObject();
-         PASSENGER2 = new JSONObject();
-         PASSENGER3 = new JSONObject();
-         PASSENGER4 = new JSONObject();
-         PASSENGER5 = new JSONObject();
-         PASSENGER6 = new JSONObject();
+        PASSENGER1 = new JSONObject();
+        PASSENGER2 = new JSONObject();
+        PASSENGER3 = new JSONObject();
+        PASSENGER4 = new JSONObject();
+        PASSENGER5 = new JSONObject();
+        PASSENGER6 = new JSONObject();
 
 
-      for (int i =0;i<=position;i++)
-      {
+        for (int i =0;i<=position;i++)
+        {
 
-          if (i==1)
-          {
+            if (i==1)
+            {
 
-              try {
+                try {
 
-                  PASSENGER1.put("age", "29");
-                  PASSENGER1.put("email", mobileverificationemail);
-                  PASSENGER1.put("first_name", mobileverificationefullname);
-                  PASSENGER1.put("gender", gander);
-                  PASSENGER1.put("last_name", " ");
-                  PASSENGER1.put("nic", mobileverificationenic);
-                  jsonArray.put(PASSENGER1);
-              } catch (JSONException e) {
-                  // TODO Auto-generated catch block
-                  e.printStackTrace();
-              }
-
-
-
-          }
-
-          else   if (i==2)
-          {
-
-              try {
-
-                  PASSENGER2.put("age", age__2);
-                  PASSENGER2.put("email", mobileverificationemail);
-                  PASSENGER2.put("first_name", full_name2);
-                  PASSENGER2.put("gender", gender2);
-                  PASSENGER2.put("last_name", " ");
-                  PASSENGER2.put("nic", nic_number2);
-                  jsonArray.put(PASSENGER2);
-              } catch (JSONException e) {
-                  // TODO Auto-generated catch block
-                  e.printStackTrace();
-              }
+                    PASSENGER1.put("age", "29");
+                    PASSENGER1.put("email", mobileverificationemail);
+                    PASSENGER1.put("first_name", mobileverificationefullname);
+                    PASSENGER1.put("gender", gander);
+                    PASSENGER1.put("last_name", " ");
+                    PASSENGER1.put("nic", mobileverificationenic);
+                    jsonArray.put(PASSENGER1);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
 
 
-          } else if(i==3)
-         {
+            }
 
+            else   if (i==2)
+            {
 
-             try {
+                try {
 
-                 PASSENGER3.put("age", age_3);
-                 PASSENGER3.put("email", mobileverificationemail);
-                 PASSENGER3.put("first_name", full_name3);
-                 PASSENGER3.put("gender", gender3);
-                 PASSENGER3.put("last_name", " ");
-                 PASSENGER3.put("nic", nic_number3);
-                 jsonArray.put(PASSENGER3);
-             } catch (JSONException e) {
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-             }
-
-
-         }
-          else if (i==4)
-          {
-
-              try {
-
-                  PASSENGER4.put("age", age_4);
-                  PASSENGER4.put("email", mobileverificationemail);
-                  PASSENGER4.put("first_name", full_name4);
-                  PASSENGER4.put("gender", gender4);
-                  PASSENGER4.put("last_name", " ");
-                  PASSENGER4.put("nic", nic_number4);
-                  jsonArray.put(PASSENGER4);
-              } catch (JSONException e) {
-                  // TODO Auto-generated catch block
-                  e.printStackTrace();
-              }
+                    PASSENGER2.put("age", age__2);
+                    PASSENGER2.put("email", mobileverificationemail);
+                    PASSENGER2.put("first_name", full_name2);
+                    PASSENGER2.put("gender", gender2);
+                    PASSENGER2.put("last_name", " ");
+                    PASSENGER2.put("nic", nic_number2);
+                    jsonArray.put(PASSENGER2);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
 
 
-          }
-          else  if(i==5)
-          {
-
-              try {
-
-                  PASSENGER5.put("age", age_5);
-                  PASSENGER5.put("email", mobileverificationemail);
-                  PASSENGER5.put("first_name", full_name5);
-                  PASSENGER5.put("gender", gender5);
-                  PASSENGER5.put("last_name", " ");
-                  PASSENGER5.put("nic", nic_number5);
-                  jsonArray.put(PASSENGER5);
-              } catch (JSONException e) {
-                  // TODO Auto-generated catch block
-                  e.printStackTrace();
-              }
+            } else if(i==3)
+            {
 
 
+                try {
 
-          }
-          else  if(i==6)
-          {
-
-              try {
-
-                  PASSENGER6.put("age", age_6);
-                  PASSENGER6.put("email", mobileverificationemail);
-                  PASSENGER6.put("first_name", full_name6);
-                  PASSENGER6.put("gender", gender6);
-                  PASSENGER6.put("last_name", " ");
-                  PASSENGER6.put("nic", nic_number6);
-                  jsonArray.put(PASSENGER6);
-              } catch (JSONException e) {
-                  // TODO Auto-generated catch block
-                  e.printStackTrace();
-              }
+                    PASSENGER3.put("age", age_3);
+                    PASSENGER3.put("email", mobileverificationemail);
+                    PASSENGER3.put("first_name", full_name3);
+                    PASSENGER3.put("gender", gender3);
+                    PASSENGER3.put("last_name", " ");
+                    PASSENGER3.put("nic", nic_number3);
+                    jsonArray.put(PASSENGER3);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
 
-          }
+            }
+            else if (i==4)
+            {
+
+                try {
+
+                    PASSENGER4.put("age", age_4);
+                    PASSENGER4.put("email", mobileverificationemail);
+                    PASSENGER4.put("first_name", full_name4);
+                    PASSENGER4.put("gender", gender4);
+                    PASSENGER4.put("last_name", " ");
+                    PASSENGER4.put("nic", nic_number4);
+                    jsonArray.put(PASSENGER4);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
 
-      }
+
+            }
+            else  if(i==5)
+            {
+
+                try {
+
+                    PASSENGER5.put("age", age_5);
+                    PASSENGER5.put("email", mobileverificationemail);
+                    PASSENGER5.put("first_name", full_name5);
+                    PASSENGER5.put("gender", gender5);
+                    PASSENGER5.put("last_name", " ");
+                    PASSENGER5.put("nic", nic_number5);
+                    jsonArray.put(PASSENGER5);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+
+            }
+            else  if(i==6)
+            {
+
+                try {
+
+                    PASSENGER6.put("age", age_6);
+                    PASSENGER6.put("email", mobileverificationemail);
+                    PASSENGER6.put("first_name", full_name6);
+                    PASSENGER6.put("gender", gender6);
+                    PASSENGER6.put("last_name", " ");
+                    PASSENGER6.put("nic", nic_number6);
+                    jsonArray.put(PASSENGER6);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
+        }
 
 
 
@@ -1009,14 +1173,4 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
     }
 
-    void disableInput(EditText editText){
-        editText.setInputType(InputType.TYPE_NULL);
-        editText.setTextIsSelectable(false);
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                return true;  // Blocks input from hardware keyboards.
-            }
-        });
-    }
 }

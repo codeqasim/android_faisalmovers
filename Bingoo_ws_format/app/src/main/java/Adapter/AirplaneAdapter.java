@@ -150,9 +150,10 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                                 String destination =pref.getString("tocityid", null);
                                 seathold(url.seatHold,model.getSeat_id(),origin,destination,position,item, holder);
 
-                               /* toggleSelection(position);
-                                mOnSeatSelected.onSeatSelected(item.getLabel());
-                              holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.green_sit);*/
+                            /*  toggleSelection(position);
+                              mOnSeatSelected.onSeatSelected(item.getLabel());
+                              holder.imgSeat.setImageResource(isSelected(position) ? R.drawable.green_sit : R.drawable.green_sit);
+                           */
                             }
 
                         }
