@@ -254,7 +254,7 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
                 if (vailddata==true)
                 {
 
-                    searchbus.setVisibility(View.GONE);
+                  searchbus.setVisibility(View.GONE);
                     progressBar2.setVisibility(View.VISIBLE);
                     bookseatintway();
                 }
@@ -1167,8 +1167,8 @@ public class Bingobus_Last_StepActivity extends Url implements View.OnClickListe
 
 
 
-     /* String jsonStr = jsonArray.toString();
-        Log.d("gggggg", " " + jsonStr);*/
+         String jsonStr = jsonArray.toString();
+        Log.d("gggggg", " " + jsonStr);
 
 
     }
