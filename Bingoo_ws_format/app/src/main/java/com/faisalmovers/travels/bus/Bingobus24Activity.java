@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import Adapter.OffersAdapter;
 import model.Bingobus7Model;
@@ -209,15 +210,18 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
-                Calendar maxdays = Calendar.getInstance();
-                maxdays.set(Calendar.DAY_OF_MONTH, day+7);
 
+               // Log.d("daydaymonth",month+1+"/"+month+"/"+month);
+                Calendar maxdays = Calendar.getInstance();
+               // maxdays.set(maxdays.get(Calendar.YEAR),maxdays.get(Calendar.MONTH)+1,maxdays.get(Calendar.DAY_OF_MONTH));
+                maxdays.set(Calendar.DAY_OF_MONTH, day+29);
 
                 DatePickerDialog dialog = new DatePickerDialog(Bingobus24Activity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK,  dateSetListener, year, month, day);
                 // dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 dialog.getDatePicker().setMinDate(cal.getTimeInMillis());
                 dialog.getDatePicker().setMaxDate(maxdays.getTimeInMillis());
-                //dialog.getDatePicker().setMinDate(10);
+               // dialog.getDatePicker().setMinDate(10);
 
                 dialog.show();
             }
@@ -231,10 +235,9 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
                 SimpleDateFormat currentDate = new SimpleDateFormat("MM-dd-yyyy");
                 Date d = new Date(year, month, dayOfMonth);
                 String strDate = currentDate.format(d);
-
-                Log.d("dayday1",dayOfMonth+"/"+year);
+                month=month+1;
+                Log.d("dayday",dayOfMonth+"/"+month+"/"+year);
                 datecfm=true;
-
                 SharedPreferences preferences=getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 String finaldate = year+"-"+month+"-"+dayOfMonth;
@@ -253,15 +256,20 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
                 Calendar cal1 = Calendar.getInstance();
+                //cal1.set(cal1.get(Calendar.YEAR),cal1.get(Calendar.MONTH)+1,cal1.get(Calendar.DAY_OF_MONTH));
                 cal1.setTimeInMillis(readDate.getTime());
 
                 Log.d(TAG, "Year: "+cal1.get(Calendar.YEAR));
                 Log.d(TAG, "Month: "+cal1.get(Calendar.MONTH));
                 Log.d(TAG, "Day: "+cal1.get(Calendar.DAY_OF_MONTH));
+                Log.d("mainday1", "DAY_OF_WEEK1: "+cal1.get(Calendar.DAY_OF_MONTH)+"/"+cal1.get(Calendar.MONTH)+"/"+cal1.get(Calendar.YEAR));
+
+
 
                 int dayofwek = cal1.get(Calendar.DAY_OF_WEEK);
-                String dayLongName =  dateday(readDate,-1);//cal1.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-               // Log.d(TAG, "DAY_OF_WEEK: "+dayLongName+"/"+dayofwek);
+                String dayLongName =  dateday(readDate,-1);
+                //cal1.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+                Log.d("mainday1", "DAY_OF_WEEK: "+dayLongName+"/"+dayofwek);
                 date1.setText(String.valueOf(cal1.get(Calendar.DAY_OF_MONTH)));
                day1.setText(String.valueOf(dayLongName.substring(0,3)));
 
@@ -269,6 +277,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
                 Calendar cal2 = Calendar.getInstance();
+                //cal2.set(cal2.get(Calendar.YEAR),cal2.get(Calendar.MONTH)+1,cal2.get(Calendar.DAY_OF_MONTH));
                 cal2.setTimeInMillis(readDate.getTime());
                 cal2.add(Calendar.DATE,+1);
 
@@ -284,6 +293,7 @@ public class Bingobus24Activity extends AppCompatActivity implements View.OnClic
 
 
                 Calendar cal3 = Calendar.getInstance();
+               // cal3.set(cal3.get(Calendar.YEAR),cal3.get(Calendar.MONTH)+1,cal3.get(Calendar.DAY_OF_MONTH));
                 cal3.setTimeInMillis(readDate.getTime());
                 cal3.add(Calendar.DATE,+2);
 
